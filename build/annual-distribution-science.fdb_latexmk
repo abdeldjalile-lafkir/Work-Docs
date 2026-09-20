@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1789923175.67189 "build/annual-distribution-science.xdv" "build/annual-distribution-science.pdf" "build/annual-distribution-science" 1789923176.03169 0
-  "build/annual-distribution-science.xdv" 1789923175.54509 63224 7b55a43929c8371026d598cc3190ca26 "xelatex"
+["xdvipdfmx"] 1789925617.75029 "build/annual-distribution-science.xdv" "build/annual-distribution-science.pdf" "build/annual-distribution-science" 1789925617.9414 0
+  "build/annual-distribution-science.xdv" 1789925617.67909 62444 0bddc7833212fd389c1aa163491e21b4 "xelatex"
   (generated)
   "build/annual-distribution-science.pdf"
   (rewritten before read)
-["xelatex"] 1789923173.15005 "annual-distribution-science.tex" "build/annual-distribution-science.xdv" "annual-distribution-science" 1789923176.02596 0
+["xelatex"] 1789925616.52377 "annual-distribution-science.tex" "build/annual-distribution-science.xdv" "annual-distribution-science" 1789925617.93826 0
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1767555874 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1767555874 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/share/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1767555874 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
@@ -171,9 +171,9 @@
   "/usr/share/texmf-dist/tex/xelatex/bidi/xcolor-xetex-bidi.def" 1767555874 5893 0a872fb7a1946e5c70d09c9441955bb2 ""
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1767555874 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1768314680 4545743 14743b524f28b3865264f2cfd027996d ""
-  "annual-distribution-science.tex" 1789923172.69411 13159 9c46466b52ae7a1a4d40d79b0e765a92 ""
-  "build/annual-distribution-science.aux" 1789923175.53609 543 b83247f54c30cb83b585621f16ad1f87 "xelatex"
-  "build/annual-distribution-science.out" 1789923175.04709 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
+  "annual-distribution-science.tex" 1789925615.21892 12987 8ff69d1d65f09d8832aaa71c1b0efbdf ""
+  "build/annual-distribution-science.aux" 1789925617.67696 543 c81a11bba761b60341c7e274e6ffc764 "xelatex"
+  "build/annual-distribution-science.out" 1789925617.60396 0 d41d8cd98f00b204e9800998ecf8427e "xelatex"
   (generated)
   "build/annual-distribution-science.aux"
   "build/annual-distribution-science.log"
