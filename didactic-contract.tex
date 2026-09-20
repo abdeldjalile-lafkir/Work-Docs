@@ -1,0 +1,340 @@
+% =============================================================================
+% العقد الديداكتيكي — المعلوماتية
+% السنة الدراسية: 2026 - 2027
+% =============================================================================
+% This file must be compiled with XeLaTeX or LuaLaTeX for Arabic support.
+% Command: xelatex didactic-contract.tex
+% =============================================================================
+
+\documentclass[12pt, a4paper]{article}
+
+% ── Geometry ──────────────────────────────────────────────────────────────────
+\usepackage[
+  top=3.2cm,
+  bottom=2.5cm,
+  left=2.5cm,
+  right=2.5cm,
+  headheight=26pt
+]{geometry}
+
+% ── Packages (loaded BEFORE polyglossia to avoid bidi/fancyhdr warnings) ──────
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{hyperref}
+
+% ── Arabic / RTL Support (XeLaTeX) ───────────────────────────────────────────
+% NOTE: polyglossia must be loaded AFTER fancyhdr so bidi can patch it properly.
+\usepackage{polyglossia}
+\setmainlanguage[numerals=western]{arabic}
+\setotherlanguage{english}
+
+% ── Fonts ─────────────────────────────────────────────────────────────────────
+% Adjust font names to match what is installed on your system.
+% Common options: Amiri, Scheherazade New, Noto Naskh Arabic, Traditional Arabic
+\setmainfont{Amiri}[
+  BoldFont = * Bold,
+  ItalicFont = * Italic,
+]
+\newfontfamily\arabicfont{Amiri}[
+  Script = Arabic,
+  BoldFont = * Bold,
+]
+
+% ── Colors ────────────────────────────────────────────────────────────────────
+\definecolor{primary}{HTML}{1A5276}      % Deep blue
+\definecolor{secondary}{HTML}{2E86C1}    % Medium blue
+\definecolor{accent}{HTML}{D4AC0D}       % Gold
+\definecolor{lightbg}{HTML}{EBF5FB}      % Light blue background
+\definecolor{darktext}{HTML}{1C2833}     % Near-black for body text
+\definecolor{rulegray}{HTML}{ABB2B9}     % Light gray for rules
+
+% ── Header / Footer ──────────────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[L]{%
+  \small\color{primary}%
+  ثانوية الشهيد حكومي العيد أدرار%
+}
+\fancyhead[R]{%
+  \small\color{primary}%
+  العقد الديداكتيكي — المعلوماتية%
+}
+\fancyfoot[C]{%
+  \small\color{rulegray}%
+  \thepage%
+}
+\fancyfoot[R]{%
+  \footnotesize\color{rulegray}%
+  2027/2026%
+}
+
+% ── Page Border (1cm from all 4 edges) ───────────────────────────────────────
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[primary, line width=1.5pt]
+      ([xshift=-1cm, yshift=-1cm]current page.north east)
+      rectangle
+      ([xshift=1cm, yshift=1cm]current page.south west);
+  \end{tikzpicture}%
+}
+
+% ── Section Formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\color{primary}}
+  {\colorbox{primary}{\color{white}\thesection}}
+  {0.8em}{}
+  [\vspace{-0.1em}{\color{primary}\titlerule[1.4pt]}]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{secondary}}
+  {\thesubsection}
+  {0.5em}{}
+
+% ── tcolorbox Styles ─────────────────────────────────────────────────────────
+\newtcolorbox{contractbox}[1][]{
+  enhanced,
+  colback=white,
+  colframe=primary,
+  coltitle=white,
+  fonttitle=\bfseries\large,
+  title=#1,
+  boxrule=1pt,
+  arc=4pt,
+  left=12pt,
+  right=12pt,
+  top=10pt,
+  bottom=10pt,
+  breakable,
+}
+
+\newtcolorbox{notebox}{
+  enhanced,
+  colback=accent!10,
+  colframe=accent,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title={ملاحظة},
+  boxrule=1pt,
+  arc=4pt,
+  left=12pt,
+  right=12pt,
+  top=8pt,
+  bottom=8pt,
+}
+
+\newtcolorbox{headerbox}{
+  enhanced,
+  colback=primary!5,
+  colframe=primary,
+  boxrule=1.5pt,
+  arc=6pt,
+  left=14pt,
+  right=14pt,
+  top=12pt,
+  bottom=12pt,
+}
+
+% ── Enumeration Style ─────────────────────────────────────────────────────────
+\newlist{teacherlist}{enumerate}{1}
+\setlist[teacherlist, 1]{
+  label=\arabic*.\hspace{1em},
+  labelwidth=1.5em,
+  left=0em .. 1.5em,
+  itemsep=5pt,
+  parsep=0pt,
+  itemindent=0pt,
+}
+
+\newlist{studentlist}{enumerate}{1}
+\setlist[studentlist, 1]{
+  label=\arabic*.\hspace{1em},
+  labelwidth=1.5em,
+  left=0em .. 1.5em,
+  itemsep=5pt,
+  parsep=0pt,
+  itemindent=0pt,
+}
+
+% ── Hyperref ──────────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=false,
+  pdfauthor={لفقير عبدالجليل},
+  pdftitle={العقد الديداكتيكي — المعلوماتية 2026-2027},
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── Title Page / Header ──────────────────────────────────────────────────────
+\begin{center}
+
+  % ── Official Header ────────────────────────────────────────────────────
+  \begin{headerbox}
+    \centering
+    \large
+    \textbf{الجمهورية الجزائرية الديمقراطية الشعبية} \\[6pt]
+    \textbf{وزارة التربية الوطنية} \\[6pt]
+    \textbf{مديرية التربية لولاية أدرار} \\[6pt]
+    \textbf{ثانوية الشهيد حكومي العيد أدرار — أدرار}
+  \end{headerbox}
+
+  \vspace{1cm}
+
+  % ── Decorative Line ────────────────────────────────────────────────────
+  {\color{accent}\rule{\textwidth}{2pt}}
+
+  \vspace{0.6cm}
+
+  % ── Main Title ─────────────────────────────────────────────────────────
+  {\Huge\bfseries\color{primary} العقد الديداكتيكي}
+
+
+  % ── Decorative Line ────────────────────────────────────────────────────
+  {\color{accent}\rule{\textwidth}{2pt}}
+
+  \vspace{0.8cm}
+
+\end{center}
+
+% ── Preamble Text ─────────────────────────────────────────────────────────────
+\begin{contractbox}[التمهيد]
+  أهنّئ تلاميذ السنة أوّلى ثانوي على انتقالهم إلى مرحلة جديدة من مسارهم
+  الدراسي والتي تعتبر مختلفة نوعاً ما عن سابقتها. وبما أنّكم اخترتم شعبة
+  \textbf{جذع مشترك علوم وتكنولوجي}، فأنتم على دراية بمدى أهمية مادة
+  \textbf{المعلوماتية} كونها مادة أساسية بمعامل~2 بحجم ساعي يُقدَّر
+  بساعتين (1~سا نظري و1~سا تطبيقي)، يتضمن برنامجها 4~مجالات.
+
+
+  وحرصاً منّي على تنفيذ هذا البرنامج على أكمل وجه بما يضمن فهم التلميذ
+  للمادة في ظروف ملائمة، وبما أنّ الأستاذ والتلميذ هما طرفا العملية
+  التعليمية التعلمية، أردتُ أن نحدد مجموعة الواجبات التي يجب أن يلتزم بها
+  الطرفان لتحقيق النتائج المرجوة، ونسجّلها في هذا العقد حيث ألتزم شخصياً
+  بتنفيذ كل ما صرّحت به وأتوقّع من الطرف الثاني (التلميذ) الالتزام بما
+  ورد بعد قراءته والموافقة عليه .
+\end{contractbox}
+
+\vspace{0.8cm}
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+% SECTION 1 — واجبات الأستاذ
+% ══════════════════════════════════════════════════════════════════════════════
+\section{واجبات الأستاذ}
+
+\begin{teacherlist}
+  \item تنفيذ البرنامج بِحافِيره دون زيادة أو نقصان وفقاً لأخر تدرّج
+        أرسلته مفتشية المعلوماتية من وزارة التربية الوطنية.
+
+  \item استعمال طرق تدريس ووسائل تعليمية مختلفة ومناسبة لكل نشاط وفقاً
+        لما تسمح به إمكانيات المؤسسة.
+
+  \item تقديم الدرس بصوت ونطق واضحين لضمان سماع جميع التلاميذ للدرس.
+
+  \item توفير شروط مناسبة في حجرة الدراسة لضمان السير الجيد للدرس
+        (الهدوء، التهوية، الإضاءة\,\ldots\ الخ) وذلك في حدود ما تسمح به
+        إمكانيات المؤسسة.
+
+  \item إعادة الشرح أكثر من مرة للتلاميذ الذين لم يفهموا.
+
+  \item تحضير مواضيع الفروض والاختبارات وفق دليل إنجاز الاختبارات
+        المُرسل من طرف مفتشية المعلوماتية.
+
+  \item تصحيح الفروض والاختبارات وفق أسس التقويم الصحيحة المؤطّرة
+        من طرف المفتشين.
+
+  \item الإجابة عن كل أسئلة التلاميذ المتعلقة بالدرس في حدود ما تسمح
+        به مدة الحصة.
+
+  \item العدل بين التلاميذ ومعاملتهم بنفس المعاملة دون تفرقة.
+
+  \item احترام التلاميذ وعدم استعمال أي شكل من أشكال العنف اللفظي أو
+        الجسدي.
+
+  \item مراعاة الحالات الخاصة (الصحية والاجتماعية) المُثبّتة بملف.
+
+  \item عدم الخروج من القسم لأي سبب.
+
+  \item ارتداء المُزر واستعمال الهاتف في القسم. (يمكن للأستاذ استعماله
+        في بعض الحالات الخاصة كالاطّلاع على الوقت أو التواصل مع
+        الإدارة\,\ldots\ الخ)
+
+  \item عدم التأخّر وانطلاق الدروس في توقيتها.
+
+  \item عدم الأكل في القسم.
+\end{teacherlist}
+
+\vspace{0.8cm}
+\newpage
+
+% ══════════════════════════════════════════════════════════════════════════════
+% SECTION 2 — واجبات التلميذ
+% ══════════════════════════════════════════════════════════════════════════════
+\section{واجبات التلميذ}
+
+\begin{studentlist}
+  \item إحضار الأدوات اللازمة في كل الحصص (مُصنَّف، أوراق متحركة،
+        كتاب المعلوماتية، كراسة محاولة، أقلام).
+
+  \item تدوين الدرس على الكرّاس بعد انتهاء الأستاذ من الشرح.
+
+  \item القيام بالواجبات المطلوبة.
+
+  \item المشاركة في الدرس حتى يكون تفاعلياً (دون فوضى).
+
+  \item لبس المُزر وارتداء ملابس لائقة بمؤسسة تعليمية.
+
+  \item احترام الأستاذ والحديث معه بما يليق به.
+
+  \item احترام باقي الزملاء وعدم التنمّر عليهم.
+
+  \item الحفاظ على القسم والوسائل الموجودة فيه.
+
+  \item يُمنع منعاً باتاً الخروج من القسم أثناء الحصة مهما كان السبب
+        إلا للحالات المرضية التي تستدعي الخروج والتي تكون مُثبّتة
+        بملف طبي.
+
+  \item يُمنع منعاً باتاً على التلميذ من دخول حجرة الدراسة في حالة
+        التأخّر وبعد غلق الباب لأنه سيصبح مصدر إزعاج يُعيق سير الدرس.
+
+  \item يُمنع منعاً باتاً استعمال الهاتف ومشتقاته في القسم أو التصوير
+        داخل القسم.
+
+  \item يُمنع منعاً باتاً الأكل في القسم مهما كان نوعه إلا للحالات
+        المرضية التي تستدعي ذلك والتي تكون مُثبّتة بملف طبي.
+
+  \item يُمنع تغيير الفوج أو تغيير المكان دون إذن الأستاذ.
+\end{studentlist}
+
+\vspace{0.8cm}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% SECTION 3 — ملاحظات
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{notebox}
+  \begin{enumerate}[label=\textcolor{primary}{\arabic*.\,}, leftmargin=2em]
+    \item كل ما ورد أعلاه لم يرد على سبيل تقييد التلميذ إنّما لضمان
+          التحصيل الدراسي الجيد.
+    \item التلميذ الذي لا يلتزم بما ورد أعلاه يتعرّض لعقوبة تتراوح من
+          الخصم من نقطة التقويم المستمر إلى مجلس التأديب.
+    
+  \end{enumerate}
+\end{notebox}
+
+\vspace{0.8cm}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% SIGNATURES + PROF INFO
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{center}
+  {\large\bfseries\color{primary} قرأتُ وأوافق على ما ورد أعلاه}
+\end{center}
+
+\end{document}
