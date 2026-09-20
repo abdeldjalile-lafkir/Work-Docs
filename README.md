@@ -29,10 +29,10 @@
 
 | الوثيقة | المستوى / الشعبة | الصفحات | الملف |
 | :--- | :--- | :---: | :--- |
-| العقد الديداكتيكي | الأقسام كلها | 3 | [PDF](build/didactic-contract.pdf) · [المصدر](didactic-contract.tex) |
-| التقويم التشخيصي | الأقسام كلها | 1 | [PDF](build/diagnostic-assessment.pdf) · [المصدر](diagnostic-assessment.tex) |
-| التوزيع السنوي | جذع مشترك علوم وتكنولوجيا | 1 | [PDF](build/annual-distribution-science.pdf) · [المصدر](annual-distribution-science.tex) |
-| التوزيع السنوي | جذع مشترك آداب وفلسفة | 1 | [PDF](build/annual-distribution-letters.pdf) · [المصدر](annual-distribution-letters.tex) |
+| العقد الديداكتيكي | الأقسام كلها | 3 | [PDF](2026-2027/Official%20Documents/%D8%A7%D9%84%D8%B9%D9%82%D8%AF%20%D8%A7%D9%84%D8%AF%D9%8A%D8%AF%D8%A7%D9%83%D8%AA%D9%8A%D9%83%D9%8A/%D8%A7%D9%84%D8%B9%D9%82%D8%AF%20%D8%A7%D9%84%D8%AF%D9%8A%D8%AF%D8%A7%D9%83%D8%AA%D9%8A%D9%83%D9%8A.pdf) · [المصدر](didactic-contract.tex) |
+| التقويم التشخيصي | الأقسام كلها | 1 | [PDF](2026-2027/Official%20Documents/%D8%A7%D9%84%D8%AA%D9%82%D9%88%D9%8A%D9%85%20%D8%A7%D9%84%D8%AA%D8%B4%D8%AE%D9%8A%D8%B5%D9%8A/%D8%A7%D9%84%D8%AA%D9%82%D9%88%D9%8A%D9%85%20%D8%A7%D9%84%D8%AA%D8%B4%D8%AE%D9%8A%D8%B5%D9%8A.pdf) · [المصدر](diagnostic-assessment.tex) |
+| التوزيع السنوي | جذع مشترك علوم وتكنولوجيا | 1 | [PDF](2026-2027/Official%20Documents/%D8%A7%D9%84%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%20%D8%A7%D9%84%D8%B3%D9%86%D9%88%D9%8A/%D8%A7%D9%84%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%20%D8%A7%D9%84%D8%B3%D9%86%D9%88%D9%8A%20-%20%D8%AC%D8%B0%D8%B9%20%D9%85%D8%B4%D8%AA%D8%B1%D9%83%20%D8%B9%D9%84%D9%88%D9%85%20%D9%88%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7.pdf) · [المصدر](annual-distribution-science.tex) |
+| التوزيع السنوي | جذع مشترك آداب وفلسفة | 1 | [PDF](2026-2027/Official%20Documents/%D8%A7%D9%84%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%20%D8%A7%D9%84%D8%B3%D9%86%D9%88%D9%8A/%D8%A7%D9%84%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%20%D8%A7%D9%84%D8%B3%D9%86%D9%88%D9%8A%20-%20%D8%AC%D8%B0%D8%B9%20%D9%85%D8%B4%D8%AA%D8%B1%D9%83%20%D8%A2%D8%AF%D8%A7%D8%A8%20%D9%88%D9%81%D9%84%D8%B3%D9%81%D8%A9.pdf) · [المصدر](annual-distribution-letters.tex) |
 
 ## البناء
 
@@ -47,10 +47,18 @@ xelatex -interaction=nonstopmode -halt-on-error -output-directory=build FILE.tex
 
 <div dir="rtl">
 
+مجلد `build/` للعمل المؤقت فقط؛ تُنسخ النسخة النهائية بعد ذلك إلى
+`2026-2027/Official Documents/` بالاسم العربي
+`<اسم الوثيقة>[ - <الشعبة>].pdf` (انظر `AGENTS.md` §4.1).
+
+</div>
+
+<div dir="rtl">
+
 ## المراجع
 
 - القواعد الكاملة (مقدمة LaTeX، نظام التصميم، الأخطاء الشائعة): [`AGENTS.md`](AGENTS.md)
-- الملخص السريع للقواعد الست الأساسية: [`RULES.md`](RULES.md)
+- الملخص السريع للقواعد الأساسية: [`RULES.md`](RULES.md)
 - المصادر الخام: `resources/` · مواد السنة: `2026-2027/`
 
 </div>

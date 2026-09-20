@@ -29,16 +29,27 @@ document; never hardcode identity data that may be stale.
 
 ```
 .
-├── README.md                  # Identity data (source of truth)
-├── AGENTS.md                  # This file
-├── *.tex                      # One .tex per document
-├── build/                     # All build artifacts (PDF, logs, aux, previews)
-├── resources/                 # Source assets
-└── 2026-2027/                 # Year-scoped material
+├── README.md                          # Identity data (source of truth)
+├── AGENTS.md                          # This file
+├── RULES.md                           # Short rule summary
+├── *.tex                              # One .tex per document
+├── build/                             # All build artifacts (PDF, logs, aux, previews)
+├── resources/                         # Source assets
+└── 2026-2027/                         # Year-scoped material
+    └── Official Documents/            # Published PDFs (Arabic folders + Arabic names)
+        ├── التوزيع السنوي/             # Annual distribution, one PDF per stream
+        ├── العقد الديداكتيكي/          # Didactic contract
+        ├── التقويم التشخيصي/           # Diagnostic assessment
+        └── ...
 ```
 
-**Rule:** every `.tex` file at the repo root compiles to `build/`. Never commit
-build artifacts to the root; they belong in `build/`.
+**Rules:**
+
+1. Every `.tex` file at the repo root compiles to `build/`. Never commit build
+   artifacts to the root; they belong in `build/`.
+2. `build/` holds **working artifacts only**. Finished, submittable PDFs are
+   **copied** to `2026-2027/Official Documents/` under their Arabic folder and
+   Arabic filename — see §4.1 for the naming convention.
 
 ---
 
@@ -79,6 +90,50 @@ xelatex -interaction=nonstopmode -halt-on-error -output-directory=build FILE.tex
 
 > If the repo directory is read-only, enable writing first:
 > `chmod u+w .`
+
+### 4.1 Publishing the compiled PDF
+
+`build/` is scratch space. After a clean build, **copy** the finished PDF into
+`2026-2027/Official Documents/<التصنيف>/` with the Arabic name below. Never rename
+the source `.tex`, and keep the two in sync.
+
+**File-naming pattern:**
+
+```
+<اسم الوثيقة>[ - <الشعبة>].pdf
+```
+
+The school year is **not** repeated in the filename — the `2026-2027/` directory
+already carries it. Place a single space around the hyphen, and add the stream
+suffix only for documents that exist per-stream (e.g. التوزيع السنوي). Folder
+name = bare document name (no stream).
+
+| Source `.tex`                    | Published folder                | Published filename                                  |
+| -------------------------------- | ------------------------------- | --------------------------------------------------- |
+| `didactic-contract.tex`          | `العقد الديداكتيكي/`            | `العقد الديداكتيكي.pdf`                             |
+| `diagnostic-assessment.tex`      | `التقويم التشخيصي/`             | `التقويم التشخيصي.pdf`                              |
+| `annual-distribution-science.tex`| `التوزيع السنوي/`               | `التوزيع السنوي - جذع مشترك علوم وتكنولوجيا.pdf`    |
+| `annual-distribution-letters.tex`| `التوزيع السنوي/`               | `التوزيع السنوي - جذع مشترك آداب وفلسفة.pdf`        |
+
+**Publish command (after the build in §4):**
+
+```bash
+cp build/didactic-contract.pdf           "2026-2027/Official Documents/العقد الديداكتيكي/العقد الديداكتيكي.pdf"
+cp build/diagnostic-assessment.pdf       "2026-2027/Official Documents/التقويم التشخيصي/التقويم التشخيصي.pdf"
+cp build/annual-distribution-science.pdf "2026-2027/Official Documents/التوزيع السنوي/التوزيع السنوي - جذع مشترك علوم وتكنولوجيا.pdf"
+cp build/annual-distribution-letters.pdf "2026-2027/Official Documents/التوزيع السنوي/التوزيع السنوي - جذع مشترك آداب وفلسفة.pdf"
+```
+
+**Rules:**
+
+- Quote every path — the names contain spaces and Arabic.
+- Overwrite the existing published PDF; it is a derived copy, not a source.
+- Keep older years in their own `20XX-20XX/` tree and never overwrite them.
+- The same `<اسم الوثيقة>[ - <الشعبة>].pdf` pattern applies to **externally
+  sourced** official documents filed under `Official Documents/` (e.g.
+  `التدرج السنوي - جذع مشترك آداب وفلسفة.pdf`) even when they have no source
+  `.tex`. Spell out the stream; never keep ministry abbreviations such as
+  `ج م ا ف` / `ج م ع ت`.
 
 ---
 
@@ -268,7 +323,11 @@ Rule 1 below.
 4. Set the header title, `\hypersetup` title, and footer consistently.
 5. Keep content inside the 1cm page border.
 6. Build to `build/` and verify (see §9).
-7. Do not modify unrelated `.tex` files.
+7. Publish the PDF to `2026-2027/Official Documents/` using the naming convention
+   in §4.1.
+8. Add the document to the index table in `README.md` (§الوثائق), linking the
+   published PDF and the source `.tex`.
+9. Do not modify unrelated `.tex` files.
 
 ---
 
