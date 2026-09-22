@@ -1,0 +1,12 @@
+# LaTeX build artifacts — scratch space only (see AGENTS.md §2, §9)
+build/
+
+# LaTeX intermediate files
+*.aux
+*.log
+*.out
+*.toc
+*.xdv
+*.fls
+*.fdb_latexmk
+*.synctex.gz

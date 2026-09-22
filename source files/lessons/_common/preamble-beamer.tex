@@ -1,0 +1,101 @@
+% ══════════════════════════════════════════════════════════════════════════════
+%  المشترك — التمهيد الموحّد للعرض التقديمي (Beamer, RTL, 16:9)
+%  يُستدعى بـ: \input{../_common/preamble-beamer.tex}
+%  يُصرَّف بـ XeLaTeX حصراً.
+% ══════════════════════════════════════════════════════════════════════════════
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% ── Fonts / language ─────────────────────────────────────────────────────────
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage[numerals=western]{arabic}
+\setotherlanguage{english}
+\setmainfont{Amiri}[BoldFont = * Bold, ItalicFont = * Italic]
+\setsansfont{Amiri}[BoldFont = * Bold, ItalicFont = * Italic]
+\newfontfamily\arabicfont{Amiri}[Script = Arabic, BoldFont = * Bold]
+\newfontfamily\arabicfontsf{Amiri}[Script = Arabic, BoldFont = * Bold]
+\setmonofont{DejaVu Sans Mono}
+\newfontfamily\arabicfonttt{Amiri}[Script = Arabic, BoldFont = * Bold]
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{colortbl}
+
+% ── Colors ───────────────────────────────────────────────────────────────────
+\definecolor{primary}{HTML}{1A5276}
+\definecolor{secondary}{HTML}{2E86C1}
+\definecolor{lightbg}{HTML}{EBF5FB}
+\definecolor{darktext}{HTML}{1C2833}
+\definecolor{rulegray}{HTML}{ABB2B9}
+\definecolor{success}{HTML}{1E8449}
+
+% ── Beamer look ──────────────────────────────────────────────────────────────
+\usetheme{default}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{frametitle}{bg=primary, fg=white}
+\setbeamercolor{structure}{fg=secondary}
+\setbeamercolor{normal text}{fg=darktext}
+\setbeamercolor{alerted text}{fg=secondary}
+\setbeamercolor{item}{fg=secondary}
+\setbeamercolor{block title}{bg=secondary, fg=white}
+\setbeamercolor{block body}{bg=lightbg}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{author}{size=\small}
+
+% frametitle bar
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \hbox to\paperwidth{%
+    \hspace*{-1.05cm}%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=3.2ex, dp=1.4ex, rightskip=1em plus 1fil, leftskip=1em, sep=0pt]{frametitle}%
+      \strut\insertframetitle\strut
+    \end{beamercolorbox}%
+    \hss
+  }%
+}
+
+% footer
+\setbeamertemplate{footline}{%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.34\paperwidth, ht=2.6ex, dp=1.2ex, leftskip=1em]{author in head/foot}%
+      \usebeamerfont{footline}\color{rulegray}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.33\paperwidth, ht=2.6ex, dp=1.2ex, center]{title in head/foot}%
+      \usebeamerfont{footline}\color{rulegray}الأستاذ: لفقير عبدالجليل
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.33\paperwidth, ht=2.6ex, dp=1.2ex, rightskip=1em]{date in head/foot}%
+      \usebeamerfont{footline}\color{rulegray}\insertframenumber\,/\,\inserttotalframenumber
+    \end{beamercolorbox}%
+  }%
+}
+
+% bullets
+\setbeamertemplate{itemize item}{\textcolor{secondary}{\textbullet}}
+\setbeamertemplate{itemize subitem}{\textcolor{secondary}{--}}
+\setbeamertemplate{enumerate item}{\textcolor{white}{\colorbox{secondary}{\insertenumlabel}}}
+
+% beamer blocks
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ── Helpers ──────────────────────────────────────────────────────────────────
+\newcommand{\hl}[1]{\textcolor{secondary}{\textbf{#1}}}
+\newcommand{\key}[1]{\textcolor{primary}{\textbf{#1}}}
+\newcommand{\answer}[1]{\textcolor{success}{\textbf{#1}}}
+\newcommand{\dotsline}[1][3cm]{\textcolor{rulegray}{\makebox[#1]{\dotfill}}}
+\newcommand{\blank}[1][2cm]{\underline{\hspace{#1}}}
+\newcommand{\bigtitle}[1]{%
+  \begin{center}{\color{primary}\Huge\bfseries #1}\end{center}%
+}
+\newcommand{\lessonframe}[1]{%
+  \begin{frame}[plain]
+    \vfill
+    \begin{center}
+      {\color{secondary}\large #1}\\[6pt]
+      {\color{primary}\Huge\bfseries\inserttitle}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
