@@ -1,0 +1,44 @@
+% ══════════════════════════════════════════════════════════════════════════════
+%  المشترك — التذييل الرسمي الموحّد لوثائق الدروس
+%  يتطلّب: تحميل fancyhdr قبل polyglossia، وتوفّر اللون rulegray،
+%           وحزمة lastpage (للعدد الكلّي للصفحات).
+%
+%  يُستدعى بـ (من مجلد المستند):
+%    \input{"../../shared/footer.tex"}          ← من source files/lessons/<درس>/
+%    \input{"../shared/footer.tex"}             ← من source files/documents/
+%    \input{"source files/shared/footer.tex"}   ← من جذر المستودع
+%
+%  هذا الملف مكتفٍ بذاته: لا يستدعي أي ملف آخر.
+%
+%  الاستعمال:
+%    \nopagenum    — إخفاء رقم الصفحة (مع إبقاء التذييل)
+%    \pagenum      — إظهاره (افتراضي)
+%    \nopagefooter — إخفاء التذييل كاملًا في الصفحة الحالية
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ── متطلّبات الحزمة ─────────────────────────────────────────────────────────
+\usepackage{lastpage}   % للعدد الكلّي للصفحات في التذييل
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+% قاعدة التذييل بلون رمادي هادئ
+\renewcommand{\footrule}{%
+  {\color{rulegray}\hrule height \footrulewidth\vskip-\footrulewidth}}
+
+\fancyfoot[L]{\footnotesize\color{rulegray} الأستاذ لفقير عبدالجليل}
+\fancyfoot[R]{\footnotesize\color{rulegray} السنة الدراسية 2027/2026}
+
+% ── رقم الصفحة: «الصفحة س / ص» ──────────────────────────────────────────────
+\newcommand{\pagenum}{%
+  \fancyfoot[C]{\footnotesize\color{rulegray} الصفحة \thepage\,/\,\pageref{LastPage}}%
+}
+\newcommand{\nopagenum}{%
+  \fancyfoot[C]{}%
+}
+\newcommand{\nofooter}{\thispagestyle{empty}}
+\newcommand{\nopagefooter}{\thispagestyle{empty}}
+
+% مفعّل افتراضيًا
+\pagenum

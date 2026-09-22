@@ -1,0 +1,36 @@
+% =============================================================================
+% main.tex — مدخل الوثائق (يستدعي الترويسة والتذييل المشتركين)
+% يُصرَّف بـ XeLaTeX حصراً.
+% =============================================================================
+
+\documentclass[12pt, a4paper]{article}
+
+% ── هوامش ضيّقة (مع فراغ للتذييل أسفل الصفحة) ────────────────────────────────
+\usepackage[top=1.2cm, bottom=1.8cm, left=2cm, right=2cm]{geometry}
+
+% ── fancyhdr قبل polyglossia (شرط bidi) ──────────────────────────────────────
+\usepackage{fancyhdr}
+
+% ── الإعداد الأدنى للعربية ───────────────────────────────────────────────────
+\usepackage{xcolor}
+\definecolor{primary}{HTML}{1A5276}
+\definecolor{rulegray}{HTML}{ABB2B9}
+
+\usepackage{polyglossia}
+\setmainlanguage[numerals=western]{arabic}
+\setotherlanguage{english}
+
+\setmainfont{Amiri}[
+  BoldFont = * Bold,
+  ItalicFont = * Italic,
+]
+
+% ── الترويسة والتذييل المشتركان ──────────────────────────────────────────────
+\input{"source files/shared/header.tex"}
+\input{"source files/shared/footer.tex"}
+
+\begin{document}
+
+\officialheader
+
+\end{document}

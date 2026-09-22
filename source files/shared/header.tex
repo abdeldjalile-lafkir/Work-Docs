@@ -1,0 +1,18 @@
+% ══════════════════════════════════════════════════════════════════════════════
+%  المشترك — الترويسة الرسمية الموحّدة لوثائق الدروس
+%  يُستدعى بـ: \input{../_common/header.tex}   (بعد preamble.tex)
+%  ثمّ الاستعمال: \officialheader
+% ══════════════════════════════════════════════════════════════════════════════
+
+\newcommand{\officialheader}{%
+  \par\noindent
+  \begin{minipage}{\linewidth}%
+    \centering
+    {\Large\bfseries\color{primary} الجمهورية الجزائرية الديمقراطية الشعبية}\par
+    {\large\bfseries\color{primary} وزارة التربية الوطنية}\par
+    \vspace{2pt}%
+    \raggedleft
+    {\large\color{primary} مديرية التربية لولاية أدرار}\par
+    {\large\color{primary} ثانوية الشهيد حكومي العيد أدرار}\par
+  \end{minipage}\par
+}

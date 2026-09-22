@@ -1,0 +1,169 @@
+% ══════════════════════════════════════════════════════════════════════════════
+%  المشترك — التمهيد الموحّد وطبقة التصميم لوثائق الدروس (article, عربي RTL)
+%  يُصرَّف بـ XeLaTeX حصراً.
+%
+%  يُستدعى بـ (من مجلد الدرس):
+%    \input{"../../shared/common.tex"}
+%
+%  يوفّر: التمهيد، الألوان، إطار الصفحة، الترويسة، التذييل (الصفحة س/ص)،
+%          والجداول الاحترافية (booktabs)، وأدوات مساعدة، والبطاقة الفنية.
+%
+%  مبادئ التصميم المطبّقة هنا:
+%    • هوامش سخيّة ومسافة بيضاء متوازنة.
+%    • تدرّج طباعي واضح (\Huge عنوان ← \large قسم ← \normalsize متن) مع
+%      \linespread لتهوية الأسطر.
+%    • لوحة ألوان هادئة (كحلي/ذهبي) تُستعمل للعناوين والقواعد لا للمتن.
+%    • جداول booktabs بلا خطوط عمودية إطلاقاً.
+%    • تذييل «الصفحة س / ص» عبر lastpage.
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ── Geometry ──────────────────────────────────────────────────────────────────
+\usepackage[
+  top=3.0cm,
+  bottom=2.6cm,
+  left=2.4cm,
+  right=2.4cm,
+  headheight=26pt          % MUST be >= 26pt (fancyhdr)
+]{geometry}
+
+% ── Packages: fancyhdr and friends BEFORE polyglossia ────────────────────────
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usepackage{eso-pic}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{booktabs}      % جداول احترافية: \toprule \midrule \bottomrule
+\usepackage{lastpage}      % للتذييل: الصفحة س / ص
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+% روابط بلا إطار (يمنع المستطيل حول رقم الصفحة في التذييل)
+\hypersetup{hidelinks}
+
+% ── Arabic / RTL — load AFTER fancyhdr ───────────────────────────────────────
+\usepackage{polyglossia}
+\setmainlanguage[numerals=western]{arabic}
+\setotherlanguage{english}
+
+% ── Fonts (Amiri — خط النسخ المعتمد) ────────────────────────────────────────
+\setmainfont{Amiri}[
+  BoldFont = * Bold,
+  ItalicFont = * Italic,
+]
+\newfontfamily\arabicfont{Amiri}[
+  Script = Arabic,
+  BoldFont = * Bold,
+]
+\setmonofont{DejaVu Sans Mono}
+
+% ── TYPOGRAPHY: تدرّج طباعي وتهوية ─────────────────────────────────────────
+\linespread{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt}
+\renewcommand{\arraystretch}{1.2}   % تنفّس داخل خلايا الجداول
+
+% ── Colors (لوحة هادئة: كحلي / أزرق متوسط / ذهبي) ───────────────────────────
+\definecolor{primary}{HTML}{1A5276}      % كحلي داكن — العناوين والقواعد
+\definecolor{secondary}{HTML}{2E86C1}    % أزرق متوسط — العناوين الفرعية
+\definecolor{accent}{HTML}{B7950B}       % ذهبي هادئ — لمسات
+\definecolor{lightbg}{HTML}{F4F9FD}      % خلفية فاتحة جداً
+\definecolor{darktext}{HTML}{1C2833}     % نص شبه أسود
+\definecolor{rulegray}{HTML}{AAB7B8}     % رمادي القواعد والهوامش
+\definecolor{success}{HTML}{1E8449}
+
+% ── Page Border: 1cm from all four edges (إطار بخط رفيع) ────────────────────
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[primary, line width=1.1pt]
+      ([xshift=-1cm, yshift=-1cm]current page.north east)
+      rectangle
+      ([xshift=1cm, yshift=1cm]current page.south west);
+  \end{tikzpicture}%
+}
+
+% ── Header / Footer ──────────────────────────────────────────────────────────
+% الترويسة الرسمية تُدخل من header.tex، والتذييل من footer.tex
+% \shareddir: مسار مجلد shared، قابل للتجاوز من المستدعي قبل \input{common.tex}
+%   • من lessons/<درس>/  → الافتراضي "../../shared/"
+%   • من documents/      → \def\shareddir{../shared/}
+\providecommand{\shareddir}{../../shared/}
+\makeatletter
+\def\input@path{{\shareddir}}
+\makeatother
+\input{header.tex}
+\input{footer.tex}
+
+% ── Section formatting ───────────────────────────────────────────────────────
+\titleformat{\section}
+  {\large\bfseries\color{primary}}
+  {\colorbox{primary}{\color{white}\thesection}}
+  {0.7em}{}
+  [\vspace{-0.15em}{\color{primary}\titlerule[1.2pt]}]
+
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{secondary}}{\thesubsection}{0.5em}{}
+
+% عنوان قسم بدون ترقيم — نص بارز فقط (بلا قاعدة)
+\newcommand{\plainsec}[1]{%
+  \par\vspace{8pt}%
+  {\large\bfseries\color{primary} #1}\par\vspace{5pt}%
+}
+
+% ── Helpers ──────────────────────────────────────────────────────────────────
+% سطر نقاط للإجابة (يجب أن يكون داخل صندوق ليرتسم)
+\newcommand{\answerline}{\par\vspace{1pt}\noindent\makebox[\linewidth]{\dotfill}}
+% عدّة أسطر إجابة — لا تُستعمل داخل خلية جدول
+\newcommand{\answerlines}[1]{%
+  \begingroup\count255=0 \loop\ifnum\count255<#1 \answerline\advance\count255 by 1 \repeat\endgroup}
+% فراغ للكتابة على السطر
+\newcommand{\blank}[1][3cm]{\underline{\hspace{#1}}}
+% مربّع اختيار
+\newcommand{\cb}{\raisebox{0.15ex}{\fbox{\rule{0pt}{1.1ex}\hspace{1em}}}}
+
+% ── البطاقة الفنية (جداول booktabs: بلا خطوط عمودية) ────────────────────────
+% \cardtitleset يهيّئ القواعد والمسافات داخل جدول البطاقة
+\newcommand{\cardsetup}{%
+  \renewcommand{\arraystretch}{1.25}%
+  \setlength{\arrayrulewidth}{0.6pt}%
+  \arrayrulecolor{rulegray}%
+}
+% صفوف البطاقة: بلا قاعدة لكل صف — القواعد تُرسم بـ \midrule بين المجموعات
+\newcommand{\cardrow}[2]{%
+  \textbf{\color{primary}#1} & #2 \\
+}
+\newcommand{\cardrowtwo}[4]{%
+  \textbf{\color{primary}#1} & #2 \hfill \textbf{\color{primary}#3:} #4 \\
+}
+% عنوان المستند — كتلة عنوان أنيقة (بلا قاعدة)
+\newcommand{\cardtitle}[1]{%
+  \begin{center}
+    {\LARGE\bfseries\color{primary} #1}
+  \end{center}
+  \vspace{8pt}
+}
+
+% ── Callout boxes — صناديق أنيقة بشريط لوني جانبي ───────────────────────────
+\newtcolorbox{infobox}[1][]{
+  enhanced, breakable,
+  colback=lightbg, colframe=secondary,
+  coltitle=white, fonttitle=\bfseries, title=#1,
+  boxrule=0.0pt, leftrule=2.5pt, arc=2pt,
+  left=11pt, right=11pt, top=8pt, bottom=8pt,
+}
+\newtcolorbox{notebox}[1][]{
+  enhanced, breakable,
+  colback=lightbg, colframe=primary,
+  coltitle=white, fonttitle=\bfseries, title=#1,
+  boxrule=0.0pt, leftrule=3pt, arc=2pt,
+  left=11pt, right=11pt, top=8pt, bottom=8pt,
+}

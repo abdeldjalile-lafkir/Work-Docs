@@ -1,0 +1,331 @@
+% =============================================================================
+%  lesson-presentation.tex — عرض درس تقنية المعلومات (الدرس 01)
+%  المجال 1: بيئة التعامل مع الحاسوب — الوحدة 1: تقنية المعلومات (IT)
+%  السنة الدراسية: 2026 / 2027
+% =============================================================================
+%  مبنيّ على القالب المشترك: source files/shared/presentation-template.tex
+%  البناء (من هذا المجلد):
+%    xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lesson-presentation.tex
+% =============================================================================
+
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+% ── Arabic / RTL (XeLaTeX) ───────────────────────────────────────────────────
+\usepackage{polyglossia}
+\setmainlanguage[numerals=western]{arabic}
+\setotherlanguage{english}
+
+% ── Fonts ─────────────────────────────────────────────────────────────────────
+\setmainfont{Amiri}[
+  BoldFont = * Bold,
+  ItalicFont = * Italic,
+]
+\setsansfont{Amiri}[
+  BoldFont = * Bold,
+  ItalicFont = * Italic,
+]
+\newfontfamily\arabicfont{Amiri}[
+  Script = Arabic,
+  BoldFont = * Bold,
+]
+\newfontfamily\arabicfontsf{Amiri}[
+  Script = Arabic,
+  BoldFont = * Bold,
+]
+\setmonofont{DejaVu Sans Mono}
+\newfontfamily\arabicfonttt{Amiri}[Script = Arabic, BoldFont = * Bold]
+
+% ── Packages ─────────────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+% ── Colors (project palette) ─────────────────────────────────────────────────
+\definecolor{primary}{HTML}{1A5276}
+\definecolor{secondary}{HTML}{2E86C1}
+\definecolor{accent}{HTML}{D4AC0D}
+\definecolor{lightbg}{HTML}{EBF5FB}
+\definecolor{darktext}{HTML}{1C2833}
+\definecolor{rulegray}{HTML}{ABB2B9}
+\definecolor{success}{HTML}{1E8449}
+
+% ── Beamer look ──────────────────────────────────────────────────────────────
+\usetheme{default}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{frametitle}{bg=primary, fg=white}
+\setbeamercolor{structure}{fg=secondary}
+\setbeamercolor{normal text}{fg=darktext}
+\setbeamercolor{alerted text}{fg=secondary}
+\setbeamercolor{item}{fg=secondary}
+\setbeamercolor{block title}{bg=secondary, fg=white}
+\setbeamercolor{block body}{bg=lightbg}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{author}{size=\small}
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \hbox to\paperwidth{%
+    \hspace*{-1.05cm}%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=3.2ex, dp=1.4ex,
+        rightskip=1em plus 1fil, leftskip=1em, sep=0pt]{frametitle}%
+      \strut\insertframetitle\strut
+    \end{beamercolorbox}%
+    \hss
+  }%
+}
+
+\setbeamertemplate{footline}{%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.34\paperwidth, ht=2.6ex, dp=1.2ex, leftskip=1em]{}%
+      \usebeamerfont{footline}\color{rulegray}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.33\paperwidth, ht=2.6ex, dp=1.2ex, center]{}%
+      \usebeamerfont{footline}\color{rulegray}الأستاذ لفقير عبدالجليل
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.33\paperwidth, ht=2.6ex, dp=1.2ex, rightskip=1em]{}%
+      \usebeamerfont{footline}\color{rulegray}\insertframenumber\,/\,\inserttotalframenumber
+    \end{beamercolorbox}%
+  }%
+}
+
+\setbeamertemplate{itemize item}{\textcolor{secondary}{\textbullet}}
+\setbeamertemplate{itemize subitem}{\textcolor{secondary}{--}}
+\setbeamertemplate{enumerate item}{\textcolor{white}{\colorbox{secondary}{\insertenumlabel}}}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ── Helpers ──────────────────────────────────────────────────────────────────
+\newcommand{\hl}[1]{\textcolor{secondary}{\textbf{#1}}}
+\newcommand{\key}[1]{\textcolor{primary}{\textbf{#1}}}
+\newcommand{\answer}[1]{\textcolor{success}{\textbf{#1}}}
+
+\newcommand{\sectionframe}[1]{%
+  \begin{frame}[plain]
+    \vfill
+    \begin{center}
+      {\color{white}\colorbox{primary}{\Large\bfseries\;#1\;}}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\title{المفاهيم القاعدية لتقنية المعلومات}
+\subtitle{المجال 1: بيئة التعامل مع الحاسوب — الوحدة 1: تقنية المعلومات (IT)}
+\author{الأستاذ لفقير عبدالجليل}
+\institute{ثانوية الشهيد حكومي العيد أدرار}
+\date{السنة الدراسية 2027/2026}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ── 1. شريحة العنوان ─────────────────────────────────────────────────────────
+\begin{frame}[plain]
+  \titlepage
+  \begin{center}
+    {\footnotesize\color{rulegray} ثانوية الشهيد حكومي العيد أدرار — المعلوماتية — السنة الأولى ثانوي}
+  \end{center}
+\end{frame}
+
+% ── 2. أهداف الدرس ───────────────────────────────────────────────────────────
+\begin{frame}{أهداف الدرس}
+  \begin{itemize}
+    \item يتعرّف التلميذ على مفاهيم \hl{التقنية}، \hl{التكنولوجيا}، \hl{الإعلام}، و\hl{الاتصال}.
+    \item يتعرّف على مفهوم \hl{تكنولوجيا الإعلام والاتصال (TIC)} ومكوّناتها المادية والشبكية.
+    \item يميّز بين \hl{البيانات} و\hl{المعلومات} وعملية \hl{المعالجة} الآلية.
+    \item يتعرّف على مفهوم \hl{المعلوماتية (Informatique)} وأصل الكلمة.
+  \end{itemize}
+\end{frame}
+
+% ── 3. الإشكالية ─────────────────────────────────────────────────────────────
+\begin{frame}{الإشكالية}
+  \begin{block}{وضعية انطلاق}
+    في حياتنا اليومية نستخدم مصطلحات مثل «المعلوماتية»، «التكنولوجيا»،
+    و«تكنولوجيا الإعلام والاتصال».%
+    \par\vspace{4pt}
+    \textbf{هل تعبّر هذه الكلمات عن نفس المعنى؟}%
+    \par\vspace{4pt}
+    وكيف يتحوّل الحرف أو الرقم المجرّد المكتوب في استمارة التسجيل إلى
+    \textbf{معلومة مفيدة} يستغلها الحاسوب؟
+  \end{block}
+\end{frame}
+
+% ── 4. المفاهيم الأولية ──────────────────────────────────────────────────────
+\sectionframe{1. المفاهيم الأولية}
+
+\begin{frame}{التقنية والتكنولوجيا}
+  \begin{block}{التقنية (Technique)}
+    هي \key{المهارة والقدرة الفردية} على ممارسة الأعمال والأنشطة لإنجاز منتج معيّن.
+  \end{block}
+  \begin{block}{التكنولوجيا (Technologie)}
+    كلمة ذات \key{أصل يوناني} مركّبة من مقطعين:%
+    \par\vspace{3pt}
+    \centerline{\key{Techno} (مهارة فنية) \;+\; \key{Logos} (علم)}%
+    \par\vspace{3pt}
+    وتعني \hl{علم المهارات والتقنيات التطبيقية} والاستغلال المنطقي للمعارف العلمية.
+  \end{block}
+\end{frame}
+
+\begin{frame}{الإعلام والاتصال}
+  \begin{block}{الإعلام (Information)}
+    هو تقديم الأخبار والمعلومات و\key{نقل رسالة} من \hl{مرسل} إلى \hl{مستقبل}.
+  \end{block}
+  \begin{block}{الاتصال (Communication)}
+    هو عملية \key{التفاعل ونقل الأفكار والمعلومات} بين مرسل ومستقبل
+    في سياق معيّن.
+  \end{block}
+  \vspace{4pt}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=2.6cm,
+    box/.style={draw=primary, fill=lightbg, thick, rounded corners=3pt,
+                minimum width=2.6cm, minimum height=0.9cm, align=center},
+    ar/.style={-{Latex[length=3mm]}, thick, primary}
+  ]
+    \node[box] (s) {مرسل};
+    \node[box, right=of s] (m) {رسالة};
+    \node[box, right=of m] (r) {مستقبل};
+    \draw[ar] (s) -- (m);
+    \draw[ar] (m) -- (r);
+  \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+% ── 5. مفهوم TIC ─────────────────────────────────────────────────────────────
+\sectionframe{2. تكنولوجيا الإعلام والاتصال (TIC)}
+
+\begin{frame}{مفهوم TIC}
+  \begin{block}{التعريف}
+    هي \key{التلاقي والتزاوج} بين عتاد الحواسيب، البرمجيات، وشبكات الاتصال
+    لـ\hl{جمع البيانات} وتخزينها و\hl{معالجتها ونقلها}.
+  \end{block}
+  \vspace{6pt}
+  \begin{center}
+  \begin{tabular}{@{}c@{\hspace{0.6cm}}c@{\hspace{0.6cm}}c@{}}
+    \colorbox{lightbg}{\parbox{3cm}{\centering\key{عتاد الحواسيب}}} &
+    \colorbox{lightbg}{\parbox{3cm}{\centering\key{البرمجيات}}} &
+    \colorbox{lightbg}{\parbox{3cm}{\centering\key{شبكات الاتصال}}} \\
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{مكوّنات TIC الأساسية}
+  \begin{columns}[t]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{1. تقنيات المعالجة والتخزين}
+        \begin{itemize}
+          \item \key{الأجهزة:} كمبيوتر، هواتف.
+          \item \key{البرامج:} أنظمة تشغيل، تطبيقات.
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{2. شبكات الاتصال}
+        \begin{itemize}
+          \item السلكية.
+          \item اللاسلكية.
+          \item السمعي البصري.
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ── 6. البيانات والمعلومات ───────────────────────────────────────────────────
+\sectionframe{3. البيانات والمعلومات والمعالجة}
+
+\begin{frame}{البيانات والمعلومات والمعالجة}
+  \begin{description}
+    \item[\key{البيانات (Data / Données):}] الحقائق والأرقام والرموز
+      \hl{الأولية الخام} التي لا تعطي معنى واضحًا بمفردها.
+    \item[\key{المعلومات (Informations):}] البيانات التي جرت
+      \hl{معالجتها وتنظيمها} فأصبحت ذات معنى وسياق مفيد.
+    \item[\key{المعالجة (Processing / Traitement):}] مجموعة العمليات
+      \hl{الحسابية والمنطقية} المطبّقة على البيانات لتحويلها إلى معلومات.
+  \end{description}
+\end{frame}
+
+\begin{frame}{دورة معالجة البيانات}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=3.4cm,
+    box/.style={draw=primary, fill=lightbg, thick, rounded corners=4pt,
+                minimum width=3.6cm, minimum height=1.3cm, align=center},
+    ar/.style={-{Latex[length=4mm]}, line width=1.1pt, primary}
+  ]
+    \node[box] (d) {\key{بيانات أولية}\\[2pt]\footnotesize (Data)};
+    \node[box, right=of d] (p) {\key{معالجة آلية}\\[2pt]\footnotesize (Processing)};
+    \node[box, right=of p] (i) {\key{معلومات مفيدة}\\[2pt]\footnotesize (Information)};
+    \draw[ar] (d) -- (p);
+    \draw[ar] (p) -- (i);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{6pt}
+  \begin{block}{مثال}
+    \hl{[علي — 2008 — 14.5]} \quad$\longrightarrow$\quad
+    \hl{ترتيب وفرز} \quad$\longrightarrow$\quad
+    \answer{علي: ناجح بمعدل 14.5}
+  \end{block}
+\end{frame}
+
+% ── 7. المعلوماتية ───────────────────────────────────────────────────────────
+\sectionframe{4. مفهوم المعلوماتية (Informatique)}
+
+\begin{frame}{أصل كلمة المعلوماتية}
+  \begin{block}{التركيب اللغوي}
+    كلمة فرنسية مركّبة من جزأين:
+  \end{block}
+  \vspace{4pt}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.2cm,
+    part/.style={draw=secondary, fill=lightbg, thick, rounded corners=3pt,
+                 minimum width=4.2cm, minimum height=1.0cm, align=center},
+    res/.style={draw=primary, fill=primary!10, thick, rounded corners=3pt,
+                minimum width=8.6cm, minimum height=1.1cm, align=center}
+  ]
+    \node[part] (a) {\key{INFORMATION}\\[1pt]\footnotesize (معلومات)};
+    \node[part, right=of a] (b) {\key{AUTOMATIQUE}\\[1pt]\footnotesize (آلية)};
+    \node[res, below=1.0cm of a, xshift=2.7cm] (r)
+      {\Large\key{INFORMATIQUE} \;\footnotesize (المعلوماتية)};
+    \draw[-{Latex[length=3mm]}, thick, primary] (a.south) -- (r.north west);
+    \draw[-{Latex[length=3mm]}, thick, primary] (b.south) -- (r.north east);
+  \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}{تعريف المعلوماتية}
+  \begin{block}{التعريف}
+    هي \key{علم المعالجة الآلية للمعلومات} باستخدام جهاز الحاسوب
+    والبرمجيات المخصّصة لذلك.
+  \end{block}
+\end{frame}
+
+% ── 8. الخلاصة ───────────────────────────────────────────────────────────────
+\begin{frame}{الخلاصة}
+  \begin{block}{ما يجب تذكّره}
+    \begin{itemize}
+      \item \key{التقنية} مهارة فردية، و\key{التكنولوجيا} علم تطبيقي.
+      \item \key{TIC} = تلاقي العتاد + البرمجيات + شبكات الاتصال.
+      \item \hl{بيانات} $\xrightarrow{\ \text{معالجة}\ }$ \hl{معلومات}.
+      \item \key{INFORMATIQUE} = INFORMATION + AUTOMATIQUE.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[plain]
+  \vfill
+  \begin{center}
+    {\color{primary}\Huge\bfseries شكرًا لحسن انتباهكم}
+  \end{center}
+  \vfill
+\end{frame}
+
+\end{document}

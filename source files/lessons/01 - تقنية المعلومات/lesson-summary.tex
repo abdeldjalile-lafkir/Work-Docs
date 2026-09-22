@@ -1,0 +1,124 @@
+% =============================================================================
+%  ملخّص الدرس — الأثر الكتابي على الكراس (الدرس 01)
+%  المجال 1: بيئة التعامل مع الحاسوب — الوحدة 1: تقنية المعلومات (IT)
+%  الموضوع: المفاهيم القاعدية لتقنية المعلومات
+%  السنة الدراسية: 2026 / 2027
+% =============================================================================
+%  البناء (من هذا المجلد):
+%    xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lesson-summary.tex
+% =============================================================================
+
+\documentclass[11pt, a4paper]{article}
+
+% ── المشترك (التمهيد، الألوان، الترويسة، التذييل، الأدوات) ───────────────────
+\input{"../../shared/common.tex"}
+
+% ── خاص بهذا المستند: عنوان الملخّص ─────────────────────────────────────────
+\newcommand{\summarytitle}[3]{%
+  \begin{center}
+    {\large\bfseries\color{primary} ملخّص الدرس — الأثر الكتابي على الكراس}
+  \end{center}
+  \vspace{1pt}
+  {\color{secondary}\hrule height 1.2pt}
+  \vspace{4pt}
+  {\cardsetup
+  \noindent
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries\color{primary}}p{3.2cm}X@{}}
+    \toprule
+    المجال التعلمي & #1 \\
+    الوحدة التعلمية & #2 \\
+    الموضوع & #3 \\
+    \bottomrule
+  \end{tabularx}}\vspace{10pt}
+}
+
+% ── خاص بهذا المستند: محور ──────────────────────────────────────────────────
+\newcommand{\summaryaxis}[2]{%
+  \par\vspace{6pt}%
+  {\normalsize\bfseries\color{primary} #1. #2}\par
+  \vspace{-0.3em}{\color{secondary}\hrule height 0.8pt}\par\vspace{3pt}%
+}
+
+% ── خاص بهذا المستند: مصطلح ────────────────────────────────────────────────
+\newcommand{\term}[2]{%
+  \textbullet\ \textbf{\color{primary}#1:} #2\par\vspace{2pt}%
+}
+
+% ── خاص بهذا المستند: صندوق الخلاصة ────────────────────────────────────────
+\newtcolorbox{leadbox}[1][]{
+  enhanced, colback=lightbg, colframe=primary,
+  coltitle=white, fonttitle=\bfseries, title=#1,
+  boxrule=1pt, arc=4pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
+  breakable,
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+\officialheader
+
+\summarytitle{بيئة التعامل مع الحاسوب}{تقنية المعلومات (IT)}{المفاهيم القاعدية لتقنية المعلومات}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\summaryaxis{1}{المفاهيم الأولية}
+
+\term{التقنية (Technique)}{هي المهارة والقدرة الفردية على ممارسة الأعمال والأنشطة لإنجاز منتج معيّن.}
+
+\term{التكنولوجيا (Technologie)}{كلمة ذات أصل يوناني مركّبة من مقطعين: (Techno: مهارة فنية) + (Logos: علم)، وتعني علم المهارات والتقنيات التطبيقية والاستغلال المنطقي للمعارف العلمية.}
+
+\term{الإعلام (Information)}{هو تقديم الأخبار والمعلومات ونقل رسالة من مرسل إلى مستقبل.}
+
+\term{الاتصال (Communication)}{هو عملية التفاعل ونقل الأفكار والمعلومات بين مرسل ومستقبل في سياق معيّن.}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\summaryaxis{2}{مفهوم تكنولوجيا الإعلام والاتصال (TIC)}
+
+\noindent هي التلاقي والتزاوج بين عتاد الحواسيب، البرمجيات، وشبكات الاتصال لجمع البيانات وتخزينها ومعالجتها ونقلها.
+
+\vspace{4pt}
+\noindent\textbf{\color{secondary}مكوّناتها الأساسية:}
+\begin{itemize}[label=\textbullet, leftmargin=1.2em, itemsep=2pt, topsep=2pt, parsep=0pt]
+  \item \textbf{تقنيات المعالجة والتخزين:} الأجهزة (كمبيوتر، هواتف) والبرامج (أنظمة تشغيل، تطبيقات).
+  \item \textbf{شبكات الاتصال:} شبكات الاتصال السلكية واللاسلكية والسمعي البصري.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\summaryaxis{3}{البيانات والمعلومات والمعالجة}
+
+\term{البيانات (Data / Données)}{هي الحقائق والأرقام والرموز الأولية الخام التي لا تعطي معنى واضحًا بمفردها.}
+
+\term{المعلومات (Informations)}{هي البيانات التي جرت معالجتها وتنظيمها فأصبحت ذات معنى وسياق مفيد.}
+
+\term{المعالجة (Processing / Traitement)}{هي مجموعة العمليات الحسابية والمنطقية المطبّقة على البيانات لتحويلها إلى معلومات.}
+
+\vspace{4pt}
+\begin{center}
+\begin{tikzpicture}[
+  node distance=2.8cm,
+  box/.style={draw=primary, fill=lightbg, thick, rounded corners=3pt,
+              minimum width=3.4cm, minimum height=1.0cm, align=center},
+  ar/.style={-{Latex[length=3mm]}, thick, primary}
+]
+  \node[box] (d) {بيانات\\\footnotesize (Data)};
+  \node[box, right=of d] (p) {معالجة\\\footnotesize (Processing)};
+  \node[box, right=of p] (i) {معلومات\\\footnotesize (Information)};
+  \draw[ar] (d) -- (p);
+  \draw[ar] (p) -- (i);
+\end{tikzpicture}
+\end{center}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\summaryaxis{4}{مفهوم المعلوماتية (Informatique)}
+
+\term{أصل الكلمة}{كلمة فرنسية مركّبة من جزأين: \textbf{INFORMATION} (معلومات) + \textbf{AUTOMATIQUE} (آلية).}
+
+\term{التعريف}{هي علم المعالجة الآلية للمعلومات باستخدام جهاز الحاسوب والبرمجيات المخصّصة لذلك.}
+
+\vspace{6pt}
+\begin{leadbox}[الخلاصة المرمزة]
+  \begin{center}
+    INFORMATION (معلومات) $+$ AUTOMATIQUE (آلية) $\;=\;$ \textbf{\color{primary}INFORMATIQUE (المعلوماتية)}
+  \end{center}
+\end{leadbox}
+
+\end{document}

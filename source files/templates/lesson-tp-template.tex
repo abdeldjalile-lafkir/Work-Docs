@@ -1,0 +1,95 @@
+% =============================================================================
+%  lesson-tp-template.tex — قالب مذكرة الأعمال التطبيقية (TP)
+%  المعلوماتية — التعليم الثانوي
+%  يُصرَّف بـ XeLaTeX حصراً.
+%
+%  الاستعمال: انسخ هذا الملف إلى مجلد الدرس باسم tp-note.tex
+%             ثم عدّل القيم بين الأقواس المعقوفة (DEMO).
+%
+%  البناء (من مجلد الدرس):
+%    xelatex -interaction=nonstopmode -halt-on-error -output-directory=build tp-note.tex
+% =============================================================================
+
+\documentclass[11pt, a4paper]{article}
+
+% ── المشترك (التمهيد، الألوان، الترويسة، التذييل، البطاقة، الأدوات) ──────────
+\input{"../../shared/common.tex"}
+
+% ── خاص بالـ TP: مراحل سير الحصة التطبيقية ──────────────────────────────────
+\newcommand{\tpstage}[3]{%
+  \noindent
+  \begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}p{3.3cm}%
+      >{\centering\arraybackslash}p{2.2cm}>{\raggedleft\arraybackslash}X@{}}
+    \hline
+    \cellcolor{primary}\color{white}\textbf{#1} &
+    \cellcolor{primary}\color{white}\textbf{#2} &
+    \begin{minipage}[t]{\linewidth}\raggedleft #3\end{minipage} \\
+    \hline
+  \end{tabularx}\par\vspace{-0.4pt}%
+}
+
+% ── خاص بالـ TP: جدول المهام التطبيقية ──────────────────────────────────────
+\newcommand{\taskheader}{%
+  \noindent
+  \begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}p{2.9cm}%
+      >{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X@{}}
+    \hline
+    \cellcolor{primary}\color{white}\textbf{المهمة التطبيقية} &
+    \cellcolor{primary}\color{white}\textbf{تعليمات الأستاذ والخطوات العملية} &
+    \cellcolor{primary}\color{white}\textbf{عمل المتعلم على الحاسوب} \\
+    \hline
+  \end{tabularx}\par\vspace{-0.4pt}%
+}
+\newcommand{\taskrow}[3]{%
+  \noindent
+  \begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}p{2.9cm}%
+      >{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X@{}}
+    \begin{minipage}[t]{2.7cm}\centering\textbf{\color{primary}#1}\end{minipage} &
+    \begin{minipage}[t]{\linewidth}\raggedleft #2\end{minipage} &
+    \begin{minipage}[t]{\linewidth}\raggedleft #3\end{minipage} \\
+    \hline
+  \end{tabularx}\par\vspace{-0.4pt}%
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  DEMO — استبدل هذه القيم بمعطيات حصتك التطبيقية
+% ══════════════════════════════════════════════════════════════════════════════
+
+\officialheader
+
+\cardtitle{مذكرة الأعمال التطبيقية رقم: <XX> (TP N° XX)}
+
+{\cardsetup
+\noindent
+\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{primary}}p{3.6cm}X@{}}
+  \toprule
+  \cardrow{المؤسسة}{<المؤسسة>}
+  \cardrow{الأستاذ}{<الأستاذ>}
+  \cardrow{المادة}{المعلوماتية (حصة الأعمال التطبيقية — TP)}
+  \cardrow{المستوى والشعبة}{<المستوى والشعبة>}
+  \cardrowtwo{المجال التعلمي}{<المجال>}{الوحدة التعلمية}{<الوحدة>}
+  \cardrow{عنوان الحصة التطبيقية}{<عنوان الحصة>}
+  \cardrowtwo{مكان الإنجاز}{<مخبر المعلوماتية>}{المدة}{<01 ساعة لكل فوج>}
+  \midrule
+  \cardrow{الكفاءة المستهدفة}{<الكفاءة>}
+  \cardrow{الأهداف التشغيلية}{<الهدف 1>\newline <الهدف 2>\newline <الهدف 3>}
+  \cardrow{الوسائل المستخدمة}{<الوسائل>}
+  \bottomrule
+\end{tabularx}
+}\vspace{8pt}
+
+\plainsec{خطة سير الحصة التطبيقية}
+
+\tpstage{التمهيد والتوجيهات الأمنية}{10 دقائق}{<مضمون التمهيد>}
+
+\taskheader
+\taskrow{المهمة 1}{<التعليمات>}{<عمل المتعلم>}
+\taskrow{المهمة 2}{<التعليمات>}{<عمل المتعلم>}
+\taskrow{المهمة 3}{<التعليمات>}{<عمل المتعلم>}
+
+\tpstage{التقييم والإغلاق الآمن}{10 دقائق}{<مضمون التقييم>}
+
+\end{document}
