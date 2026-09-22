@@ -10,109 +10,24 @@
 
 \documentclass[11pt, a4paper]{article}
 
-% ── المشترك (التمهيد، الألوان، الترويسة، التذييل، الأدوات) ───────────────────
+% ── المشترك ─────────────────────────────────────────────────────────────────
 \input{"../../shared/common.tex"}
-
-% ── خاص بهذا المستند: عنوان الوثيقة ─────────────────────────────────────────
-\newcommand{\sheettitle}[4]{%
-  \begin{center}
-    {\Large\bfseries\color{primary} وثيقة التلميذ — الأعمال التطبيقية رقم: #1}
-  \end{center}
-  \vspace{1pt}
-  {\color{secondary}\hrule height 1.2pt}
-  \vspace{4pt}
-  \begin{center}
-    {\large\bfseries\color{primary} #2}
-  \end{center}
-  \begin{center}
-    {\normalsize\color{darktext} المكان: #3 \quad$\cdot$\quad المدة الزمنية: #4}
-  \end{center}
-  \vspace{2pt}
-  {\color{secondary}\hrule height 1.2pt}
-  \vspace{6pt}
-}
-
-% ── خاص بهذا المستند: بيانات التلميذ ────────────────────────────────────────
-\newcommand{\studentid}[1]{%
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}>{\bfseries\color{primary}}p{2.6cm}X@{}%
-      >{\bfseries\color{primary}}p{2.9cm}p{2.4cm}@{}}
-    \hline
-    اللقب والاسم: & \blank[5.0cm] &
-    القسم / الفوج: & \blank[2.2cm] \\
-    \hline
-    رقم الجهاز: & \blank[5.0cm] &
-    التاريخ: & \blank[2.2cm] \\
-    \hline
-  \end{tabularx}\par\vspace{8pt}%
-}
-
-% ── خاص بهذا المستند: صندوق مهمة ────────────────────────────────────────────
-\newtcolorbox{taskbox}[1][]{
-  enhanced, colback=white, colframe=secondary,
-  coltitle=white, fonttitle=\bfseries, title=#1,
-  boxrule=1pt, arc=4pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-  breakable,
-}
-
-% ── خاص بهذا المستند: جدول المواصفات (booktabs — بلا خطوط عمودية) ──────────
-\newcommand{\specheader}{%
-  \noindent
-  \begin{tabular}{@{}>{\raggedleft\arraybackslash}p{6.0cm}@{\hspace{10pt}}%
-      >{\raggedleft\arraybackslash}p{9.0cm}@{}}
-    \toprule
-    \textbf{\color{primary}العنصر المستهدف} &
-    \textbf{\color{primary}المواصفات المدوّنة على الجهاز} \\
-    \midrule
-}
-\newcommand{\specrow}[2]{%
-  #1 & \specdots{#2} \\
-}
-\newcommand{\specend}{%
-  \bottomrule
-  \end{tabular}\par\vspace{8pt}%
-}
-\newcommand{\specdots}[1]{%
-  \makebox[\linewidth]{\dotfill}%
-  \ifnum#1>1 \\\makebox[\linewidth]{\dotfill}\fi
-  \ifnum#1>2 \\\makebox[\linewidth]{\dotfill}\fi
-  \ifnum#1>3 \\\makebox[\linewidth]{\dotfill}\fi
-}
-
-% ── خاص بهذا المستند: جدول التقييم (booktabs) ──────────────────────────────
-\newcommand{\gradetable}{%
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}X>{\centering\arraybackslash}p{3.0cm}@{}}
-    \toprule
-    \textbf{\color{primary}المعيار} &
-    \textbf{\color{primary}الملاحظة والدرجة} \\
-    \midrule
-    1. التشغيل والاستعمال الآمن للجهاز والالتزام بالنظام. & \phantom{0}/ 04 \\
-    2. استخراج مواصفات الجهاز بدقة (المهمة 1). & \phantom{0}/ 05 \\
-    3. إدخال البيانات ومعالجتها واستخراج المعلومة الصحيحة (المهمة 2). & \phantom{0}/ 06 \\
-    4. إنشاء المجلد وحفظ الملف في المسار الصحيح (المهمة 3). & \phantom{0}/ 05 \\
-    \midrule
-    \textbf{\color{primary}المجموع النهائي} & \textbf{\phantom{0}/ 20} \\
-    \bottomrule
-  \end{tabularx}\par\vspace{4pt}%
-}
 
 % ══════════════════════════════════════════════════════════════════════════════
 \begin{document}
 
-% ── الترويسة الرسمية ─────────────────────────────────────────────────────────
+% ── الصفحة 1: الترويسة + العنوان + بيانات التلميذ ───────────────────────────
 \officialheader
 
-% ── عنوان الوثيقة ────────────────────────────────────────────────────────────
 \sheettitle{01}{استكشاف مواصفات الحاسوب وتجريب دورة معالجة البيانات}
            {مخبر المعلوماتية}{01 ساعة}
 
-% ── بيانات التلميذ ───────────────────────────────────────────────────────────
-\studentid{2026}
+\studentid
 
-% ══════════════════════════════════════════════════════════════════════════════
-%  المهمة الأولى
-\begin{taskbox}[المهمة الأولى: استكشاف مواصفات العتاد ونظام التشغيل (15 دقيقة)]
+% ── الصفحة 2: المهمة الأولى ────────────────────────────────────────────────
+\sectionbreak{المهمة الأولى: استكشاف مواصفات العتاد ونظام التشغيل}
+
+\begin{activitybox}[التعليمات]
   قم بالضغط بالزر الأيمن للفأرة على أيقونة «هذا الكمبيوتر» (Ce PC / This PC)، ثم اختر «خصائص» (Propriétés)، ودوّن مواصفات جهازك في الجدول التالي:
   \vspace{4pt}
   \specheader
@@ -121,12 +36,13 @@
   \specrow{اسم ونوع نظام التشغيل (OS)}{1}
   \specrow{سعة القرص الصلب المتاح (D:)}{1}
   \specend
-\end{taskbox}
+\end{activitybox}
 
-% ══════════════════════════════════════════════════════════════════════════════
-%  المهمة الثانية
-\begin{taskbox}[المهمة الثانية: تجسيد دورة معالجة البيانات (25 دقيقة)]
-  \textbf{1.} افتح تطبيق محرّر النصوص أو المجدول المتاح على جهازك.\\[3pt]
+% ── الصفحة 3: المهمة الثانية ────────────────────────────────────────────────
+\sectionbreak{المهمة الثانية: تجسيد دورة معالجة البيانات}
+
+\begin{activitybox}[التعليمات]
+  \textbf{1.} افتح تطبيق محرّر النصوص أو المجدول المتاح على جهازك.\newline
   \textbf{2.} \textbf{إدخال البيانات الخام (Data):} قم بكتابة قائمة التلاميذ التالية كما هي دون تعديل:
   \begin{center}
   \begin{tabular}{@{}c@{}}
@@ -139,23 +55,20 @@
   \textbf{3.} \textbf{إجراء المعالجة (Processing):}
   \begin{itemize}[label=\textbullet, leftmargin=1.1em, itemsep=1pt, topsep=2pt, parsep=0pt]
     \item قم بإعادة ترتيب الأسماء أبجديًا من الألف إلى الياء.
-    \item أضف خانة «الملاحظة» أمام كل تلميذ حسب القاعدة التالية:
+    \item أضف خانة «الملاحظة» أمام كل تلميذ حسب القاعدة: إذا كان المعدل $\ge 10.00$ $\rightarrow$ \textbf{ناجح}، وإذا كان $< 10.00$ $\rightarrow$ \textbf{مؤجل}.
   \end{itemize}
-  \begin{center}
-    إذا كان المعدل $\ge 10.00$ $\rightarrow$ \textbf{ناجح} \qquad
-    إذا كان المعدل $< 10.00$ $\rightarrow$ \textbf{مؤجل}
-  \end{center}
   \textbf{4.} \textbf{استخراج المعلومات (Information):} سجّل النتائج النهائية بعد المعالجة:
   \begin{itemize}[label=\textbullet, leftmargin=1.1em, itemsep=3pt, topsep=2pt, parsep=0pt]
     \item عدد الناجحين: \blank[2.2cm]
     \item عدد المؤجلين: \blank[2.2cm]
     \item التلميذ المتحصّل على أعلى معدل: \blank[5cm]
   \end{itemize}
-\end{taskbox}
+\end{activitybox}
 
-% ══════════════════════════════════════════════════════════════════════════════
-%  المهمة الثالثة
-\begin{taskbox}[المهمة الثالثة: تنظيم وتخزين الملف (10 دقائق)]
+% ── الصفحة 4: المهمة الثالثة ────────────────────────────────────────────────
+\sectionbreak{المهمة الثالثة: تنظيم وتخزين الملف}
+
+\begin{activitybox}[التعليمات]
   \begin{enumerate}[label=\arabic*., leftmargin=1.4em, itemsep=2pt, topsep=1pt, parsep=0pt]
     \item افتح القرص الصلب (D:).
     \item أنشئ مجلدًا جديدًا واجعله باسمك وفق الشكل التالي: \textbf{اسمك\_لقبك\_الفوج}.
@@ -164,12 +77,24 @@
   \vspace{4pt}
   اكتب المسار الكامل لحفظ ملفك هنا: \\[2pt]
   \noindent D:\textbackslash\ \blank[12cm]
-\end{taskbox}
+\end{activitybox}
 
-% ══════════════════════════════════════════════════════════════════════════════
-%  جدول التقييم (خاص بالأستاذ)
-\newpage
-\plainsec{جدول تقييم عمل التلميذ (خاص بالأستاذ)}
-\gradetable
+% ── الصفحة الأخيرة: جدول التقييم (خاص بالأستاذ) ─────────────────────────────
+\sectionbreak{جدول تقييم عمل التلميذ (خاص بالأستاذ)}
+
+{\gridsetup
+\centering
+\begin{tabularx}{0.9\textwidth}{@{}|X|>{\centering\arraybackslash}p{2.8cm}|@{}}
+  \hline
+  \rowcolor{primary}
+  \thead{المعيار} & \thead{الملاحظة والدرجة} \\
+  \hline
+  \graderow{1. التشغيل والاستعمال الآمن للجهاز والالتزام بالنظام.}{/ 04}
+  \graderow{2. استخراج مواصفات الجهاز بدقة (المهمة 1).}{/ 05}
+  \graderow{3. إدخال البيانات ومعالجتها واستخراج المعلومة الصحيحة (المهمة 2).}{/ 06}
+  \graderow{4. إنشاء المجلد وحفظ الملف في المسار الصحيح (المهمة 3).}{/ 05}
+  \graderow{\textbf{المجموع النهائي}}{/ 20}
+\end{tabularx}\par
+}\vspace{4pt}
 
 \end{document}

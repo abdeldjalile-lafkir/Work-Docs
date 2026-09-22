@@ -11,151 +11,100 @@
 
 \documentclass[11pt, a4paper]{article}
 
-% ── المشترك (التمهيد، الألوان، الترويسة، التذييل، الأدوات) ───────────────────
+% ── المشترك (التمهيد + التصميم + الماكروهات) ────────────────────────────────
 \input{"../../shared/common.tex"}
-
-% ── خاص بهذا المستند: جدول مراحل سير الوضعية التعلمية ───────────────────────
-\newcommand{\stageheader}{%
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}p{2.4cm}%
-      >{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X%
-      >{\centering\arraybackslash}p{2.6cm}@{}}
-    \hline
-    \cellcolor{primary}\color{white}\textbf{مرحلة الدرس}&
-    \cellcolor{primary}\color{white}\textbf{مهمات التعلم والهدف منها}&
-    \cellcolor{primary}\color{white}\textbf{نشاط الأستاذ والمتعلم}&
-    \cellcolor{primary}\color{white}\textbf{نوع التقويم} \\
-    \hline
-  \end{tabularx}\par\vspace{-0.4pt}%
-}
-\newcommand{\stagecontent}[4]{%
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}p{2.4cm}%
-      >{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X%
-      >{\centering\arraybackslash}p{2.6cm}@{}}
-    \begin{minipage}[t]{2.2cm}\centering\textbf{\color{primary}#1}\end{minipage} &
-    \begin{minipage}[t]{\linewidth}\raggedleft #2\end{minipage} &
-    \begin{minipage}[t]{\linewidth}\raggedleft #3\end{minipage} &
-    \begin{minipage}[t]{2.4cm}\centering\textbf{#4}\end{minipage} \\
-    \hline
-  \end{tabularx}\par\vspace{-0.4pt}%
-}
-
-% ── خاص بهذا المستند: صندوق المعارف المستهدفة ───────────────────────────────
-\newtcolorbox{knowbox}[1][]{
-  enhanced, colback=lightbg, colframe=secondary,
-  coltitle=white, fonttitle=\bfseries, title=#1,
-  boxrule=0.9pt, arc=4pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-  breakable,
-}
 
 % ══════════════════════════════════════════════════════════════════════════════
 \begin{document}
 
-% ── الترويسة الرسمية ─────────────────────────────────────────────────────────
+% ── الصفحة 1: الترويسة + البطاقة الفنية ─────────────────────────────────────
 \officialheader
 
-% ── البطاقة الفنية التنظيمية ─────────────────────────────────────────────────
 \cardtitle{مذكرة بيداغوجية رقم: 01}
 
-{\cardsetup
-\noindent
-\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{primary}}p{3.4cm}X@{}}
-  \toprule
+{\gridsetup
+\centering
+\begin{tabularx}{0.85\textwidth}{@{}|c|X|@{}}
+  \hline
   \cardrow{المؤسسة}{ثانوية الشهيد حكومي العيد أدرار — أدرار}
   \cardrow{المادة}{المعلوماتية}
   \cardrow{المستوى والشعبة}{السنة الأولى ثانوي (جذع مشترك علوم وتكنولوجيا / جذع مشترك آداب وفلسفة)}
-  \cardrowtwo{التاريخ}{..............................}{المدة}{02 ساعتان}
-  \midrule
+  \cardrow{التاريخ}{..............................}
+  \cardrow{المدة}{02 ساعتان}
   \cardrow{المجال التعلمي}{بيئة التعامل مع الحاسوب}
   \cardrow{الوحدة التعلمية}{تقنية المعلومات (IT)}
   \cardrow{المورد المستهدف}{مفهوم تكنولوجيا الإعلام والاتصال (TIC)، مفهوم المعلوماتية، والفرق بين البيانات والمعلومات}
   \cardrow{الكفاءة المستهدفة}{اكتساب المفاهيم القاعدية الأساسية لتقنية المعلومات والتمكّن من التمييز بين المادة الخام (البيانات) والنتائج المعالجة (المعلومات).}
-  \cardrow{المكتسبات القبلية}{المفاهيم العامة الأولية حول الحاسوب والمعلوماتية.}
-  \cardrow{الوسائل والدعامات}{العارض الرقمي (Data Show)، الكتاب المدرسي، ومخططات توضيحية لدورة معالجة البيانات.}
-  \bottomrule
-\end{tabularx}
-}\vspace{4pt}
-
-% ── الأهداف التعليمية ────────────────────────────────────────────────────────
-{\cardsetup
-\noindent
-\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{primary}}p{3.4cm}X@{}}
-  \toprule
   \cardrow{الأهداف التعليمية}{يتعرّف التلميذ على مفاهيم التقنية، التكنولوجيا، الإعلام، والاتصال.\newline
     يتعرّف على مفهوم تكنولوجيا الإعلام والاتصال (TIC) ومكوناتها المادية والشبكية.\newline
     يميّز بين البيانات والمعلومات وعملية المعالجة الآلية.\newline
     يتعرّف على مفهوم المعلوماتية (Informatique) وأصل الكلمة.}
-  \bottomrule
-\end{tabularx}
+  \cardrow{المكتسبات القبلية}{المفاهيم العامة الأولية حول الحاسوب والمعلوماتية.}
+  \cardrow{الوسائل والدعامات}{العارض الرقمي (Data Show)، الكتاب المدرسي، ومخططات توضيحية لدورة معالجة البيانات.}
+\end{tabularx}\par
 }\vspace{8pt}
 
-% ══════════════════════════════════════════════════════════════════════════════
-\plainsec{سير الوضعية التعلمية}
+% ── الصفحة 2: مراحل سير الوضعية التعلمية ────────────────────────────────────
+\sectionbreak{مراحل سير الوضعية التعلمية}
 
 \stageheader
-
-% ── 1. مرحلة الانطلاق ────────────────────────────────────────────────────────
 \stagecontent
-  {مرحلة الانطلاق\\[2pt]\footnotesize (15 دقيقة)}
-  {التذكير بالمكتسبات القبلية وطرح الوضعية المشكلة.\\
+  {\badge{1}\\[2pt] مرحلة الانطلاق\\\footnotesize (15 دقيقة)}
+  {التذكير بالمكتسبات القبلية وطرح الوضعية المشكلة.\newline
    \textbf{الوضعية المشكلة:} في حياتنا اليومية نستخدم مصطلحات مثل «المعلوماتية»، «التكنولوجيا»، و«تكنولوجيا الإعلام والاتصال». هل تعبّر هذه الكلمات عن نفس المعنى؟ وكيف يتحوّل الحرف أو الرقم المجرّد المكتوب في استمارة التسجيل إلى معلومة مفيدة يستغلها الحاسوب؟}
-  {مناقشة أولية مع التلاميذ لاستخراج تمثّلاتهم ومكتسباتهم القبلية حول مفهوم المادة الخام والنتيجة المعالجة.\\
+  {مناقشة أولية مع التلاميذ لاستخراج تمثّلاتهم ومكتسباتهم القبلية حول مفهوم المادة الخام والنتيجة المعالجة.\newline
    \textbf{نشاط المتعلم:} يقدّم التلاميذ إجاباتهم الأولية انطلاقًا من تجربتهم اليومية.}
   {تقويم تشخيصي}
 
-% ── 2. مرحلة بناء التعلمات ───────────────────────────────────────────────────
 \stagecontent
-  {بناء التعلمات\\[2pt]\footnotesize (65 دقيقة)}
-  {\textbf{المحاور والمعارف المستهدفة:}\\
+  {\badge{2}\\[2pt] بناء التعلمات\\\footnotesize (65 دقيقة)}
+  {\textbf{المحاور والمعارف المستهدفة:}\newline
    التفكيك المفهومي للتقنية والتكنولوجيا، مفهوم TIC، البيانات والمعلومات والمعالجة، مفهوم المعلوماتية.}
-  {\textbf{نشاط الأستاذ والمتعلم:}\\
-   يطرح الأستاذ أسئلة لاستكشاف التمييز بين المهارة الفردية والعلم التطبيقي، ويوجّه التلاميذ للربط بين مفهومي الإعلام والاتصال، ويعرض مجموعة بيانات غير مرتبة على السبورة ويطلب صياغتها في جملة مفيدة، ثم يشرح التركيب اللغوي للمصطلح العلمي Informatique.\\
+  {\textbf{نشاط الأستاذ والمتعلم:}\newline
+   يطرح الأستاذ أسئلة لاستكشاف التمييز بين المهارة الفردية والعلم التطبيقي، ويوجّه التلاميذ للربط بين مفهومي الإعلام والاتصال، ويعرض مجموعة بيانات غير مرتبة على السبورة ويطلب صياغتها في جملة مفيدة، ثم يشرح التركيب اللغوي للمصطلح العلمي Informatique.\newline
    \textbf{نشاط المتعلم:} يستنتج التلاميذ أصل الكلمة وتطبيقاتها، ويحلّلون مكونات تكنولوجيا الإعلام والاتصال.}
   {تقويم تكويني}
 
-% ── 3. مرحلة الحصيلة والتقويم ────────────────────────────────────────────────
 \stagecontent
-  {الحصيلة والتقويم\\[2pt]\footnotesize (40 دقيقة)}
+  {\badge{3}\\[2pt] الحصيلة والتقويم\\\footnotesize (40 دقيقة)}
   {صياغة الخلاصة وتثبيت المفاهيم، ثم إنجاز النشاط التطبيقي (تقويم مرحلي).}
   {يقدّم الأستاذ تمرينين تطبيقيين للتأكد من فهم دورة معالجة البيانات.}
   {تقويم ختامي}
 
-% ══════════════════════════════════════════════════════════════════════════════
-\vspace{6pt}
-\plainsec{الصياغة والتأسيس المعرفي}
+% ── الصفحة 3: الصياغة والتأسيس المعرفي ──────────────────────────────────────
+\sectionbreak{الصياغة والتأسيس المعرفي}
 
-\begin{knowbox}[1. التفكيك المفهومي للتقنية والتكنولوجيا]
+\begin{rememberbox}[1. التفكيك المفهومي للتقنية والتكنولوجيا]
   \begin{itemize}[label=\textbullet, leftmargin=1.1em, itemsep=2pt, topsep=1pt, parsep=0pt]
     \item \textbf{التقنية (Technique):} المهارة والقدرة على ممارسة الأعمال والأنشطة لإنجاز عمل ما.
     \item \textbf{التكنولوجيا (Technologie):} كلمة يونانية مركّبة من مقطعين (Techno: مهارة فنية + Logos: علم)، وتعني علم المهارات التطبيقية والاستغلال المنطقي للمعارف العلمية.
   \end{itemize}
-\end{knowbox}
+\end{rememberbox}
 
-\begin{knowbox}[2. مفهوم تكنولوجيا الإعلام والاتصال (TIC)]
+\begin{rememberbox}[2. مفهوم تكنولوجيا الإعلام والاتصال (TIC)]
   \begin{itemize}[label=\textbullet, leftmargin=1.1em, itemsep=2pt, topsep=1pt, parsep=0pt]
     \item \textbf{التعريف:} التلاقي والتزاوج بين عتاد الحواسيب والبرمجيات وشبكات الاتصال لجمع البيانات وتخزينها ومعالجتها ونقلها.
     \item \textbf{المكونات الأساسية:} تقنيات المعالجة والتخزين (أجهزة وبرامج)، وشبكات الاتصال السلكية واللاسلكية.
   \end{itemize}
-\end{knowbox}
+\end{rememberbox}
 
-\begin{knowbox}[3. البيانات والمعلومات والمعالجة]
+\begin{rememberbox}[3. البيانات والمعلومات والمعالجة]
   \begin{itemize}[label=\textbullet, leftmargin=1.1em, itemsep=2pt, topsep=1pt, parsep=0pt]
     \item \textbf{البيانات (Data / Données):} القيم والحقائق الأولية الخام (أرقام، حروف، صور) قبل تنظيمها.
     \item \textbf{المعالجة (Processing / Traitement):} العمليات الحسابية أو المنطقية المطبّقة على البيانات.
     \item \textbf{المعلومات (Informations):} البيانات التي تمّت معالجتها وأصبحت ذات معنى وسياق محدّد.
   \end{itemize}
-\end{knowbox}
+\end{rememberbox}
 
-\begin{knowbox}[4. مفهوم المعلوماتية (Informatique)]
+\begin{rememberbox}[4. مفهوم المعلوماتية (Informatique)]
   \begin{itemize}[label=\textbullet, leftmargin=1.1em, itemsep=2pt, topsep=1pt, parsep=0pt]
     \item \textbf{أصل الكلمة:} كلمة مركّبة من كلمتين فرنسيتين هما (Information: معلومات) + (Automatique: آلية).
     \item \textbf{التعريف:} العلم الذي يعالج المعلومات بطريقة آلية باستخدام جهاز الحاسوب وفق برامج محدّدة.
   \end{itemize}
-\end{knowbox}
+\end{rememberbox}
 
-% ══════════════════════════════════════════════════════════════════════════════
-\plainsec{النشاط التطبيقي (تقويم مرحلي)}
+% ── الصفحة 4: النشاط التطبيقي ───────────────────────────────────────────────
+\sectionbreak{النشاط التطبيقي (تقويم مرحلي)}
 
 \textbf{\color{primary}التمرين الأول:} صنّف العناصر التالية في جدول ينقسم إلى (بيانات / معلومات):
 \begin{enumerate}[label=\arabic*., leftmargin=1.4em, itemsep=2pt, topsep=2pt, parsep=0pt]
@@ -165,24 +114,23 @@
   \item القائمة الاسمية للتلاميذ الناجحين مرتّبة حسب المعدل.
 \end{enumerate}
 
-{\cardsetup
-\noindent
-\begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}X>{\centering\arraybackslash}X@{}}
-  \toprule
-  \cellcolor{primary}\color{white}\textbf{بيانات (Data)} &
-  \cellcolor{primary}\color{white}\textbf{معلومات (Informations)} \\
-  \midrule
+{\gridsetup
+\centering
+\begin{tabularx}{0.85\textwidth}{@{}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|@{}}
+  \hline
+  \rowcolor{primary}
+  \thead{بيانات (Data)} & \thead{معلومات (Informations)} \\
+  \hline
   \answerline & \answerline \\
   \answerline & \answerline \\
   \answerline & \answerline \\
-  \bottomrule
-\end{tabularx}
+  \hline
+\end{tabularx}\par
 }\vspace{8pt}
 
 \textbf{\color{primary}التمرين الثاني:} بيّن في مخطط سهمي بسيط كيف تتكامل البيانات والمعالجة للحصول على المعلومات.
 
 \vspace{4pt}
-\noindent
 \begin{center}
 \begin{tikzpicture}[
   node distance=2.6cm,
@@ -199,12 +147,10 @@
 \end{center}
 
 \vspace{6pt}
-\noindent
-\begin{center}
-\fbox{\parbox{0.92\textwidth}{\centering
-  \textbf{\color{primary}الخلاصة المدوّنة:}\\[4pt]
-  بيانات أوليّة (Data) $\xrightarrow{\ \ \text{معالجة آلية (Processing)}\ \ }$ معلومات مفيدة (Information)
-}}
-\end{center}
+\begin{rememberbox}[الخلاصة المدوّنة]
+  \begin{center}
+    بيانات أوليّة (Data) $\xrightarrow{\ \ \text{معالجة آلية (Processing)}\ \ }$ معلومات مفيدة (Information)
+  \end{center}
+\end{rememberbox}
 
 \end{document}

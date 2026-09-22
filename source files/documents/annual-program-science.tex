@@ -15,19 +15,7 @@
 % ── بدون تذييل (الترويسة فقط) ───────────────────────────────────────────────
 \pagestyle{empty}
 
-% ── قائمة وحدات المجال ──────────────────────────────────────────────────────
-\newlist{units}{enumerate}{1}
-\setlist[units,1]{%
-  label=\textcolor{secondary}{\bfseries\arabic*.},
-  labelwidth=1.6em, left=0.4em .. 1.8em,
-  itemsep=3pt, topsep=3pt, parsep=0pt,
-}
-% ── عنوان مجال تعلمي ────────────────────────────────────────────────────────
-% \domain{الترتيب}{اسم المجال}
-\newcommand{\domain}[2]{%
-  \par\vspace{10pt}%
-  {\large\bfseries\color{primary} المجال التعلمي #1: #2}\par\vspace{5pt}%
-}
+% ── قائمة الوحدات وعناوين المجالات تأتي من lesson-macros.tex (المشترك) ──────
 
 % ══════════════════════════════════════════════════════════════════════════════
 \begin{document}

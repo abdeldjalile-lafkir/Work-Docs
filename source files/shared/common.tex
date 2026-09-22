@@ -5,24 +5,17 @@
 %  يُستدعى بـ (من مجلد الدرس):
 %    \input{"../../shared/common.tex"}
 %
-%  يوفّر: التمهيد، الألوان، إطار الصفحة، الترويسة، التذييل (الصفحة س/ص)،
-%          والجداول الاحترافية (booktabs)، وأدوات مساعدة، والبطاقة الفنية.
-%
-%  مبادئ التصميم المطبّقة هنا:
-%    • هوامش سخيّة ومسافة بيضاء متوازنة.
-%    • تدرّج طباعي واضح (\Huge عنوان ← \large قسم ← \normalsize متن) مع
-%      \linespread لتهوية الأسطر.
-%    • لوحة ألوان هادئة (كحلي/ذهبي) تُستعمل للعناوين والقواعد لا للمتن.
-%    • جداول booktabs بلا خطوط عمودية إطلاقاً.
-%    • تذييل «الصفحة س / ص» عبر lastpage.
+%  يوفّر: التمهيد، الخطوط، الألوان (أزرق/أسود/أبيض)، إطار الصفحة، الترويسة،
+%          التذييل (الصفحة س/ص)، شبكة الجداول بخطوط عمودية، صناديق وشارات وأيقونات،
+%          وكل ماكروهات الوثائق عبر design.tex + lesson-macros.tex.
 % ══════════════════════════════════════════════════════════════════════════════
 
 % ── Geometry ──────────────────────────────────────────────────────────────────
 \usepackage[
-  top=3.0cm,
-  bottom=2.6cm,
-  left=2.4cm,
-  right=2.4cm,
+  top=2.8cm,
+  bottom=2.4cm,
+  left=2.2cm,
+  right=2.2cm,
   headheight=26pt          % MUST be >= 26pt (fancyhdr)
 ]{geometry}
 
@@ -30,21 +23,21 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{enumitem}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}   % table → \rowcolors / \rowcolor / \cellcolor
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes.geometric}
 \usepackage{eso-pic}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins, breakable}
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{longtable}
-\usepackage{colortbl}
 \usepackage{multirow}
-\usepackage{booktabs}      % جداول احترافية: \toprule \midrule \bottomrule
 \usepackage{lastpage}      % للتذييل: الصفحة س / ص
 \usepackage{amsmath}
+\usepackage{etoolbox}
 \usepackage{hyperref}
 
 % روابط بلا إطار (يمنع المستطيل حول رقم الصفحة في التذييل)
@@ -67,21 +60,24 @@
 \setmonofont{DejaVu Sans Mono}
 
 % ── TYPOGRAPHY: تدرّج طباعي وتهوية ─────────────────────────────────────────
-\linespread{1.15}
+\linespread{1.18}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{4pt plus 1pt}
-\renewcommand{\arraystretch}{1.2}   % تنفّس داخل خلايا الجداول
+\setlength{\parskip}{5pt plus 1pt}
+\renewcommand{\arraystretch}{1.2}
 
-% ── Colors (لوحة هادئة: كحلي / أزرق متوسط / ذهبي) ───────────────────────────
-\definecolor{primary}{HTML}{1A5276}      % كحلي داكن — العناوين والقواعد
-\definecolor{secondary}{HTML}{2E86C1}    % أزرق متوسط — العناوين الفرعية
-\definecolor{accent}{HTML}{B7950B}       % ذهبي هادئ — لمسات
-\definecolor{lightbg}{HTML}{F4F9FD}      % خلفية فاتحة جداً
-\definecolor{darktext}{HTML}{1C2833}     % نص شبه أسود
-\definecolor{rulegray}{HTML}{AAB7B8}     % رمادي القواعد والهوامش
-\definecolor{success}{HTML}{1E8449}
 
-% ── Page Border: 1cm from all four edges (إطار بخط رفيع) ────────────────────
+% ── مسار مجلد shared (قابل للتجاوز قبل \input{common.tex}) ──────────────────
+%   • من lessons/<درس>/  → الافتراضي "../../shared/"
+%   • من documents/      → \def\shareddir{../shared/}
+\providecommand{\shareddir}{../../shared/}
+\makeatletter
+\def\input@path{{\shareddir}}
+\makeatother
+
+% ── طبقة التصميم (الألوان، الجداول، الصناديق، الشارات، الأيقونات) ────────────
+\input{design.tex}
+
+% ── Page Border: 1cm from all four edges (إطار أزرق) ────────────────────────
 \AddToShipoutPictureBG{%
   \begin{tikzpicture}[remember picture, overlay]
     \draw[primary, line width=1.1pt]
@@ -92,16 +88,11 @@
 }
 
 % ── Header / Footer ──────────────────────────────────────────────────────────
-% الترويسة الرسمية تُدخل من header.tex، والتذييل من footer.tex
-% \shareddir: مسار مجلد shared، قابل للتجاوز من المستدعي قبل \input{common.tex}
-%   • من lessons/<درس>/  → الافتراضي "../../shared/"
-%   • من documents/      → \def\shareddir{../shared/}
-\providecommand{\shareddir}{../../shared/}
-\makeatletter
-\def\input@path{{\shareddir}}
-\makeatother
 \input{header.tex}
 \input{footer.tex}
+
+% ── ماكروهات الوثائق المشتركة ───────────────────────────────────────────────
+\input{lesson-macros.tex}
 
 % ── Section formatting ───────────────────────────────────────────────────────
 \titleformat{\section}
@@ -129,41 +120,3 @@
 \newcommand{\blank}[1][3cm]{\underline{\hspace{#1}}}
 % مربّع اختيار
 \newcommand{\cb}{\raisebox{0.15ex}{\fbox{\rule{0pt}{1.1ex}\hspace{1em}}}}
-
-% ── البطاقة الفنية (جداول booktabs: بلا خطوط عمودية) ────────────────────────
-% \cardtitleset يهيّئ القواعد والمسافات داخل جدول البطاقة
-\newcommand{\cardsetup}{%
-  \renewcommand{\arraystretch}{1.25}%
-  \setlength{\arrayrulewidth}{0.6pt}%
-  \arrayrulecolor{rulegray}%
-}
-% صفوف البطاقة: بلا قاعدة لكل صف — القواعد تُرسم بـ \midrule بين المجموعات
-\newcommand{\cardrow}[2]{%
-  \textbf{\color{primary}#1} & #2 \\
-}
-\newcommand{\cardrowtwo}[4]{%
-  \textbf{\color{primary}#1} & #2 \hfill \textbf{\color{primary}#3:} #4 \\
-}
-% عنوان المستند — كتلة عنوان أنيقة (بلا قاعدة)
-\newcommand{\cardtitle}[1]{%
-  \begin{center}
-    {\LARGE\bfseries\color{primary} #1}
-  \end{center}
-  \vspace{8pt}
-}
-
-% ── Callout boxes — صناديق أنيقة بشريط لوني جانبي ───────────────────────────
-\newtcolorbox{infobox}[1][]{
-  enhanced, breakable,
-  colback=lightbg, colframe=secondary,
-  coltitle=white, fonttitle=\bfseries, title=#1,
-  boxrule=0.0pt, leftrule=2.5pt, arc=2pt,
-  left=11pt, right=11pt, top=8pt, bottom=8pt,
-}
-\newtcolorbox{notebox}[1][]{
-  enhanced, breakable,
-  colback=lightbg, colframe=primary,
-  coltitle=white, fonttitle=\bfseries, title=#1,
-  boxrule=0.0pt, leftrule=3pt, arc=2pt,
-  left=11pt, right=11pt, top=8pt, bottom=8pt,
-}

@@ -35,21 +35,30 @@ document; never hardcode identity data that may be stale.
 ├── *.tex                              # One .tex per document
 ├── build/                             # All build artifacts (PDF, logs, aux, previews)
 ├── resources/                         # Source assets
-└── 2026-2027/                         # Year-scoped material
-    └── Official Documents/            # Published PDFs (Arabic folders + Arabic names)
-        ├── التوزيع السنوي/             # Annual distribution, one PDF per stream
-        ├── العقد الديداكتيكي/          # Didactic contract
-        ├── التقويم التشخيصي/           # Diagnostic assessment
-        └── ...
+└── 2026-2027/                         # ⭐ PRODUCTION — generated PDFs land here, Arabic names
+    ├── Official Documents/            # Final, submittable PDFs (Arabic folders + Arabic names)
+    │   ├── التدرج السنوي/             # Externally-sourced progression (no source .tex)
+    │   ├── القانون التوجيهي/          # Externally-sourced
+    │   ├── الكتاب المدرسي/            # Externally-sourced
+    │   └── منهاج المادة/              # Externally-sourced
+    ├── Support Documents/             # Working/staging PDFs (regenerated from our .tex)
+    │   ├── البرنامج السنوي/           # Annual program — one PDF per stream
+    │   ├── التوزيع السنوي/            # Annual distribution — one PDF per stream
+    │   ├── العقد الديداكتيكي/         # Didactic contract
+    │   └── التقويم التشخيصي/          # Diagnostic assessment
+    ├── Lesson Documents/              # Lesson PDFs (note / TP / sheet / summary / presentation)
+    ├── Lab Documents/                 # Lab/practical PDFs
+    └── Record Documents/              # Record / registry PDFs
 ```
 
 **Rules:**
 
-1. Every `.tex` file at the repo root compiles to `build/`. Never commit build
-   artifacts to the root; they belong in `build/`.
-2. `build/` holds **working artifacts only**. Finished, submittable PDFs are
-   **copied** to `2026-2027/Official Documents/` under their Arabic folder and
-   Arabic filename — see §4.1 for the naming convention.
+1. `2026-2027/` is the **production directory**. Every compiled PDF is copied
+   **here** (never committed to the repo root) under the sub-folder that matches
+   its category, with an **Arabic filename** (see §4.1).
+2. `build/` holds **working artifacts only** — never commit those.
+3. Each sub-folder (`Official Documents/`, `Support Documents/`, `Lesson Documents/`,
+   `Lab Documents/`, `Record Documents/`) holds the finished PDFs for its category.
 
 ---
 
@@ -93,9 +102,14 @@ xelatex -interaction=nonstopmode -halt-on-error -output-directory=build FILE.tex
 
 ### 4.1 Publishing the compiled PDF
 
-`build/` is scratch space. After a clean build, **copy** the finished PDF into
-`2026-2027/Official Documents/<التصنيف>/` with the Arabic name below. Never rename
-the source `.tex`, and keep the two in sync.
+`build/` is scratch space. After a clean build, **copy** the finished PDF into the
+**production directory `2026-2027/`** — into the sub-folder that matches the
+document's category, with the **Arabic name** below:
+
+- Final/submittable → `2026-2027/Official Documents/<التصنيف>/`
+- Working/staging (regenerated) → `2026-2027/Support Documents/<التصنيف>/`
+
+Never rename the source `.tex`, and keep the two in sync.
 
 **File-naming pattern:**
 
@@ -105,8 +119,8 @@ the source `.tex`, and keep the two in sync.
 
 The school year is **not** repeated in the filename — the `2026-2027/` directory
 already carries it. Place a single space around the hyphen, and add the stream
-suffix only for documents that exist per-stream (e.g. التوزيع السنوي). Folder
-name = bare document name (no stream).
+suffix only for documents that exist per-stream (e.g. التوزيع السنوي، البرنامج
+السنوي). Folder name = bare document name (no stream).
 
 | Source `.tex`                    | Published folder                | Published filename                                  |
 | -------------------------------- | ------------------------------- | --------------------------------------------------- |
@@ -114,6 +128,8 @@ name = bare document name (no stream).
 | `diagnostic-assessment.tex`      | `التقويم التشخيصي/`             | `التقويم التشخيصي.pdf`                              |
 | `annual-distribution-science.tex`| `التوزيع السنوي/`               | `التوزيع السنوي - جذع مشترك علوم وتكنولوجيا.pdf`    |
 | `annual-distribution-letters.tex`| `التوزيع السنوي/`               | `التوزيع السنوي - جذع مشترك آداب وفلسفة.pdf`        |
+| `annual-program-science.tex`     | `البرنامج السنوي/`              | `البرنامج السنوي - جذع مشترك علوم وتكنولوجيا.pdf`   |
+| `annual-program-letters.tex`     | `البرنامج السنوي/`              | `البرنامج السنوي - جذع مشترك آداب وفلسفة.pdf`       |
 
 **Publish command (after the build in §4):**
 
@@ -122,7 +138,12 @@ cp build/didactic-contract.pdf           "2026-2027/Official Documents/العق�
 cp build/diagnostic-assessment.pdf       "2026-2027/Official Documents/التقويم التشخيصي/التقويم التشخيصي.pdf"
 cp build/annual-distribution-science.pdf "2026-2027/Official Documents/التوزيع السنوي/التوزيع السنوي - جذع مشترك علوم وتكنولوجيا.pdf"
 cp build/annual-distribution-letters.pdf "2026-2027/Official Documents/التوزيع السنوي/التوزيع السنوي - جذع مشترك آداب وفلسفة.pdf"
+cp build/annual-program-science.pdf      "2026-2027/Official Documents/البرنامج السنوي/البرنامج السنوي - جذع مشترك علوم وتكنولوجيا.pdf"
+cp build/annual-program-letters.pdf      "2026-2027/Official Documents/البرنامج السنوي/البرنامج السنوي - جذع مشترك آداب وفلسفة.pdf"
 ```
+
+> For staging (before final sign-off) put the same files under
+> `2026-2027/Support Documents/<التصنيف>/` instead of `Official Documents/`.
 
 **Rules:**
 

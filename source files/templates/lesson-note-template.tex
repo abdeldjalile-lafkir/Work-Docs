@@ -1,102 +1,83 @@
 % =============================================================================
 %  lesson-note-template.tex — قالب مذكرة الدرس (المعلوماتية — التعليم الثانوي)
-%  يُصرَّف بـ XeLaTeX حصراً.
+%  يُصرَّف بـ XeLaTeX حصراً. التصميم: أزرق/أسود/أبيض.
 %
 %  الاستعمال: انسخ هذا الملف إلى مجلد الدرس باسم lesson-note.tex
 %             ثم عدّل القيم بين الأقواس المعقوفة (DEMO).
-%
 %  البناء (من مجلد الدرس):
 %    xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lesson-note.tex
 % =============================================================================
 
 \documentclass[11pt, a4paper]{article}
 
-% ── المشترك (التمهيد، الألوان، الترويسة، التذييل، البطاقة، الأدوات) ──────────
+% ── المشترك (التمهيد + التصميم + الماكروهات) ────────────────────────────────
 \input{"../../shared/common.tex"}
-
-% ── خاص بالمذكرة: جدول مراحل سير الوضعية التعلمية ───────────────────────────
-\newcommand{\stageheader}{%
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}p{2.4cm}%
-      >{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X%
-      >{\centering\arraybackslash}p{2.6cm}@{}}
-    \hline
-    \cellcolor{primary}\color{white}\textbf{مرحلة الدرس}&
-    \cellcolor{primary}\color{white}\textbf{مهمات التعلم والهدف منها}&
-    \cellcolor{primary}\color{white}\textbf{نشاط الأستاذ والمتعلم}&
-    \cellcolor{primary}\color{white}\textbf{نوع التقويم} \\
-    \hline
-  \end{tabularx}\par\vspace{-0.4pt}%
-}
-\newcommand{\stagecontent}[4]{%
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}>{\centering\arraybackslash}p{2.4cm}%
-      >{\raggedleft\arraybackslash}X>{\raggedleft\arraybackslash}X%
-      >{\centering\arraybackslash}p{2.6cm}@{}}
-    \begin{minipage}[t]{2.2cm}\centering\textbf{\color{primary}#1}\end{minipage} &
-    \begin{minipage}[t]{\linewidth}\raggedleft #2\end{minipage} &
-    \begin{minipage}[t]{\linewidth}\raggedleft #3\end{minipage} &
-    \begin{minipage}[t]{2.4cm}\centering\textbf{#4}\end{minipage} \\
-    \hline
-  \end{tabularx}\par\vspace{-0.4pt}%
-}
-
-% ── خاص بالمذكرة: صندوق المعارف المستهدفة ───────────────────────────────────
-\newtcolorbox{knowbox}[1][]{
-  enhanced, colback=lightbg, colframe=secondary,
-  coltitle=white, fonttitle=\bfseries, title=#1,
-  boxrule=0.9pt, arc=4pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-  breakable,
-}
 
 % ══════════════════════════════════════════════════════════════════════════════
 \begin{document}
 
-% ══════════════════════════════════════════════════════════════════════════════
-%  DEMO — استبدل هذه القيم بمعطيات درسك الحقيقية
-% ══════════════════════════════════════════════════════════════════════════════
-
+% ── الصفحة 1: الترويسة + البطاقة الفنية ─────────────────────────────────────
 \officialheader
 
 \cardtitle{مذكرة درس: <المورد المستهدف>}
 
-{\cardsetup
-\noindent
-\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{primary}}p{3.4cm}X@{}}
-  \toprule
+{\gridsetup
+\centering
+\begin{tabularx}{0.85\textwidth}{@{}|c|X|@{}}
+  \hline
   \cardrow{المستوى}{<المستوى، مثل: السنة الأولى ثانوي — جذع مشترك علوم وتكنولوجيا>}
   \cardrow{المادة}{<المادة، مثل: المعلوماتية>}
-  \cardrowtwo{التاريخ}{<التاريخ>}{المدة}{<المدة، مثل: ساعة واحدة>}
-  \midrule
-  \cardrow{المجال التعلمي}{<المجال التعلمي>}
+  \cardrow{التاريخ}{<التاريخ>}
+  \cardrow{المدة}{<المدة، مثل: ساعة واحدة>}  \cardrow{المجال التعلمي}{<المجال التعلمي>}
   \cardrow{الوحدة التعلمية}{<الوحدة التعلمية>}
   \cardrow{المورد المستهدف}{<المورد المستهدف>}
   \cardrow{الكفاءة المستهدفة}{<الكفاءة المستهدفة>}
   \cardrow{الأهداف التعليمية}{<الأهداف التعليمية>}
   \cardrow{المكتسبات القبلية}{<المكتسبات القبلية>}
   \cardrow{الوسائل والدعامات}{<الوسائل والدعامات الديداكتيكية>}
-  \bottomrule
-\end{tabularx}
+\end{tabularx}\par
 }\vspace{8pt}
 
-\plainsec{مراحل سير الوضعية التعلمية}
+% ── الصفحة 2: مراحل سير الوضعية التعلمية ────────────────────────────────────
+\sectionbreak{مراحل سير الوضعية التعلمية}
 
 \stageheader
 \stagecontent
-  {مرحلة الانطلاق}
+  {\badge{1}\\مرحلة الانطلاق}
   {<مهمات التعلم والهدف منها: التذكير بالمكتسبات القبلية وطرح الوضعية المشكلة>}
   {<نشاط الأستاذ والمتعلم>}
   {تقويم تشخيصي}
 \stagecontent
-  {بناء التعلمات}
+  {\badge{2}\\بناء التعلمات}
   {<مهمات التعلم والهدف منها: اكتشاف المورد المعرفي الجديد وتطبيقه>}
   {<نشاط الأستاذ والمتعلم>}
   {تقويم تكويني}
 \stagecontent
-  {الحصيلة والتقويم}
+  {\badge{3}\\الحصيلة والتقويم}
   {<مهمات التعلم والهدف منها: صياغة الخلاصة وتثبيت المفاهيم>}
   {<نشاط الأستاذ والمتعلم>}
   {تقويم ختامي}
 
-\end{document}
+% ── الصفحة 3: الصياغة والتأسيس المعرفي ──────────────────────────────────────
+\sectionbreak{الصياغة والتأسيس المعرفي}
 
+\begin{rememberbox}[<العنوان المعرفي 1>]
+  <التعريفات والمعارف…>
+\end{rememberbox}
+
+\begin{rememberbox}[<العنوان المعرفي 2>]
+  <التعريفات والمعارف…>
+\end{rememberbox}
+
+% ── الصفحة 4: النشاط التطبيقي ───────────────────────────────────────────────
+\sectionbreak{النشاط التطبيقي}
+
+\begin{activitybox}[<التمرين الأول>]
+  <نص التمرين…>
+\end{activitybox}
+
+\begin{activitybox}[<التمرين الثاني>]
+  <نص التمرين…>
+\end{activitybox}
+
+\end{document}

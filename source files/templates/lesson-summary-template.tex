@@ -1,76 +1,37 @@
 % =============================================================================
 %  lesson-summary-template.tex — قالب ملخّص الدرس (الأثر الكتابي على الكراس)
-%  المعلوماتية — التعليم الثانوي
-%  ملخّص مركّز ومباشر يُكتب على كراس التلميذ.
+%  المعلوماتية — التعليم الثانوي. التصميم: أزرق/أسود/أبيض.
 %  يُصرَّف بـ XeLaTeX حصراً.
 %
-%  الاستعمال: انسخ هذا الملف إلى مجلد الدرس باسم lesson-summary.tex
-%             ثم عدّل القيم بين الأقواس المعقوفة (DEMO).
-%
-%  البناء (من مجلد الدرس):
-%    xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lesson-summary.tex
+%  الاستعمال: انسخ إلى مجلد الدرس باسم lesson-summary.tex وعدّل القيم (DEMO).
 % =============================================================================
 
 \documentclass[11pt, a4paper]{article}
 
-% ── المشترك (التمهيد، الألوان، الترويسة، التذييل، البطاقة، الأدوات) ──────────
+% ── المشترك ─────────────────────────────────────────────────────────────────
 \input{"../../shared/common.tex"}
-
-% ── خاص بالملخّص: عنوان الملخّص ─────────────────────────────────────────────
-\newcommand{\summarytitle}[3]{%
-  \begin{center}
-    {\large\bfseries\color{primary} ملخّص الدرس — الأثر الكتابي على الكراس}
-  \end{center}
-  \vspace{1pt}
-  {\color{secondary}\hrule height 1.2pt}
-  \vspace{4pt}
-  {\cardsetup
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}>{\bfseries\color{primary}}p{3.2cm}X@{}}
-    \toprule
-    المجال التعلمي & #1 \\
-    الوحدة التعلمية & #2 \\
-    الموضوع & #3 \\
-    \bottomrule
-  \end{tabularx}}\vspace{10pt}
-}
-
-% ── خاص بالملخّص: محور ──────────────────────────────────────────────────────
-\newcommand{\summaryaxis}[2]{%
-  \par\vspace{6pt}%
-  {\normalsize\bfseries\color{primary} #1. #2}\par
-  \vspace{-0.3em}{\color{secondary}\hrule height 0.8pt}\par\vspace{3pt}%
-}
-
-% ── خاص بالملخّص: مصطلح ─────────────────────────────────────────────────────
-\newcommand{\term}[2]{%
-  \textbullet\ \textbf{\color{primary}#1:} #2\par\vspace{2pt}%
-}
-
-% ── خاص بالملخّص: صندوق الخلاصة ─────────────────────────────────────────────
-\newtcolorbox{leadbox}[1][]{
-  enhanced, colback=lightbg, colframe=primary,
-  coltitle=white, fonttitle=\bfseries, title=#1,
-  boxrule=1pt, arc=4pt, left=10pt, right=10pt, top=8pt, bottom=8pt,
-  breakable,
-}
 
 % ══════════════════════════════════════════════════════════════════════════════
 \begin{document}
 
+% ── الصفحة 1: الترويسة + بطاقة الملخّص ──────────────────────────────────────
 \officialheader
 
 \summarytitle{<المجال التعلمي>}{<الوحدة التعلمية>}{<الموضوع>}
 
-\summaryaxis{1}{<عنوان المحور الأول>}
+% ── المحور الأول ────────────────────────────────────────────────────────────
+\sectionbreak{المحور الأول: <عنوان المحور>}
+
 \term{<المصطلح 1>}{<التعريف 1>}
 \term{<المصطلح 2>}{<التعريف 2>}
 
-\summaryaxis{2}{<عنوان المحور الثاني>}
-<مضمون المحور…>
+% ── المحور الثاني ───────────────────────────────────────────────────────────
+\sectionbreak{المحور الثاني: <عنوان المحور>}
 
-\begin{leadbox}[الخلاصة]
+\term{<المصطلح 3>}{<التعريف 3>}
+
+\begin{rememberbox}[الخلاصة]
   <الخلاصة المرمزة…>
-\end{leadbox}
+\end{rememberbox}
 
 \end{document}

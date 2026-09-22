@@ -1,13 +1,9 @@
 % =============================================================================
-%  presentation-template.tex — قالب العرض التقديمي (Beamer, عربي RTL, 16:9)
-%  المعلوماتية — التعليم الثانوي
+%  lesson-presentation-template.tex — قالب العرض التقديمي (Beamer, عربي RTL, 16:9)
+%  المعلوماتية — التعليم الثانوي. التصميم: أزرق/أسود/أبيض.
 %  يُصرَّف بـ XeLaTeX حصراً.
 %
-%  يُستدعى بـ (من مجلد الدرس): \input{"../../shared/presentation-preamble.tex"}
-%  أو انسخ هذا الملف إلى مجلد الدرس باسم lesson-presentation.tex وعدّل المحتوى.
-%
-%  البناء (من مجلد الدرس):
-%    xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lesson-presentation.tex
+%  الاستعمال: انسخ إلى مجلد الدرس باسم lesson-presentation.tex وعدّل المحتوى.
 % =============================================================================
 
 \documentclass[aspectratio=169, 11pt]{beamer}
@@ -18,44 +14,34 @@
 \setotherlanguage{english}
 
 % ── Fonts ─────────────────────────────────────────────────────────────────────
-\setmainfont{Amiri}[
-  BoldFont = * Bold,
-  ItalicFont = * Italic,
-]
-\setsansfont{Amiri}[
-  BoldFont = * Bold,
-  ItalicFont = * Italic,
-]
-\newfontfamily\arabicfont{Amiri}[
-  Script = Arabic,
-  BoldFont = * Bold,
-]
-\newfontfamily\arabicfontsf{Amiri}[
-  Script = Arabic,
-  BoldFont = * Bold,
-]
+\setmainfont{Amiri}[BoldFont = * Bold, ItalicFont = * Italic]
+\setsansfont{Amiri}[BoldFont = * Bold, ItalicFont = * Italic]
+\newfontfamily\arabicfont{Amiri}[Script = Arabic, BoldFont = * Bold]
+\newfontfamily\arabicfontsf{Amiri}[Script = Arabic, BoldFont = * Bold]
 \setmonofont{DejaVu Sans Mono}
 \newfontfamily\arabicfonttt{Amiri}[Script = Arabic, BoldFont = * Bold]
 
 % ── Packages ─────────────────────────────────────────────────────────────────
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes.geometric}
 \usepackage{array}
 \usepackage{tabularx}
-\usepackage{colortbl}
 \usepackage{amsmath}
 \usepackage{booktabs}
 
-% ── Colors (project palette) ─────────────────────────────────────────────────
-\definecolor{primary}{HTML}{1A5276}
-\definecolor{secondary}{HTML}{2E86C1}
-\definecolor{accent}{HTML}{D4AC0D}
-\definecolor{lightbg}{HTML}{EBF5FB}
-\definecolor{darktext}{HTML}{1C2833}
-\definecolor{rulegray}{HTML}{ABB2B9}
-\definecolor{success}{HTML}{1E8449}
+% ── الألوان (أزرق/أسود/أبيض) ───────────────────────────────────────────────
+\definecolor{primary}{HTML}{0D47A1}
+\definecolor{secondary}{HTML}{1976D2}
+\definecolor{blue}{HTML}{42A5F5}
+\definecolor{darktext}{HTML}{111111}
+\definecolor{lightbg}{HTML}{E8F0FE}
+\definecolor{rulegray}{HTML}{9E9E9E}
+
+% ── الترويسة الرسمية المشتركة (تحدّد \officialheader) ──────────────────────
+\input{"../../shared/header.tex"}
 
 % ── Beamer look ──────────────────────────────────────────────────────────────
 \usetheme{default}
@@ -85,20 +71,8 @@
   }%
 }
 
-% شريط سفلي
-\setbeamertemplate{footline}{%
-  \hbox{%
-    \begin{beamercolorbox}[wd=.34\paperwidth, ht=2.6ex, dp=1.2ex, leftskip=1em]{}%
-      \usebeamerfont{footline}\color{rulegray}\insertshorttitle
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.33\paperwidth, ht=2.6ex, dp=1.2ex, center]{}%
-      \usebeamerfont{footline}\color{rulegray}الأستاذ لفقير عبدالجليل
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.33\paperwidth, ht=2.6ex, dp=1.2ex, rightskip=1em]{}%
-      \usebeamerfont{footline}\color{rulegray}\insertframenumber\,/\,\inserttotalframenumber
-    \end{beamercolorbox}%
-  }%
-}
+% بدون تذييل في العرض التقديمي
+\setbeamertemplate{footline}{}
 
 % القوائم
 \setbeamertemplate{itemize item}{\textcolor{secondary}{\textbullet}}
@@ -109,51 +83,39 @@
 % ── Helpers ──────────────────────────────────────────────────────────────────
 \newcommand{\hl}[1]{\textcolor{secondary}{\textbf{#1}}}
 \newcommand{\key}[1]{\textcolor{primary}{\textbf{#1}}}
-\newcommand{\answer}[1]{\textcolor{success}{\textbf{#1}}}
 
-% شريحة عنوان الدرس (plain)
-% \lessonframe{نص تمهيدي}
-\newcommand{\lessonframe}[1]{%
+% شريحة قسم برقم كبير
+\newcommand{\sectionframe}[2]{%
   \begin{frame}[plain]
     \vfill
     \begin{center}
-      {\color{secondary}\large #1}\\[8pt]
-      {\color{primary}\Huge\bfseries\inserttitle}
+      {\color{blue}\fontsize{60}{60}\selectfont\bfseries #1}\\[6pt]
+      {\color{primary}\LARGE\bfseries #2}
     \end{center}
     \vfill
   \end{frame}%
 }
 
-% شريحة قسم
-% \sectionframe{عنوان القسم}
-\newcommand{\sectionframe}[1]{%
-  \begin{frame}[plain]
-    \vfill
-    \begin{center}
-      {\color{white}\colorbox{primary}{\Large\bfseries\;#1\;}}
-    \end{center}
-    \vfill
-  \end{frame}%
-}
-
-% ══════════════════════════════════════════════════════════════════════════════
-%  بيانات العرض — عدّلها لكل درس
 % ══════════════════════════════════════════════════════════════════════════════
 \title{<عنوان الدرس>}
 \subtitle{<المجال التعلمي — الوحدة التعلمية>}
 \author{الأستاذ لفقير عبدالجليل}
 \institute{ثانوية الشهيد حكومي العيد أدرار}
 \date{السنة الدراسية 2027/2026}
-\titlegraphic{}
 
 % ══════════════════════════════════════════════════════════════════════════════
 \begin{document}
 
-% ── شريحة العنوان ────────────────────────────────────────────────────────────
+% ── شريحة العنوان: الترويسة الرسمية المشتركة ────────────────────────────────
 \begin{frame}[plain]
-  \titlepage
+  \officialheader
+  \vfill
   \begin{center}
-    {\footnotesize\color{rulegray} ثانوية الشهيد حكومي العيد أدرار — المعلوماتية — السنة الأولى ثانوي}
+    {\color{primary}\Huge\bfseries\inserttitle}
+  \end{center}
+  \vfill
+  \begin{center}
+    {\color{rulegray}\footnotesize \insertauthor\ — \insertdate}
   \end{center}
 \end{frame}
 
@@ -165,6 +127,9 @@
     \item <الهدف 3>
   \end{itemize}
 \end{frame}
+
+% ── شريحة قسم نموذجية ────────────────────────────────────────────────────────
+\sectionframe{1}{<عنوان القسم الأول>}
 
 % ── شريحة محتوى نموذجية ──────────────────────────────────────────────────────
 \begin{frame}{<عنوان المحور>}
