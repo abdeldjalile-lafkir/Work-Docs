@@ -3,17 +3,24 @@
 %  يُستدعى من common.tex (بعد تحميل الحزم) — لا يحمّل أي حزمة هنا.
 %
 %  يوفّر: الألوان، شبكة الجداول (خطوط عمودية + تظليل متناوب)، العناوين الملوّنة،
-%          \sectionbreak (صفحة جديدة قبل كل قسم)، \badge، أيقونات، وصناديق ملاحظات.
+%          \lessonbreak (صفحة جديدة قبل كل قسم)، \badge، أيقونات، وصناديق ملاحظات.
 % ══════════════════════════════════════════════════════════════════════════════
 
-% ── الألوان (أزرق / أسود / أبيض حصراً) ───────────────────────────────────────
-\definecolor{primary}{HTML}{0D47A1}      % أزرق داكن — العناوين ورؤوس الجداول
-\definecolor{secondary}{HTML}{1976D2}    % أزرق متوسط — عناوين فرعية
-\definecolor{blue}{HTML}{42A5F5}         % أزرق فاتح — شارات ولمسات
-\definecolor{darktext}{HTML}{111111}     % أسود للنص
-\definecolor{lightbg}{HTML}{E8F0FE}      % خلفية فاتحة جداً
-\definecolor{zebra}{HTML}{F2F6FC}        % تظليل الصفوف المتناوب
-\definecolor{rulegray}{HTML}{9E9E9E}     % رمادي خطوط الجداول
+% ── الألوان: تُعرَّف في identity.tex (المصدر الوحيد) وتُحمَّل قبله ────────────
+%    primary، secondary، blue، darktext، lightbg، zebra، rulegray
+
+% ── إطار الصفحة الموحّد (1cm من كل الجهات، بلون primary) ─────────────────────
+% \pageborder — يُستدعى مرة واحدة في تمهيد المستند
+\newcommand{\pageborder}{%
+  \AddToShipoutPictureBG{%
+    \begin{tikzpicture}[remember picture, overlay]
+      \draw[primary, line width=1.1pt]
+        ([xshift=-1cm, yshift=-1cm]current page.north east)
+        rectangle
+        ([xshift=1cm, yshift=1cm]current page.south west);
+    \end{tikzpicture}%
+  }%
+}
 
 % تظليل متناوب افتراضي لكل الجداول (أبيض / zebra)
 \rowcolors{2}{white}{zebra}
@@ -29,8 +36,8 @@
 }
 
 % ── فاصل الأقسام: صفحة جديدة + شريط أزرق ممتلئ ──────────────────────────────
-% \sectionbreak{العنوان}
-\newcommand{\sectionbreak}[1]{%
+% \lessonbreak{العنوان}
+\newcommand{\lessonbreak}[1]{%
   \clearpage
   \begin{center}
     \begin{tcolorbox}[enhanced, colback=primary, colframe=primary,

@@ -1,5 +1,5 @@
 % =============================================================================
-% main.tex — مدخل الوثائق (يستدعي الترويسة والتذييل المشتركين)
+% main.tex — مدخل الوثائق (يستدعي النواة المشتركة core.tex)
 % يُصرَّف بـ XeLaTeX حصراً.
 % =============================================================================
 
@@ -8,27 +8,13 @@
 % ── هوامش ضيّقة (مع فراغ للتذييل أسفل الصفحة) ────────────────────────────────
 \usepackage[top=1.2cm, bottom=1.8cm, left=2cm, right=2cm]{geometry}
 
-% ── fancyhdr قبل polyglossia (شرط bidi) ──────────────────────────────────────
-\usepackage{fancyhdr}
+% ── مسار مجلد shared ثم النواة المشتركة (الحزم + الهوية + الترويسة + ...) ────
+\def\shareddir{source files/shared/}
+\input{"source files/shared/core.tex"}
 
-% ── الإعداد الأدنى للعربية ───────────────────────────────────────────────────
-\usepackage{xcolor}
-\definecolor{primary}{HTML}{1A5276}
-\definecolor{rulegray}{HTML}{ABB2B9}
-
-\usepackage{polyglossia}
-\setmainlanguage[numerals=western]{arabic}
-\setotherlanguage{english}
-
-\setmainfont{Amiri}[
-  BoldFont = * Bold,
-  ItalicFont = * Italic,
-]
-
-% ── الترويسة والتذييل المشتركان ──────────────────────────────────────────────
-\input{"source files/shared/header.tex"}
-\input{"source files/shared/footer.tex"}
-
+\hypersetup{
+  pdfauthor={لفقير عبدالجليل},
+}
 \begin{document}
 
 \officialheader

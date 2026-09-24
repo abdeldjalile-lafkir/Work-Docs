@@ -17,45 +17,18 @@
   headheight=14pt
 ]{geometry}
 
-% ── Packages (fancyhdr & friends BEFORE polyglossia) ─────────────────────────
-\usepackage{fancyhdr}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usepackage{eso-pic}
-\usepackage{tcolorbox}
-\tcbuselibrary{skins, breakable}
+% ── النواة المشتركة (الحزم + الهوية + الترويسة + التذييل + التصميم + الماكروهات) ─
+\def\shareddir{../shared/}
+\input{"../shared/core.tex"}
+
+% ── حزمة الأعمدة المتعددة (خاصة بالاستمارة) ────────────────────────────────
 \usepackage{multicol}
-\usepackage{hyperref}
-
-% ── Arabic / RTL ─────────────────────────────────────────────────────────────
-\usepackage{polyglossia}
-\setmainlanguage[numerals=western]{arabic}
-\setotherlanguage{english}
-
-% ── Fonts ────────────────────────────────────────────────────────────────────
-\setmainfont{Amiri}[
-  BoldFont = * Bold,
-  ItalicFont = * Italic,
-]
-\newfontfamily\arabicfont{Amiri}[
-  Script = Arabic,
-  BoldFont = * Bold,
-]
-
-% ── Colors ───────────────────────────────────────────────────────────────────
-\definecolor{primary}{HTML}{1A5276}
-\definecolor{secondary}{HTML}{2E86C1}
-\definecolor{lightbg}{HTML}{EBF5FB}
-\definecolor{darktext}{HTML}{1C2833}
-\definecolor{rulegray}{HTML}{ABB2B9}
 
 % ── Compact spacing ──────────────────────────────────────────────────────────
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1pt}
 
-% ── Header / Footer (minimal — each form is self-contained) ──────────────────
+% ── بدون تذييل ولا ترقيم (كل استمارة مكتفية بذاتها) ─────────────────────────
 \pagestyle{empty}
 
 % ── Form container: one half-page form ───────────────────────────────────────
@@ -98,10 +71,8 @@
   itemsep=0.5pt, parsep=0pt, topsep=1pt,
 }
 
-% ── Helpers ──────────────────────────────────────────────────────────────────
-\newcommand{\cb}{\raisebox{0.1ex}{\fbox{\rule{0pt}{1ex}\hspace{0.9em}}}}
+% ── Helpers (خاصة بالاستمارة؛ \cb و \answerline يأتيان من core.tex) ─────────
 \newcommand{\yesno}{\hfill\textbf{نعم}~\cb\quad\textbf{لا}~\cb}
-\newcommand{\answerline}{\par\vspace{0pt}\noindent\makebox[\linewidth]{\dotfill}}
 
 % ── Cut line between the two forms ───────────────────────────────────────────
 \newcommand{\cutline}{%

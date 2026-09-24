@@ -16,6 +16,9 @@
 % ── خلية رأس: تُستعمل مع \rowcolor{primary} (نص أبيض وسط) ──────────────────
 \newcommand{\thead}[2][\linewidth]{\parbox[t]{#1}{\centering\textcolor{white}{\bfseries #2}}}
 
+% ── خلية رأس مبسّطة (خلفية primary ونص أبيض) — للجداول الممتدة/الأفقية ──────
+\newcommand{\thd}[1]{\cellcolor{primary}\color{white}\textbf{#1}}
+
 % ── البطاقة الفنية ───────────────────────────────────────────────────────────
 \newcommand{\cardsetup}{%
   \renewcommand{\arraystretch}{1.3}%

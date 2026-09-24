@@ -29,12 +29,25 @@ document; never hardcode identity data that may be stale.
 
 ```
 .
-├── README.md                          # Identity data (source of truth)
+├── README.md                          # Identity data + document index (source of truth)
 ├── AGENTS.md                          # This file
 ├── RULES.md                           # Short rule summary
-├── *.tex                              # One .tex per document
-├── build/                             # All build artifacts (PDF, logs, aux, previews)
-├── resources/                         # Source assets
+├── main.tex                           # Entry / identity document
+├── source files/                      # ⭐ all .tex sources live here
+│   ├── shared/                        # ⭐ SINGLE SOURCE OF TRUTH — the shared layer
+│   │   ├── identity.tex               #   language + Amiri fonts + color palette
+│   │   ├── core.tex                   #   article core (packages + identity + header/footer + design + macros)
+│   │   ├── common.tex                 #   default article doc = geometry + page border + core
+│   │   ├── presentation.tex           #   beamer core (packages + identity + header + theme)
+│   │   ├── header.tex                 #   \officialheader
+│   │   ├── footer.tex                 #   article footer (page x/y)
+│   │   ├── design.tex                 #   design layer (boxes, icons, \pageborder, section dividers)
+│   │   └── lesson-macros.tex          #   document macros (cards, stage tables, \thd, …)
+│   ├── documents/                     # admin documents — one .tex per document
+│   ├── lessons/<اسم الدرس>/           # lesson docs (note / TP / sheet / summary / presentation)
+│   └── templates/                     # copy-me skeletons for new lessons
+├── build/                             # scratch artifacts only — never commit
+├── resources/                         # source assets
 └── 2026-2027/                         # ⭐ PRODUCTION — generated PDFs land here, Arabic names
     ├── Official Documents/            # Final, submittable PDFs (Arabic folders + Arabic names)
     │   ├── التدرج السنوي/             # Externally-sourced progression (no source .tex)
@@ -158,125 +171,41 @@ cp build/annual-program-letters.pdf      "2026-2027/Official Documents/البر�
 
 ---
 
-## 5. Canonical Preamble
+## 5. Shared Layer (Single Source of Truth)
 
-Copy this as the starting point for any new Arabic document. **Order matters** — see
-Rule 1 below.
+Every document composes from the shared layer in `source files/shared/` — do **not**
+copy a preamble. Set `\shareddir` (the path from the document to `shared/`), then
+`\input` the entry point that matches the document type.
 
-```latex
-\documentclass[12pt, a4paper]{article}
+### 5.1 Entry points
 
-% ── Geometry ─────────────────────────────────────────────────────────────────
-\usepackage[
-  top=3.2cm, bottom=2.5cm, left=2.5cm, right=2.5cm,
-  headheight=26pt          % MUST be >= 26pt to avoid fancyhdr warning
-]{geometry}
+| Document type | Preamble |
+| --- | --- |
+| Default article (lessons, programs, logbook, lab register) | `\def\shareddir{…}` then `\input{"…/common.tex"}` — geometry + `\pageborder` + core |
+| Special-layout article (landscape distribution, two-per-page form, contract) | set geometry yourself, then `\def\shareddir{…}` + `\input{"…/core.tex"}` (call `\pageborder` if wanted) |
+| Presentation | `\documentclass[aspectratio=169,11pt]{beamer}` then `\def\shareddir{…}` + `\input{"…/presentation.tex"}` |
 
-% ── Packages: load fancyhdr and friends BEFORE polyglossia ───────────────────
-\usepackage{fancyhdr}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usepackage{eso-pic}        % page border
-\usepackage{tcolorbox}
-\tcbuselibrary{skins, breakable}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{colortbl}       % REQUIRED for \rowcolor
-\usepackage{multicol}       % for multi-column layouts
-\usepackage{hyperref}
+### 5.2 What the shared files own
 
-% ── Arabic / RTL — load AFTER fancyhdr ───────────────────────────────────────
-\usepackage{polyglossia}
-\setmainlanguage[numerals=western]{arabic}   % western = 1,2,3 (not ١,٢,٣)
-\setotherlanguage{english}
+| File | Owns |
+| --- | --- |
+| `identity.tex` | language (`polyglossia`, western numerals), Amiri fonts, color palette |
+| `core.tex` | article packages (fancyhdr-before-polyglossia), then `identity` + `header` + `footer` + `design` + `lesson-macros` |
+| `common.tex` | default article geometry + `\pageborder` + `core.tex` |
+| `presentation.tex` | beamer packages, theme, frametitle, `\sectionframe`, `\hl`/`\key` |
+| `header.tex` | `\officialheader` |
+| `footer.tex` | footer (teacher / year / page x-of-y) |
+| `design.tex` | boxes, icons, badges, `\pageborder`, section dividers |
+| `lesson-macros.tex` | cards, stage tables, `\thead`/`\thd`, `\answerline`, `\cb`, `\blank`, … |
 
-% ── Fonts ────────────────────────────────────────────────────────────────────
-\setmainfont{Amiri}[
-  BoldFont = * Bold,
-  ItalicFont = * Italic,
-]
-\newfontfamily\arabicfont{Amiri}[
-  Script = Arabic,
-  BoldFont = * Bold,
-]
+### 5.3 What stays per-document
 
-% ── Colors (project palette — reuse these names) ─────────────────────────────
-\definecolor{primary}{HTML}{1A5276}      % deep blue  — titles, headings
-\definecolor{secondary}{HTML}{2E86C1}    % medium blue — sub-headings, boxes
-\definecolor{accent}{HTML}{D4AC0D}       % gold — rules, note boxes
-\definecolor{lightbg}{HTML}{EBF5FB}      % light blue — info box fill
-\definecolor{darktext}{HTML}{1C2833}     % near-black body text
-\definecolor{rulegray}{HTML}{ABB2B9}     % light gray — rules, hints
+Only document-specific layout and constructs: geometry/page size, whether the page
+border is drawn, page style (e.g. `\pagestyle{empty}`), and document-specific boxes
+(`contractbox`, `formbox`, `\cutline`, …). Everything else comes from the shared
+layer.
 
-% ── Header / Footer ──────────────────────────────────────────────────────────
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0.8pt}
-\renewcommand{\footrulewidth}{0.4pt}
-\fancyhead[L]{\small\color{primary} ثانوية الشهيد حكومي العيد أدرار}
-\fancyhead[R]{\small\color{primary} TITLE — المعلوماتية}
-\fancyfoot[C]{\small\color{rulegray}\thepage}
-\fancyfoot[R]{\footnotesize\color{rulegray}2027/2026}
-
-% ── Page Border: 1cm from all four edges, header INSIDE the border ───────────
-\AddToShipoutPictureBG{%
-  \begin{tikzpicture}[remember picture, overlay]
-    \draw[primary, line width=1.5pt]
-      ([xshift=-1cm, yshift=-1cm]current page.north east)
-      rectangle
-      ([xshift=1cm, yshift=1cm]current page.south west);
-  \end{tikzpicture}%
-}
-
-% ── Section formatting ───────────────────────────────────────────────────────
-\titleformat{\section}
-  {\Large\bfseries\color{primary}}
-  {\colorbox{primary}{\color{white}\thesection}}
-  {0.8em}{}
-  [\vspace{-0.1em}{\color{primary}\titlerule[1.4pt]}]
-
-\titleformat{\subsection}
-  {\large\bfseries\color{secondary}}{\thesubsection}{0.5em}{}
-
-% ── Reusable boxes ───────────────────────────────────────────────────────────
-\newtcolorbox{infobox}[1][]{
-  enhanced, colback=lightbg, colframe=secondary,
-  coltitle=white, fonttitle=\bfseries, title=#1,
-  boxrule=0.9pt, arc=4pt, left=12pt, right=12pt, top=10pt, bottom=10pt,
-  breakable,
-}
-
-% ── Lists ────────────────────────────────────────────────────────────────────
-\newlist{numlist}{enumerate}{1}
-\setlist[numlist,1]{
-  label=\arabic*.\hspace{1em},
-  labelwidth=1.5em, left=0em .. 1.5em,
-  itemsep=5pt, parsep=0pt, itemindent=0pt,
-}
-
-% ── Helpers ──────────────────────────────────────────────────────────────────
-% Fill remaining line width with dots (answer line). Plain \dotfill on an
-% otherwise-empty line does NOT render — it must be boxed.
-\newcommand{\answerline}{\par\vspace{1pt}\noindent\makebox[\linewidth]{\dotfill}}
-\newcommand{\cb}{\raisebox{0.15ex}{\fbox{\rule{0pt}{1.1ex}\hspace{1em}}}} % checkbox
-
-\hypersetup{
-  colorlinks=false,
-  pdfauthor={لفقير عبدالجليل},
-  pdftitle={TITLE — المعلوماتية 2026-2027},
-}
-
-\begin{document}
-% ... content ...
-\end{document}
-```
-
-**Compact variant** (when the whole document must fit one page): use
-`11pt`, `top=2.6cm, bottom=1.8cm, left=2cm, right=2cm, headheight=20pt`,
-`\setlength{\parindent}{0pt}`, `\setlength{\parskip}{2pt}`, and wrap sections in
-`\begin{multicols}{2}` / `{3}`.
+The color palette lives in `identity.tex` (see §7).
 
 ---
 
@@ -320,16 +249,17 @@ Rule 1 below.
 
 | Token       | Hex       | Use                                           |
 | ----------- | --------- | --------------------------------------------- |
-| `primary`   | `#1A5276` | Page border, section titles, header text      |
-| `secondary` | `#2E86C1` | Info boxes, sub-headings, question box frames |
-| `accent`    | `#D4AC0D` | Decorative rules, "ملاحظة" / conclusion boxes |
-| `lightbg`   | `#EBF5FB` | Info box fill                                 |
-| `darktext`  | `#1C2833` | Body text                                     |
-| `rulegray`  | `#ABB2B9` | Footer, hints, signature rules                |
+| `primary`   | `#0D47A1` | Page border, section titles, table headers    |
+| `secondary` | `#1976D2` | Sub-headings, box frames                      |
+| `blue`      | `#42A5F5` | Badges, icons, light touches                  |
+| `darktext`  | `#111111` | Body text                                     |
+| `lightbg`   | `#E8F0FE` | Box fill                                      |
+| `zebra`     | `#F2F6FC` | Alternating table row shading                 |
+| `rulegray`  | `#9E9E9E` | Rules, footer, hints, signature rules         |
 
-- **Header:** school name (left) + document title (right).
-- **Footer:** page number (center) + year `2027/2026` (right).
-- **Page border:** 1cm from all edges, `primary`, 1.5pt.
+- **Header:** `\officialheader` (republic / ministry / direction / school).
+- **Footer:** teacher (left) + year `2027/2026` (right) + page `الصفحة س/ص` (center).
+- **Page border:** 1cm from all edges, `primary`, 1.1pt (`\pageborder`).
 - **Signature blocks:** three `minipage`s of `0.30\textwidth` separated by `\hfill`
   with a `\hrulefill` line above each label.
 
@@ -338,7 +268,7 @@ Rule 1 below.
 ## 8. Conventions for New Documents
 
 1. Read `README.md` for identity data.
-2. Copy the canonical preamble (§5); pick full or compact geometry.
+2. Compose from the shared layer per §5 (`common.tex` / `core.tex` / `presentation.tex`); set geometry yourself only for special layouts.
 3. Name the file descriptively in kebab-case: `didactic-contract.tex`,
    `diagnostic-assessment.tex`.
 4. Set the header title, `\hypersetup` title, and footer consistently.
@@ -391,6 +321,7 @@ pdftoppm -png -r 90 build/FILE.pdf build/preview
 | Numbers show as ١،٢،٣                     | default numerals                      | `numerals=western`                  |
 | `\dotfill` line invisible                 | leaders on empty line                 | `\makebox[\linewidth]{\dotfill}`    |
 | Border crosses the header                 | border top edge too low               | increase `top=` or adjust `yshift`  |
+| `Argument of \addvspace has an extra }`   | defined a macro named `\sectionbreak` (titlesec reserves `\<secname>break`) | rename it (e.g. `\lessonbreak`) |
 | `Permission denied` writing `.tex`        | read-only directory                   | `chmod u+w .`                       |
 
 ---

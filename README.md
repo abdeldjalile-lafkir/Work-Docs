@@ -35,14 +35,19 @@
 | الدفتر اليومي للأستاذ | الأقسام كلها              |    5    | [PDF](2026-2027/Record%20Documents/%D8%A7%D9%84%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D9%8A%D9%88%D9%85%D9%8A%20%D9%84%D9%84%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0/%D8%A7%D9%84%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D9%8A%D9%88%D9%85%D9%8A%20%D9%84%D9%84%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0.pdf) · [المصدر](source%20files/documents/teacher-daily-logbook.tex) |
 | سجل متابعة المخبر | الأقسام كلها              |   15    | [PDF](2026-2027/Record%20Documents/%D8%B3%D8%AC%D9%84%20%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D8%AE%D8%A8%D8%B1/%D8%B3%D8%AC%D9%84%20%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D8%AE%D8%A8%D8%B1.pdf) · [المصدر](source%20files/documents/lab-register.tex) |
 
-## البناء
+## البنية والبناء
 
-كل ملف `.tex` في جذر المستودع يُصرَّف بـ **XeLaTeX** إلى مجلد `build/`.
-شغّل الأمر مرتين عند وجود `\ref` أو فهرس:
+المصادر كلّها تحت `source files/`، وتتكوّن من **طبقة مشتركة واحدة**
+(`source files/shared/`) هي المصدر الوحيد للحقيقة (اللغة، الخطوط، الألوان،
+الترويسة والتذييل، الماكروهات). كل مستند يستدعي هذه الطبقة بدل تكرار المقدمة.
+
+يُصرَّف كل ملف بـ **XeLaTeX** من مجلده إلى `build/` (مرتين عند وجود `\ref`):
 
 </div>
 
 ```bash
+# من مجلد المستند (مثال)
+xelatex -interaction=nonstopmode -halt-on-error -output-directory=build FILE.tex
 xelatex -interaction=nonstopmode -halt-on-error -output-directory=build FILE.tex
 ```
 
@@ -52,6 +57,9 @@ xelatex -interaction=nonstopmode -halt-on-error -output-directory=build FILE.tex
 `2026-2027/Official Documents/` بالاسم العربي
 `<اسم الوثيقة>[ - <الشعبة>].pdf` (انظر `AGENTS.md` §4.1).
 
+لوحة الألوان الموحّدة (أزرق/أسود/أبيض) موثّقة في `AGENTS.md` §7،
+والطبقة المشتركة في §2 و§5.
+
 </div>
 
 <div dir="rtl">
@@ -59,6 +67,7 @@ xelatex -interaction=nonstopmode -halt-on-error -output-directory=build FILE.tex
 ## المراجع
 
 - القواعد الكاملة (مقدمة LaTeX، نظام التصميم، الأخطاء الشائعة): [`AGENTS.md`](AGENTS.md)
+- الطبقة المشتركة (المصدر الوحيد للحقيقة) ولوحة الألوان: `AGENTS.md` §2 و§5 و§7
 - الملخص السريع للقواعد الأساسية: [`RULES.md`](RULES.md)
 - المصادر الخام: `resources/` · مواد السنة: `2026-2027/`
 

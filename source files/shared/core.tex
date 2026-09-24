@@ -1,0 +1,83 @@
+% ══════════════════════════════════════════════════════════════════════════════
+%  core.tex — النواة المشتركة لوثائق article:
+%    الحزم + الهوية (لغة/خطوط/ألوان) + الترويسة + التذييل + التصميم + الماكروهات.
+%
+%  لا يحتوي على geometry ولا على إطار الصفحة — يضيفهما المستند حسب حاجته:
+%    • common.tex   → geometry الافتراضي + \pageborder
+%    • مستند خاص    → geometry خاص به ثم \input{core.tex}
+%
+%  يُستدعى بـ:  \def\shareddir{../shared/}\input{"../shared/core.tex"}
+%  (المستندات في documents/ أو lessons/<درس>/ تضبط \shareddir قبل الاستدعاء)
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ── Package: fancyhdr وأخواتها BEFORE polyglossia (شرط bidi) ─────────────────
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}   % table → \rowcolors / \rowcolor / \cellcolor
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes.geometric}
+\usepackage{eso-pic}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{lastpage}        % للتذييل: الصفحة س / ص
+\usepackage{amsmath}
+\usepackage{etoolbox}
+\usepackage{hyperref}
+
+% ── مسار مجلد shared (قابل للتجاوز بـ \def\shareddir قبل الاستدعاء) ──────────
+\providecommand{\shareddir}{../../shared/}
+\makeatletter
+\def\input@path{{\shareddir}}
+\makeatother
+
+% ── الهوية: اللغة + الخطوط + الألوان (بعد الحزم، وقبل الترويسة) ──────────────
+\input{identity.tex}
+
+% روابط بلا إطار (يمنع المستطيل حول مراجع الصفحات)
+\hypersetup{hidelinks}
+
+% ── الترويسة والتذييل والتصميم والماكروهات المشتركة ──────────────────────────
+\input{header.tex}
+\input{footer.tex}
+\input{design.tex}
+\input{lesson-macros.tex}
+
+% ── التنسيق الطباعي الموحّد ──────────────────────────────────────────────────
+\linespread{1.18}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\renewcommand{\arraystretch}{1.2}
+
+% ── تنسيق الأقسام ────────────────────────────────────────────────────────────
+\titleformat{\section}
+  {\large\bfseries\color{primary}}
+  {\colorbox{primary}{\color{white}\thesection}}
+  {0.7em}{}
+  [\vspace{-0.15em}{\color{primary}\titlerule[1.2pt]}]
+
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{secondary}}{\thesubsection}{0.5em}{}
+
+% عنوان قسم بدون ترقيم — نص بارز فقط (بلا قاعدة)
+\newcommand{\plainsec}[1]{%
+  \par\vspace{8pt}%
+  {\large\bfseries\color{primary} #1}\par\vspace{5pt}%
+}
+
+% ── Helpers ──────────────────────────────────────────────────────────────────
+% سطر نقاط للإجابة (يجب أن يكون داخل صندوق ليرتسم)
+\newcommand{\answerline}{\par\vspace{1pt}\noindent\makebox[\linewidth]{\dotfill}}
+% عدّة أسطر إجابة — لا تُستعمل داخل خلية جدول
+\newcommand{\answerlines}[1]{%
+  \begingroup\count255=0 \loop\ifnum\count255<#1 \answerline\advance\count255 by 1 \repeat\endgroup}
+% فراغ للكتابة على السطر
+\newcommand{\blank}[1][3cm]{\underline{\hspace{#1}}}
+% مربّع اختيار
+\newcommand{\cb}{\raisebox{0.15ex}{\fbox{\rule{0pt}{1.1ex}\hspace{1em}}}}

@@ -17,69 +17,14 @@
   headheight=26pt
 ]{geometry}
 
-% ── Packages (loaded BEFORE polyglossia to avoid bidi/fancyhdr warnings) ──────
-\usepackage{fancyhdr}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usepackage{eso-pic}
-\usepackage{tcolorbox}
-\tcbuselibrary{skins, breakable}
-\usepackage{hyperref}
+% ── النواة المشتركة (الحزم + الهوية + الترويسة + التذييل + التصميم + الماكروهات) ─
+\def\shareddir{../shared/}
+\input{"../shared/core.tex"}
 
-% ── Arabic / RTL Support (XeLaTeX) ───────────────────────────────────────────
-% NOTE: polyglossia must be loaded AFTER fancyhdr so bidi can patch it properly.
-\usepackage{polyglossia}
-\setmainlanguage[numerals=western]{arabic}
-\setotherlanguage{english}
+% ── إطار الصفحة الموحّد ─────────────────────────────────────────────────────
+\pageborder
 
-% ── Fonts ─────────────────────────────────────────────────────────────────────
-% Adjust font names to match what is installed on your system.
-% Common options: Amiri, Scheherazade New, Noto Naskh Arabic, Traditional Arabic
-\setmainfont{Amiri}[
-  BoldFont = * Bold,
-  ItalicFont = * Italic,
-]
-\newfontfamily\arabicfont{Amiri}[
-  Script = Arabic,
-  BoldFont = * Bold,
-]
-
-% ── Colors ────────────────────────────────────────────────────────────────────
-\definecolor{primary}{HTML}{1A5276}      % Deep blue
-\definecolor{secondary}{HTML}{2E86C1}    % Medium blue
-\definecolor{lightbg}{HTML}{EBF5FB}      % Light blue background
-\definecolor{darktext}{HTML}{1C2833}     % Near-black for body text
-\definecolor{rulegray}{HTML}{ABB2B9}     % Light gray for rules
-
-% ── Header / Footer المشتركان ────────────────────────────────────────────────
-\input{"../shared/header.tex"}
-\input{"../shared/footer.tex"}
-
-% ── Page Border (1cm from all 4 edges) ───────────────────────────────────────
-\AddToShipoutPictureBG{%
-  \begin{tikzpicture}[remember picture, overlay]
-    \draw[primary, line width=1.5pt]
-      ([xshift=-1cm, yshift=-1cm]current page.north east)
-      rectangle
-      ([xshift=1cm, yshift=1cm]current page.south west);
-  \end{tikzpicture}%
-}
-
-% ── Section Formatting ───────────────────────────────────────────────────────
-\titleformat{\section}
-  {\Large\bfseries\color{primary}}
-  {\colorbox{primary}{\color{white}\thesection}}
-  {0.8em}{}
-  [\vspace{-0.1em}{\color{primary}\titlerule[1.4pt]}]
-
-\titleformat{\subsection}
-  {\large\bfseries\color{secondary}}
-  {\thesubsection}
-  {0.5em}{}
-
-% ── tcolorbox Styles ─────────────────────────────────────────────────────────
+% ── tcolorbox Styles (خاصة بهذا المستند) ────────────────────────────────────
 \newtcolorbox{contractbox}[1][]{
   enhanced,
   colback=white,

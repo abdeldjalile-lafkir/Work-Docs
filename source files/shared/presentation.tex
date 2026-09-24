@@ -1,0 +1,87 @@
+% ══════════════════════════════════════════════════════════════════════════════
+%  presentation.tex — النواة المشتركة لعروض beamer (عربي RTL، نسبة 16:9)
+%  يجمع: الحزم + الهوية (لغة/خطوط/ألوان) + الترويسة + مظهر beamer + الخلاصات.
+%
+%  يُستدعى بـ:  \def\shareddir{../../shared/}\input{"../../shared/presentation.tex"}
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ── Packages ─────────────────────────────────────────────────────────────────
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes.geometric}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+% ── مسار مجلد shared (قابل للتجاوز بـ \def\shareddir قبل الاستدعاء) ──────────
+\providecommand{\shareddir}{../../shared/}
+\makeatletter
+\def\input@path{{\shareddir}}
+\makeatother
+
+% ── الهوية: اللغة + الخطوط + الألوان ────────────────────────────────────────
+\input{identity.tex}
+
+% خطوط beamer الإضافية (sans / tt) بنفس عائلة Amiri المعتمدة
+\setsansfont{Amiri}[BoldFont = * Bold, ItalicFont = * Italic]
+\newfontfamily\arabicfontsf{Amiri}[Script = Arabic, BoldFont = * Bold]
+\newfontfamily\arabicfonttt{Amiri}[Script = Arabic, BoldFont = * Bold]
+
+% ── الترويسة الرسمية المشتركة (تحدّد \officialheader) ──────────────────────
+\input{header.tex}
+
+% ── Beamer look ──────────────────────────────────────────────────────────────
+\usetheme{default}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{frametitle}{bg=primary, fg=white}
+\setbeamercolor{structure}{fg=secondary}
+\setbeamercolor{normal text}{fg=darktext}
+\setbeamercolor{alerted text}{fg=secondary}
+\setbeamercolor{item}{fg=secondary}
+\setbeamercolor{block title}{bg=secondary, fg=white}
+\setbeamercolor{block body}{bg=lightbg}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{author}{size=\small}
+
+% شريط عنوان الشريحة
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \hbox to\paperwidth{%
+    \hspace*{-1.05cm}%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=3.2ex, dp=1.4ex,
+        rightskip=1em plus 1fil, leftskip=1em, sep=0pt]{frametitle}%
+      \strut\insertframetitle\strut
+    \end{beamercolorbox}%
+    \hss
+  }%
+}
+
+% بدون تذييل في العرض التقديمي
+\setbeamertemplate{footline}{}
+
+% القوائم
+\setbeamertemplate{itemize item}{\textcolor{secondary}{\textbullet}}
+\setbeamertemplate{itemize subitem}{\textcolor{secondary}{--}}
+\setbeamertemplate{enumerate item}{\textcolor{white}{\colorbox{secondary}{\insertenumlabel}}}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ── Helpers ──────────────────────────────────────────────────────────────────
+\newcommand{\hl}[1]{\textcolor{secondary}{\textbf{#1}}}
+\newcommand{\key}[1]{\textcolor{primary}{\textbf{#1}}}
+
+% شريحة قسم برقم كبير
+\newcommand{\sectionframe}[2]{%
+  \begin{frame}[plain]
+    \vfill
+    \begin{center}
+      {\color{blue}\fontsize{60}{60}\selectfont\bfseries #1}\\[6pt]
+      {\color{primary}\LARGE\bfseries #2}
+    \end{center}
+    \vfill
+  \end{frame}%
+}

@@ -13,6 +13,9 @@
 \def\shareddir{../shared/}
 \input{"../shared/common.tex"}
 
+% ── بدون تذييل (الترويسة فقط) ───────────────────────────────────────────────
+\pagestyle{empty}
+
 % ── معلومات الملف ────────────────────────────────────────────────────────────
 \hypersetup{
   pdfauthor={لفقير عبدالجليل},
@@ -39,7 +42,7 @@
 \newcommand{\logline}{& & & & & & \\[0.38cm] \hline}
 \newcommand{\loglines}[1]{\ifnum#1>0 \logline \loglines{\number\numexpr#1-1\relax}\fi}
 
-\newcommand{\seatrow}{& & \\[0.02cm] \hline}
+\newcommand{\seatrow}{& & & \\[0.02cm] \hline}
 \newcommand{\seatrows}[1]{\ifnum#1>0 \seatrow \seatrows{\number\numexpr#1-1\relax}\fi}
 
 % ── جدول الجرد ───────────────────────────────────────────────────────────────
@@ -127,21 +130,44 @@
   \gridsetup
   \renewcommand{\arraystretch}{1.05}%
   \setlength{\tabcolsep}{4pt}%
-  \begin{longtable}{@{}|c|p{7.6cm}|p{2.6cm}|p{4.0cm}|@{}}
+  \centering
+  \begin{tabular}{@{}|c|p{7.6cm}|p{2.5cm}|p{3.8cm}|@{}}
     \hline
     \rowcolor{primary}
-    \thead[1.0cm]{الرقم} & \thead{اللقب والاسم} & \thead[2.6cm]{رقم المحطة} &
+    \thead[1.0cm]{الرقم} & \thead{اللقب والاسم} & \thead[2.5cm]{رقم المحطة} &
     \thead{الملاحظات} \\
     \hline
-    \endfirsthead
-    \hline
-    \rowcolor{primary}
-    \thead[1.0cm]{الرقم} & \thead{اللقب والاسم} & \thead[2.6cm]{رقم المحطة} &
-    \thead{الملاحظات} \\
-    \hline
-    \endhead
     \seatrows{30}
-  \end{longtable}
+  \end{tabular}\par
+  \endgroup
+}
+
+% ── توزيع التلاميذ على المحطات (محطة واحدة لكل صفحة) ─────────────────────────
+\newcommand{\stationrow}{& & & \\[0.30cm] \hline}
+\newcommand{\stationrows}[1]{\ifnum#1>0 \stationrow \stationrows{\number\numexpr#1-1\relax}\fi}
+
+\newcommand{\stationlist}[1]{%
+  \clearpage
+  \officialheader
+  \vspace{2pt}%
+  \begin{center}
+    {\large\bfseries\color{primary} توزيع التلاميذ على المحطات
+     — \textcolor{secondary}{المحطة رقم #1}}
+  \end{center}
+  \vspace{4pt}
+  \begingroup
+  \gridsetup
+  \renewcommand{\arraystretch}{1.25}%
+  \setlength{\tabcolsep}{4pt}%
+  \centering
+  \begin{tabular}{@{}|c|p{7.6cm}|p{3.0cm}|p{3.5cm}|@{}}
+    \hline
+    \rowcolor{primary}
+    \thead[1.0cm]{الرقم} & \thead{اللقب والاسم} & \thead[3.0cm]{القسم} &
+    \thead{الملاحظات} \\
+    \hline
+    \stationrows{16}
+  \end{tabular}\par
   \endgroup
 }
 
@@ -159,9 +185,6 @@
 \vspace*{\fill}
 \begin{center}
   {\Huge\bfseries\color{primary} سجل متابعة المخبر}\\[12pt]
-  {\LARGE\bfseries\color{secondary} مخبر الإعلام الآلي}\\[8pt]
-  {\large مادة المعلوماتية}\\[4pt]
-  {\normalsize\color{primary} السنة الدراسية 2026 / 2027}
 \end{center}
 \vspace*{\fill}
 
@@ -241,5 +264,29 @@
 \seatinglist{السنة الأولى جذع مشترك آداب وفلسفة — الفوج 1}
 \seatinglist{السنة الأولى جذع مشترك آداب وفلسفة — الفوج 2}
 \seatinglist{السنة الأولى جذع مشترك آداب وفلسفة — الفوج 3}
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  6. توزيع التلاميذ على المحطات
+% ═════════════════════════════════════════════════════════════════════════════
+\stationlist{1}
+\stationlist{2}
+\stationlist{3}
+\stationlist{4}
+\stationlist{5}
+\stationlist{6}
+\stationlist{7}
+\stationlist{8}
+\stationlist{9}
+\stationlist{10}
+\stationlist{11}
+\stationlist{12}
+\stationlist{13}
+\stationlist{14}
+\stationlist{15}
+\stationlist{16}
+\stationlist{17}
+\stationlist{18}
+\stationlist{19}
+\stationlist{20}
 
 \end{document}

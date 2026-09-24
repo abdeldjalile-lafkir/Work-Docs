@@ -1,13 +1,11 @@
 % ══════════════════════════════════════════════════════════════════════════════
-%  المشترك — التمهيد الموحّد وطبقة التصميم لوثائق الدروس (article, عربي RTL)
-%  يُصرَّف بـ XeLaTeX حصراً.
+%  common.tex — التمهيد الافتراضي لوثائق الدروس (article عربي RTL)
+%  = geometry الافتراضي + إطار الصفحة + النواة المشتركة core.tex
 %
-%  يُستدعى بـ (من مجلد الدرس):
-%    \input{"../../shared/common.tex"}
+%  يُستدعى بـ (من مجلد الدرس):  \input{"../../shared/common.tex"}
 %
-%  يوفّر: التمهيد، الخطوط، الألوان (أزرق/أسود/أبيض)، إطار الصفحة، الترويسة،
-%          التذييل (الصفحة س/ص)، شبكة الجداول بخطوط عمودية، صناديق وشارات وأيقونات،
-%          وكل ماكروهات الوثائق عبر design.tex + lesson-macros.tex.
+%  المستندات ذات التخطيط الخاص (التوزيع الأفقي، الاستمارات، ...) لا تستعمل هذا
+%  الملف، بل تضبط geometry الخاص بها ثم تستدعي core.tex مباشرة.
 % ══════════════════════════════════════════════════════════════════════════════
 
 % ── Geometry ──────────────────────────────────────────────────────────────────
@@ -19,104 +17,12 @@
   headheight=26pt          % MUST be >= 26pt (fancyhdr)
 ]{geometry}
 
-% ── Packages: fancyhdr and friends BEFORE polyglossia ────────────────────────
-\usepackage{fancyhdr}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage[table]{xcolor}   % table → \rowcolors / \rowcolor / \cellcolor
-\usepackage{tikz}
-\usetikzlibrary{positioning}
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{shapes.geometric}
-\usepackage{eso-pic}
-\usepackage{tcolorbox}
-\tcbuselibrary{skins, breakable}
-\usepackage{array}
-\usepackage{tabularx}
-\usepackage{longtable}
-\usepackage{multirow}
-\usepackage{lastpage}      % للتذييل: الصفحة س / ص
-\usepackage{amsmath}
-\usepackage{etoolbox}
-\usepackage{hyperref}
-
-% روابط بلا إطار (يمنع المستطيل حول رقم الصفحة في التذييل)
-\hypersetup{hidelinks}
-
-% ── Arabic / RTL — load AFTER fancyhdr ───────────────────────────────────────
-\usepackage{polyglossia}
-\setmainlanguage[numerals=western]{arabic}
-\setotherlanguage{english}
-
-% ── Fonts (Amiri — خط النسخ المعتمد) ────────────────────────────────────────
-\setmainfont{Amiri}[
-  BoldFont = * Bold,
-  ItalicFont = * Italic,
-]
-\newfontfamily\arabicfont{Amiri}[
-  Script = Arabic,
-  BoldFont = * Bold,
-]
-\setmonofont{DejaVu Sans Mono}
-
-% ── TYPOGRAPHY: تدرّج طباعي وتهوية ─────────────────────────────────────────
-\linespread{1.18}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt plus 1pt}
-\renewcommand{\arraystretch}{1.2}
-
-
-% ── مسار مجلد shared (قابل للتجاوز قبل \input{common.tex}) ──────────────────
-%   • من lessons/<درس>/  → الافتراضي "../../shared/"
-%   • من documents/      → \def\shareddir{../shared/}
+% ── مسار مجلد shared ثم النواة المشتركة (الحزم + الهوية + الترويسة + ...) ────
 \providecommand{\shareddir}{../../shared/}
 \makeatletter
 \def\input@path{{\shareddir}}
 \makeatother
+\input{core.tex}
 
-% ── طبقة التصميم (الألوان، الجداول، الصناديق، الشارات، الأيقونات) ────────────
-\input{design.tex}
-
-% ── Page Border: 1cm from all four edges (إطار أزرق) ────────────────────────
-\AddToShipoutPictureBG{%
-  \begin{tikzpicture}[remember picture, overlay]
-    \draw[primary, line width=1.1pt]
-      ([xshift=-1cm, yshift=-1cm]current page.north east)
-      rectangle
-      ([xshift=1cm, yshift=1cm]current page.south west);
-  \end{tikzpicture}%
-}
-
-% ── Header / Footer ──────────────────────────────────────────────────────────
-\input{header.tex}
-\input{footer.tex}
-
-% ── ماكروهات الوثائق المشتركة ───────────────────────────────────────────────
-\input{lesson-macros.tex}
-
-% ── Section formatting ───────────────────────────────────────────────────────
-\titleformat{\section}
-  {\large\bfseries\color{primary}}
-  {\colorbox{primary}{\color{white}\thesection}}
-  {0.7em}{}
-  [\vspace{-0.15em}{\color{primary}\titlerule[1.2pt]}]
-
-\titleformat{\subsection}
-  {\normalsize\bfseries\color{secondary}}{\thesubsection}{0.5em}{}
-
-% عنوان قسم بدون ترقيم — نص بارز فقط (بلا قاعدة)
-\newcommand{\plainsec}[1]{%
-  \par\vspace{8pt}%
-  {\large\bfseries\color{primary} #1}\par\vspace{5pt}%
-}
-
-% ── Helpers ──────────────────────────────────────────────────────────────────
-% سطر نقاط للإجابة (يجب أن يكون داخل صندوق ليرتسم)
-\newcommand{\answerline}{\par\vspace{1pt}\noindent\makebox[\linewidth]{\dotfill}}
-% عدّة أسطر إجابة — لا تُستعمل داخل خلية جدول
-\newcommand{\answerlines}[1]{%
-  \begingroup\count255=0 \loop\ifnum\count255<#1 \answerline\advance\count255 by 1 \repeat\endgroup}
-% فراغ للكتابة على السطر
-\newcommand{\blank}[1][3cm]{\underline{\hspace{#1}}}
-% مربّع اختيار
-\newcommand{\cb}{\raisebox{0.15ex}{\fbox{\rule{0pt}{1.1ex}\hspace{1em}}}}
+% ── إطار الصفحة الموحّد ─────────────────────────────────────────────────────
+\pageborder
