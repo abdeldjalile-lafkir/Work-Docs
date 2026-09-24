@@ -1,0 +1,162 @@
+% =============================================================================
+%  الدفتر اليومي للأستاذ لمادة المعلوماتية
+%  السنة الدراسية: 2026 / 2027
+% =============================================================================
+%  البناء (من هذا المجلد):
+%    xelatex -interaction=nonstopmode -halt-on-error -output-directory=build teacher-daily-logbook.tex
+%  (مرّتان أو ثلاث مرّات لأنّ التذييل يستعمل \pageref{LastPage})
+% =============================================================================
+
+\documentclass[11pt, a4paper]{article}
+
+% ── المشترك (مسار shared نسبي لمجلد documents/) ──────────────────────────────
+\def\shareddir{../shared/}
+\input{"../shared/common.tex"}
+
+% ── معلومات الملف ────────────────────────────────────────────────────────────
+\hypersetup{
+  pdfauthor={لفقير عبدالجليل},
+  pdftitle={الدفتر اليومي للأستاذ لمادة المعلوماتية — 2026-2027},
+}
+
+% ══════════════════════════════════════════════════════════════════════════════
+%  ماكروهات خاصة بالدفتر (نماذج فقط — بلا زخارف)
+% ══════════════════════════════════════════════════════════════════════════════
+
+% ── خط نموذج: نقاط تمتدّ إلى نهاية الخلية ───────────────────────────────────
+\newcommand{\formdots}{\makebox[\linewidth]{\dotfill}}
+
+% ── صفّ نموذج: تسميتان وقيمتان ──────────────────────────────────────────────
+\newcommand{\formrow}[4]{%
+  \celllabel{3.2cm}{\textbf{\color{primary}#1}} & #2 &
+  \celllabel{3.2cm}{\textbf{\color{primary}#3}} & #4 \\ \hline%
+}
+
+% ── صفّ جدول المتابعة اليومية (فارغ بارتفاع مريح) ────────────────────────────
+\newcommand{\logrow}{& & & & \\[0.62cm] \hline}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  الصفحة 1 — الغلاف
+% ═════════════════════════════════════════════════════════════════════════════
+\officialheader
+
+\vspace{0.6cm}
+\begin{center}
+  \begin{tcolorbox}[enhanced, colback=primary, colframe=primary, coltext=white,
+      arc=4pt, left=10pt, right=10pt, top=12pt, bottom=12pt,
+      width=0.94\textwidth]
+    \centering
+    {\Huge\bfseries الدفتر اليومي للأستاذ}\\[8pt]
+    {\LARGE لمادة المعلوماتية}
+  \end{tcolorbox}
+\end{center}
+
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  الصفحة 2 — البسملة
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\officialheader
+
+\begin{center}
+  \vspace*{\fill}
+  {\fontsize{34}{50}\selectfont\color{primary} بسم الله الرحمن الرحيم}
+  \vspace*{\fill}
+\end{center}
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  الصفحة 3 — معلومات الأستاذ
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\officialheader
+\vspace{2pt}
+\begin{center}
+  {\LARGE\bfseries\color{primary} معلومات الأستاذ}
+\end{center}
+\vspace{8pt}
+
+{\cardsetup\small
+\renewcommand{\arraystretch}{1.55}%
+\setlength{\tabcolsep}{5pt}%
+\centering
+\begin{tabularx}{\textwidth}{@{}|c|X|c|X|@{}}
+  \hline
+  \formrow{الاسم}{عبدالجليل}{اللقب}{لفقير}
+  \formrow{تاريخ ومكان الميلاد}{\formdots}{الحالة العائلية}{\formdots}
+  \formrow{الرتبة}{أستاذ التعليم الثانوي}{المادة}{المعلوماتية}
+  \formrow{البلدية}{\formdots}{المؤسسة}{ثانوية الشهيد حكومي العيد أدرار}
+  \formrow{تاريخ أول تعيين}{\formdots}{الولاية}{أدرار}
+  \formrow{آخر درجة}{\formdots}{تاريخ الترسيم}{\formdots}
+  \formrow{الشهادة العلمية}{\formdots}{تاريخ آخر ترقية}{\formdots}
+  \formrow{رقم الهاتف}{\formdots}{التخصص}{\formdots}
+  \formrow{العنوان الشخصي}{\formdots}{البريد الإلكتروني}{\formdots}
+  \formrow{اسم مدير المؤسسة}{\formdots}{رقم هاتف المؤسسة}{\formdots}
+  \formrow{اسم مفتش المادة}{\formdots}{رقم هاتف المفتش}{\formdots}
+  \multicolumn{4}{|c|}{\textbf{\color{primary}السنة الدراسية :} \ 2026 / 2027} \\ \hline
+\end{tabularx}\par}
+
+\vspace{10pt}
+\begin{tcolorbox}[enhanced, colback=white, colframe=primary,
+  colbacktitle=primary, coltitle=white, fonttitle=\bfseries, title={ملاحظات},
+  boxrule=1pt, arc=3pt, left=12pt, right=12pt, top=7pt, bottom=9pt]
+  \answerlines{4}
+\end{tcolorbox}
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  الصفحة 4 — جدول المتابعة اليومية للحصص
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+\officialheader
+\vspace{2pt}
+\begin{center}
+  {\LARGE\bfseries\color{primary} جدول المتابعة اليومية للحصص}
+\end{center}
+\vspace{8pt}
+
+{\gridsetup
+\setlength{\tabcolsep}{4pt}%
+\centering
+\begin{tabularx}{\textwidth}{@{}|>{\centering\arraybackslash}p{2.4cm}|>{\centering\arraybackslash}p{1.9cm}|>{\centering\arraybackslash}p{2.4cm}|X|X|@{}}
+  \hline
+  \rowcolor{primary}
+  \thead{التاريخ} & \thead{الوقت} & \thead{القسم} &
+  \thead{النشاط} & \thead{الملاحظات} \\
+  \hline
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+  \logrow
+\end{tabularx}\par}
+
+% ═════════════════════════════════════════════════════════════════════════════
+%  الصفحة 5 — الغلاف الخلفي
+% ═════════════════════════════════════════════════════════════════════════════
+\newpage
+
+\begin{center}
+  \vspace*{\fill}
+  {\Large\bfseries\color{primary} الدفتر اليومي للأستاذ لمادة المعلوماتية}
+
+
+
+
+  {\normalsize\color{secondary} مادة المعلوماتية — السنة الدراسية 2026 / 2027}
+
+  \vspace{0.4cm}
+
+  {\footnotesize\color{rulegray} إعداد: الأستاذ لفقير عبدالجليل}
+  \vspace*{\fill}
+\end{center}
+
+\end{document}
