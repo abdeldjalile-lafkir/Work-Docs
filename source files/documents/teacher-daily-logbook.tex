@@ -26,10 +26,9 @@
 % ── خط نموذج: نقاط تمتدّ إلى نهاية الخلية ───────────────────────────────────
 \newcommand{\formdots}{\makebox[\linewidth]{\dotfill}}
 
-% ── صفّ نموذج: تسميتان وقيمتان ──────────────────────────────────────────────
-\newcommand{\formrow}[4]{%
-  \celllabel{3.2cm}{\textbf{\color{primary}#1}} & #2 &
-  \celllabel{3.2cm}{\textbf{\color{primary}#3}} & #4 \\ \hline%
+% ── صفّ نموذج: تسمية وقيمة على سطر واحد ─────────────────────────────────────
+\newcommand{\formrow}[2]{%
+  \celllabel{4.0cm}{\textbf{\color{primary}#1}} & #2 \\ \hline%
 }
 
 % ── صفّ جدول المتابعة اليومية (فارغ بارتفاع مريح) ────────────────────────────
@@ -79,23 +78,34 @@
 \vspace{8pt}
 
 {\cardsetup\small
-\renewcommand{\arraystretch}{1.55}%
+\renewcommand{\arraystretch}{1.35}%
 \setlength{\tabcolsep}{5pt}%
 \centering
-\begin{tabularx}{\textwidth}{@{}|c|X|c|X|@{}}
+\begin{tabularx}{\textwidth}{@{}|c|X|@{}}
   \hline
-  \formrow{الاسم}{عبدالجليل}{اللقب}{لفقير}
-  \formrow{تاريخ ومكان الميلاد}{\formdots}{الحالة العائلية}{\formdots}
-  \formrow{الرتبة}{أستاذ التعليم الثانوي}{المادة}{المعلوماتية}
-  \formrow{البلدية}{\formdots}{المؤسسة}{ثانوية الشهيد حكومي العيد أدرار}
-  \formrow{تاريخ أول تعيين}{\formdots}{الولاية}{أدرار}
-  \formrow{آخر درجة}{\formdots}{تاريخ الترسيم}{\formdots}
-  \formrow{الشهادة العلمية}{\formdots}{تاريخ آخر ترقية}{\formdots}
-  \formrow{رقم الهاتف}{\formdots}{التخصص}{\formdots}
-  \formrow{العنوان الشخصي}{\formdots}{البريد الإلكتروني}{\formdots}
-  \formrow{اسم مدير المؤسسة}{\formdots}{رقم هاتف المؤسسة}{\formdots}
-  \formrow{اسم مفتش المادة}{\formdots}{رقم هاتف المفتش}{\formdots}
-  \multicolumn{4}{|c|}{\textbf{\color{primary}السنة الدراسية :} \ 2026 / 2027} \\ \hline
+  \formrow{الاسم}{عبدالجليل}
+  \formrow{اللقب}{لفقير}
+  \formrow{تاريخ ومكان الميلاد}{\formdots}
+  \formrow{الحالة العائلية}{\formdots}
+  \formrow{الرتبة}{أستاذ التعليم الثانوي}
+  \formrow{المادة}{المعلوماتية}
+  \formrow{البلدية}{\formdots}
+  \formrow{المؤسسة}{ثانوية الشهيد حكومي العيد أدرار}
+  \formrow{تاريخ أول تعيين}{\formdots}
+  \formrow{الولاية}{أدرار}
+  \formrow{آخر درجة}{\formdots}
+  \formrow{تاريخ الترسيم}{\formdots}
+  \formrow{الشهادة العلمية}{\formdots}
+  \formrow{تاريخ آخر ترقية}{\formdots}
+  \formrow{رقم الهاتف}{\formdots}
+  \formrow{التخصص}{\formdots}
+  \formrow{العنوان الشخصي}{\formdots}
+  \formrow{البريد الإلكتروني}{\formdots}
+  \formrow{اسم مدير المؤسسة}{\formdots}
+  \formrow{رقم هاتف المؤسسة}{\formdots}
+  \formrow{اسم مفتش المادة}{\formdots}
+  \formrow{رقم هاتف المفتش}{\formdots}
+  \formrow{السنة الدراسية}{2026 / 2027}
 \end{tabularx}\par}
 
 \vspace{10pt}
