@@ -42,17 +42,42 @@
     \item يتعرّف على مفهوم \hl{تكنولوجيا الإعلام والاتصال (TIC)} ومكوّناتها.
     \item يميّز بين \hl{البيانات} و\hl{المعلومات} وعملية \hl{المعالجة} الآلية.
     \item يتعرّف على مفهوم \hl{المعلوماتية (Informatique)} وأصل الكلمة.
+    \item يتعرّف على \hl{مراحل تطور تقنية المعلومات}: الأجهزة والبرامج.
   \end{itemize}
+\end{frame}
+
+% ── المدخل: المصطلحات ومجالات استعمالها ─────────────────────────────────────
+\begin{frame}{المصطلحات ومجالات استعمالها}
+  \centering
+  {\footnotesize
+  \begin{tabularx}{\textwidth}{@{}|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|@{}}
+    \hline
+    \rowcolor{primary}
+    \colorbox{primary}{\parbox{3.2cm}{\centering\color{white}\textbf{المصطلح}}} &
+    \cellcolor{primary}\color{white}\textbf{مجالات الاستعمال} \\
+    \hline
+    \textbf{\color{primary}المعلوماتية / الإعلام الآلي} &
+    إنجاز الدروس والواجبات، متابعة السلع والفواتير في المحلات، ومعالجة الطلبات والمسابقات وتسجيل التلاميذ لشهادة التعليم المتوسط (وزارة التربية). \\
+    \hline
+    \textbf{\color{primary}التكنولوجيا} &
+    البيوت الذكية (مثل Siri)، الروبوتات، الزراعة الآلية، والطبّ عن بُعد. \\
+    \hline
+    \textbf{\color{primary}الإعلام والاتصال} &
+    الإذاعة والبثّ (عتاد وميكروفون وكاميرا وتطبيقات المونتاج)، والبثوث المباشرة على منصات التواصل. \\
+    \hline
+    \rowcolor{lightbg}
+    \textbf{القاسم المشترك} & جميعها \key{تُيسِّر حياة الإنسان}. \\
+    \hline
+  \end{tabularx}\par}
 \end{frame}
 
 % ── الإشكالية ────────────────────────────────────────────────────────────────
 \begin{frame}{الإشكالية}
   \begin{block}{وضعية انطلاق}
-    في حياتنا اليومية نستخدم مصطلحات مثل «المعلوماتية»، «التكنولوجيا»،
-    و«تكنولوجيا الإعلام والاتصال».\\[4pt]
-    \textbf{هل تعبّر هذه الكلمات عن نفس المعنى؟}\\[4pt]
-    وكيف يتحوّل الحرف أو الرقم المجرّد المكتوب في استمارة التسجيل إلى
-    \textbf{معلومة مفيدة} يستغلها الحاسوب؟
+    نلاحظ أنّ «المعلوماتية» و«الإعلام الآلي» يدلّان على \key{المعنى نفسه}،
+    أمّا «التكنولوجيا» و«الإعلام والاتصال» فـ\hl{مفاهيم مختلفة}.\\[4pt]
+    \textbf{هل تعبّر هذه الكلمات عن مفهوم واحد؟}\\[4pt]
+    فما \textbf{مفهوم تقنية المعلومات}؟ وما \textbf{مراحل تطورها}؟
   \end{block}
 \end{frame}
 
@@ -195,6 +220,63 @@
   \end{block}
 \end{frame}
 
+% ── 5. مراحل تطور تقنية المعلومات ────────────────────────────────────────────
+\sectionframe{5}{مراحل تطور تقنية المعلومات}
+
+\begin{frame}{تطور أجهزة المعالجة}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=1.0cm,
+    gen/.style={draw=primary, fill=lightbg, thick, rounded corners=3pt,
+                minimum width=3.1cm, minimum height=1.1cm, align=center},
+    ar/.style={-{Latex[length=3mm]}, line width=1.1pt, primary}
+  ]
+    \node[gen] (a) {حاسوب بحجم \key{غرفة}};
+    \node[gen, left=of a] (b) {حاسوب \key{محمول}};
+    \node[gen, left=of b] (c) {جهاز \key{لوحي}};
+    \node[gen, left=of c] (d) {هاتف \key{ذكي}};
+    \draw[ar] (a) -- (b);
+    \draw[ar] (b) -- (c);
+    \draw[ar] (c) -- (d);
+  \end{tikzpicture}
+  \end{center}
+  \vspace{4pt}
+  \begin{block}{ومع ذلك}
+    يشمل التطوّر أيضًا \key{مكوّنات الحاسوب}: الرامات وبطاقة الشاشة.
+  \end{block}
+\end{frame}
+
+\begin{frame}{تطور البرامج: أنظمة التشغيل}
+  \centering
+  \begin{tabular}{@{}c@{\hspace{0.7cm}}c@{\hspace{0.7cm}}c@{}}
+    \colorbox{lightbg}{\parbox{3.4cm}{\centering\key{Windows}}} &
+    \colorbox{lightbg}{\parbox{3.4cm}{\centering\key{Linux}}} &
+    \colorbox{lightbg}{\parbox{3.4cm}{\centering\key{macOS}}} \\
+  \end{tabular}
+  \vspace{6pt}
+  \begin{block}{مسار تطوّر Windows}
+    {\footnotesize MS-DOS ثمّ 1.0 و2.0 و3.0، ثمّ 95 و98، فـ XP وVista، ثمّ 7 و8، ثمّ 10 و11.}
+  \end{block}
+  \vspace{4pt}
+  \begin{block}{أشهر توزيعات Linux}
+    {\footnotesize Ubuntu وArch Linux وRed Hat وFedora.}
+  \end{block}
+\end{frame}
+
+\begin{frame}{تطور التطبيقات}
+  \begin{block}{البرامج التطبيقية}
+    \begin{itemize}
+      \item تطبيقات \hl{Adobe}.
+      \item المتصفحات والألعاب.
+      \item برامج \hl{Word} و\hl{Excel} و\hl{PowerPoint}.
+    \end{itemize}
+  \end{block}
+  \vspace{6pt}
+  \begin{block}{قاعدة التطور}
+    كلُّ تحديثٍ لهذه التطبيقات يُعدّ \key{مرحلةً} من مراحل تطور تقنية المعلومات.
+  \end{block}
+\end{frame}
+
 % ── الخلاصة ──────────────────────────────────────────────────────────────────
 \begin{frame}{الخلاصة}
   \begin{block}{ما يجب تذكّره}
@@ -203,6 +285,7 @@
       \item \key{TIC} = تلاقي العتاد + البرمجيات + شبكات الاتصال.
       \item \hl{بيانات} $\xrightarrow{\ \text{معالجة}\ }$ \hl{معلومات}.
       \item \key{INFORMATIQUE} = INFORMATION + AUTOMATIQUE.
+      \item تطوّر تقنية المعلومات = \hl{أجهزة المعالجة} + \hl{البرامج} (أنظمة التشغيل والتطبيقات).
     \end{itemize}
   \end{block}
 \end{frame}

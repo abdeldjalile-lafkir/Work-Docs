@@ -36,22 +36,25 @@
 
 % ── مراحل سير الوضعية التعلمية (مذكرة الدرس) ────────────────────────────────
 \newcommand{\stageheader}{%
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}|c|X|X|c|@{}}
+  \noindent\small
+  \begin{tabularx}{\textwidth}{@{}|c|X|c|c|c|c|@{}}
     \hline
     \rowcolor{primary}
-    \thead[2.2cm]{مرحلة الدرس} & \thead{مهمات التعلم والهدف منها} &
-    \thead{نشاط الأستاذ والمتعلم} & \thead[2.4cm]{نوع التقويم} \\
+    \thead[1.8cm]{مرحلة الدرس} & \thead{مهمات التعلم والهدف منها} &
+    \thead[2.7cm]{نشاط الأستاذ} & \thead[2.7cm]{نشاط المتعلم} &
+    \thead[2.0cm]{الاستراتيجية} & \thead[1.8cm]{نوع التقويم} \\
     \hline
   \end{tabularx}\par\vspace{-0.4pt}%
 }
-\newcommand{\stagecontent}[4]{%
-  \noindent
-  \begin{tabularx}{\textwidth}{@{}|c|X|X|c|@{}}
-    \cellcenter{2.2cm}{\textbf{\color{primary}#1}} &
+\newcommand{\stagecontent}[6]{%
+  \noindent\small
+  \begin{tabularx}{\textwidth}{@{}|c|X|c|c|c|c|@{}}
+    \cellcenter{1.8cm}{\textbf{\color{primary}#1}} &
     \celllabel{\linewidth}{#2} &
-    \celllabel{\linewidth}{#3} &
-    \cellcenter{2.4cm}{\textbf{#4}} \\
+    \celllabel{2.7cm}{#3} &
+    \celllabel{2.7cm}{#4} &
+    \cellcenter{2.0cm}{\textbf{\color{secondary}#5}} &
+    \cellcenter{1.8cm}{\textbf{#6}} \\
     \hline
   \end{tabularx}\par\vspace{-0.4pt}%
 }
