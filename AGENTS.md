@@ -135,14 +135,14 @@ already carries it. Place a single space around the hyphen, and add the stream
 suffix only for documents that exist per-stream (e.g. التوزيع السنوي، البرنامج
 السنوي). Folder name = bare document name (no stream).
 
-| Source `.tex`                    | Published folder                | Published filename                                  |
-| -------------------------------- | ------------------------------- | --------------------------------------------------- |
-| `didactic-contract.tex`          | `العقد الديداكتيكي/`            | `العقد الديداكتيكي.pdf`                             |
-| `diagnostic-assessment.tex`      | `التقويم التشخيصي/`             | `التقويم التشخيصي.pdf`                              |
-| `annual-distribution-science.tex`| `التوزيع السنوي/`               | `التوزيع السنوي - جذع مشترك علوم وتكنولوجيا.pdf`    |
-| `annual-distribution-letters.tex`| `التوزيع السنوي/`               | `التوزيع السنوي - جذع مشترك آداب وفلسفة.pdf`        |
-| `annual-program-science.tex`     | `البرنامج السنوي/`              | `البرنامج السنوي - جذع مشترك علوم وتكنولوجيا.pdf`   |
-| `annual-program-letters.tex`     | `البرنامج السنوي/`              | `البرنامج السنوي - جذع مشترك آداب وفلسفة.pdf`       |
+| Source `.tex`                     | Published folder     | Published filename                                |
+| --------------------------------- | -------------------- | ------------------------------------------------- |
+| `didactic-contract.tex`           | `العقد الديداكتيكي/` | `العقد الديداكتيكي.pdf`                           |
+| `diagnostic-assessment.tex`       | `التقويم التشخيصي/`  | `التقويم التشخيصي.pdf`                            |
+| `annual-distribution-science.tex` | `التوزيع السنوي/`    | `التوزيع السنوي - جذع مشترك علوم وتكنولوجيا.pdf`  |
+| `annual-distribution-letters.tex` | `التوزيع السنوي/`    | `التوزيع السنوي - جذع مشترك آداب وفلسفة.pdf`      |
+| `annual-program-science.tex`      | `البرنامج السنوي/`   | `البرنامج السنوي - جذع مشترك علوم وتكنولوجيا.pdf` |
+| `annual-program-letters.tex`      | `البرنامج السنوي/`   | `البرنامج السنوي - جذع مشترك آداب وفلسفة.pdf`     |
 
 **Publish command (after the build in §4):**
 
@@ -179,24 +179,24 @@ copy a preamble. Set `\shareddir` (the path from the document to `shared/`), the
 
 ### 5.1 Entry points
 
-| Document type | Preamble |
-| --- | --- |
-| Default article (lessons, programs, logbook, lab register) | `\def\shareddir{…}` then `\input{"…/common.tex"}` — geometry + `\pageborder` + core |
-| Special-layout article (landscape distribution, two-per-page form, contract) | set geometry yourself, then `\def\shareddir{…}` + `\input{"…/core.tex"}` (call `\pageborder` if wanted) |
-| Presentation | `\documentclass[aspectratio=169,11pt]{beamer}` then `\def\shareddir{…}` + `\input{"…/presentation.tex"}` |
+| Document type                                                                | Preamble                                                                                                 |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Default article (lessons, programs, logbook, lab register)                   | `\def\shareddir{…}` then `\input{"…/common.tex"}` — geometry + `\pageborder` + core                      |
+| Special-layout article (landscape distribution, two-per-page form, contract) | set geometry yourself, then `\def\shareddir{…}` + `\input{"…/core.tex"}` (call `\pageborder` if wanted)  |
+| Presentation                                                                 | `\documentclass[aspectratio=169,11pt]{beamer}` then `\def\shareddir{…}` + `\input{"…/presentation.tex"}` |
 
 ### 5.2 What the shared files own
 
-| File | Owns |
-| --- | --- |
-| `identity.tex` | language (`polyglossia`, western numerals), Amiri fonts, color palette |
-| `core.tex` | article packages (fancyhdr-before-polyglossia), then `identity` + `header` + `footer` + `design` + `lesson-macros` |
-| `common.tex` | default article geometry + `\pageborder` + `core.tex` |
-| `presentation.tex` | beamer packages, theme, frametitle, `\sectionframe`, `\hl`/`\key` |
-| `header.tex` | `\officialheader` |
-| `footer.tex` | footer (teacher / year / page x-of-y) |
-| `design.tex` | boxes, icons, badges, `\pageborder`, section dividers |
-| `lesson-macros.tex` | cards, stage tables, `\thead`/`\thd`, `\answerline`, `\cb`, `\blank`, … |
+| File                | Owns                                                                                                               |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `identity.tex`      | language (`polyglossia`, western numerals), Amiri fonts, color palette                                             |
+| `core.tex`          | article packages (fancyhdr-before-polyglossia), then `identity` + `header` + `footer` + `design` + `lesson-macros` |
+| `common.tex`        | default article geometry + `\pageborder` + `core.tex`                                                              |
+| `presentation.tex`  | beamer packages, theme, frametitle, `\sectionframe`, `\hl`/`\key`                                                  |
+| `header.tex`        | `\officialheader`                                                                                                  |
+| `footer.tex`        | footer (teacher / year / page x-of-y)                                                                              |
+| `design.tex`        | boxes, icons, badges, `\pageborder`, section dividers                                                              |
+| `lesson-macros.tex` | cards, stage tables, `\thead`/`\thd`, `\answerline`, `\cb`, `\blank`, …                                            |
 
 ### 5.3 What stays per-document
 
@@ -247,15 +247,15 @@ The color palette lives in `identity.tex` (see §7).
 
 ## 7. Design System
 
-| Token       | Hex       | Use                                           |
-| ----------- | --------- | --------------------------------------------- |
-| `primary`   | `#0D47A1` | Page border, section titles, table headers    |
-| `secondary` | `#1976D2` | Sub-headings, box frames                      |
-| `blue`      | `#42A5F5` | Badges, icons, light touches                  |
-| `darktext`  | `#111111` | Body text                                     |
-| `lightbg`   | `#E8F0FE` | Box fill                                      |
-| `zebra`     | `#F2F6FC` | Alternating table row shading                 |
-| `rulegray`  | `#9E9E9E` | Rules, footer, hints, signature rules         |
+| Token       | Hex       | Use                                        |
+| ----------- | --------- | ------------------------------------------ |
+| `primary`   | `#0D47A1` | Page border, section titles, table headers |
+| `secondary` | `#1976D2` | Sub-headings, box frames                   |
+| `blue`      | `#42A5F5` | Badges, icons, light touches               |
+| `darktext`  | `#111111` | Body text                                  |
+| `lightbg`   | `#E8F0FE` | Box fill                                   |
+| `zebra`     | `#F2F6FC` | Alternating table row shading              |
+| `rulegray`  | `#9E9E9E` | Rules, footer, hints, signature rules      |
 
 - **Header:** `\officialheader` (republic / ministry / direction / school).
 - **Footer:** teacher (left) + year `2027/2026` (right) + page `الصفحة س/ص` (center).
@@ -310,19 +310,19 @@ pdftoppm -png -r 90 build/FILE.pdf build/preview
 
 ## 10. Pitfall Reference
 
-| Symptom                                   | Cause                                 | Fix                                 |
-| ----------------------------------------- | ------------------------------------- | ----------------------------------- |
-| `Missing $ inserted` flood                | bare `_` in text                      | `\underline{\hspace{..}}`           |
-| `Missing character ... in font cmmi6`     | text typeset in math mode             | remove `_`, `^`, `$` from text      |
-| `Missing character ... in font Amiri`     | emoji / symbol absent                 | replace with Latin/word             |
-| `bidi Warning: Oops! patching \f@nch@...` | `fancyhdr` loaded after `polyglossia` | move `fancyhdr` above `polyglossia` |
-| `\headheight is too small`                | default 12pt header                   | `headheight=26pt` in geometry       |
-| `Undefined control sequence \rowcolor`    | `colortbl` not loaded                 | `\usepackage{colortbl}`             |
-| Numbers show as ١،٢،٣                     | default numerals                      | `numerals=western`                  |
-| `\dotfill` line invisible                 | leaders on empty line                 | `\makebox[\linewidth]{\dotfill}`    |
-| Border crosses the header                 | border top edge too low               | increase `top=` or adjust `yshift`  |
-| `Argument of \addvspace has an extra }`   | defined a macro named `\sectionbreak` (titlesec reserves `\<secname>break`) | rename it (e.g. `\lessonbreak`) |
-| `Permission denied` writing `.tex`        | read-only directory                   | `chmod u+w .`                       |
+| Symptom                                   | Cause                                                                       | Fix                                 |
+| ----------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------- |
+| `Missing $ inserted` flood                | bare `_` in text                                                            | `\underline{\hspace{..}}`           |
+| `Missing character ... in font cmmi6`     | text typeset in math mode                                                   | remove `_`, `^`, `$` from text      |
+| `Missing character ... in font Amiri`     | emoji / symbol absent                                                       | replace with Latin/word             |
+| `bidi Warning: Oops! patching \f@nch@...` | `fancyhdr` loaded after `polyglossia`                                       | move `fancyhdr` above `polyglossia` |
+| `\headheight is too small`                | default 12pt header                                                         | `headheight=26pt` in geometry       |
+| `Undefined control sequence \rowcolor`    | `colortbl` not loaded                                                       | `\usepackage{colortbl}`             |
+| Numbers show as ١،٢،٣                     | default numerals                                                            | `numerals=western`                  |
+| `\dotfill` line invisible                 | leaders on empty line                                                       | `\makebox[\linewidth]{\dotfill}`    |
+| Border crosses the header                 | border top edge too low                                                     | increase `top=` or adjust `yshift`  |
+| `Argument of \addvspace has an extra }`   | defined a macro named `\sectionbreak` (titlesec reserves `\<secname>break`) | rename it (e.g. `\lessonbreak`)     |
+| `Permission denied` writing `.tex`        | read-only directory                                                         | `chmod u+w .`                       |
 
 ---
 

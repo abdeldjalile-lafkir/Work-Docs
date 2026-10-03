@@ -25,13 +25,13 @@ xelatex -interaction=nonstopmode -halt-on-error -output-directory=build FILE.tex
 **`2026-2027/` is the production directory** — every generated PDF is copied there,
 into the sub-folder that matches its category, with its **Arabic name**:
 
-| Category           | Destination folder                  |
-| ------------------ | ----------------------------------- |
-| Final/submittable  | `2026-2027/Official Documents/…`    |
-| Staging/working    | `2026-2027/Support Documents/…`     |
-| Lessons            | `2026-2027/Lesson Documents/…`      |
-| Lab / practical    | `2026-2027/Lab Documents/…`         |
-| Records            | `2026-2027/Record Documents/…`      |
+| Category          | Destination folder               |
+| ----------------- | -------------------------------- |
+| Final/submittable | `2026-2027/Official Documents/…` |
+| Staging/working   | `2026-2027/Support Documents/…`  |
+| Lessons           | `2026-2027/Lesson Documents/…`   |
+| Lab / practical   | `2026-2027/Lab Documents/…`      |
+| Records           | `2026-2027/Record Documents/…`   |
 
 `build/` is scratch space. Copy the finished PDF into its Arabic sub-folder with
 the Arabic name (quote paths — they contain spaces and Arabic). The school year is
@@ -59,18 +59,18 @@ Finished PDFs are renamed to Arabic using one fixed pattern:
 ```
 
 - The school year is **not** in the filename (the `2026-2027/` directory carries it).
-- A **single space around the hyphen** ` - `.
+- A **single space around the hyphen** `-`.
 - The stream suffix (`- <الشعبة>`) is added **only** for per-stream documents.
 - The folder name = the bare document name (no stream).
 
-| Source `.tex`                        | Arabic filename                                                    |
-| ------------------------------------ | ------------------------------------------------------------------ |
-| `didactic-contract.tex`              | `العقد الديداكتيكي.pdf`                                            |
-| `diagnostic-assessment.tex`          | `التقويم التشخيصي.pdf`                                             |
-| `annual-distribution-science.tex`    | `التوزيع السنوي - جذع مشترك علوم وتكنولوجيا.pdf`                   |
-| `annual-distribution-letters.tex`    | `التوزيع السنوي - جذع مشترك آداب وفلسفة.pdf`                       |
-| `annual-program-science.tex`         | `البرنامج السنوي - جذع مشترك علوم وتكنولوجيا.pdf`                  |
-| `annual-program-letters.tex`         | `البرنامج السنوي - جذع مشترك آداب وفلسفة.pdf`                      |
+| Source `.tex`                     | Arabic filename                                   |
+| --------------------------------- | ------------------------------------------------- |
+| `didactic-contract.tex`           | `العقد الديداكتيكي.pdf`                           |
+| `diagnostic-assessment.tex`       | `التقويم التشخيصي.pdf`                            |
+| `annual-distribution-science.tex` | `التوزيع السنوي - جذع مشترك علوم وتكنولوجيا.pdf`  |
+| `annual-distribution-letters.tex` | `التوزيع السنوي - جذع مشترك آداب وفلسفة.pdf`      |
+| `annual-program-science.tex`      | `البرنامج السنوي - جذع مشترك علوم وتكنولوجيا.pdf` |
+| `annual-program-letters.tex`      | `البرنامج السنوي - جذع مشترك آداب وفلسفة.pdf`     |
 
 Support/staging PDFs (not yet in `Official Documents/`) live in
 `2026-2027/Support Documents/`, each under a sub-folder named after the bare
@@ -112,15 +112,15 @@ with `\def\shareddir{../shared/}` **before** `\input`.
 
 ### Design tokens (palette — أزرق / أسود / أبيض حصراً)
 
-| Token       | Hex       | Use                                  |
-| ----------- | --------- | ------------------------------------ |
+| Token       | Hex       | Use                                          |
+| ----------- | --------- | -------------------------------------------- |
 | `primary`   | `#0D47A1` | titles, headings, table headers, page border |
-| `secondary` | `#1976D2` | sub-headings, accents                |
-| `blue`      | `#42A5F5` | light highlights, badges, icons      |
-| `darktext`  | `#111111` | body text (black)                    |
-| `lightbg`   | `#E8F0FE` | box fill                             |
-| `zebra`     | `#F2F6FC` | alternating table rows               |
-| `rulegray`  | `#9E9E9E` | table lines, footer hints            |
+| `secondary` | `#1976D2` | sub-headings, accents                        |
+| `blue`      | `#42A5F5` | light highlights, badges, icons              |
+| `darktext`  | `#111111` | body text (black)                            |
+| `lightbg`   | `#E8F0FE` | box fill                                     |
+| `zebra`     | `#F2F6FC` | alternating table rows                       |
+| `rulegray`  | `#9E9E9E` | table lines, footer hints                    |
 
 **No gold, green, red, or any other colour** — blue/black/white only.
 
@@ -158,7 +158,7 @@ with `\def\shareddir{../shared/}` **before** `\input`.
 ## RTL rules
 
 - **Arabic cells use `\raggedleft`, never `\raggedright`.** `\raggedright` is
-  direction-agnostic and flushes to the *left* — wrong in an RTL document.
+  direction-agnostic and flushes to the _left_ — wrong in an RTL document.
 - `\centering` for narrow numeric / score columns.
 - `\hypersetup{hidelinks}` to prevent the link box around the page number.
 

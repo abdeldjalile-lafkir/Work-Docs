@@ -1,20 +1,7 @@
-% ══════════════════════════════════════════════════════════════════════════════
-%  identity.tex — المصدر الوحيد للحقيقة: اللغة + الخطوط + لوحة الألوان
-%  يُستدعى من core.tex (وثائق article) ومن presentation.tex (عروض beamer).
-%
-%  متطلّبات مسبقة:
-%    • يجب تحميل [table]{xcolor} قبل هذا الملف (للألوان).
-%    • polyglossia تُحمَّل هنا، لذا يُستدعى هذا الملف AFTER fancyhdr في article.
-%
-%  لا يحمّل أي حزمة أخرى ولا يضبط geometry.
-% ══════════════════════════════════════════════════════════════════════════════
-
-% ── اللغة / RTL ──────────────────────────────────────────────────────────────
 \usepackage{polyglossia}
 \setmainlanguage[numerals=western]{arabic}
 \setotherlanguage{english}
 
-% ── الخطوط (Amiri — خط النسخ المعتمد) ────────────────────────────────────────
 \setmainfont{Amiri}[
   BoldFont = * Bold,
   ItalicFont = * Italic,
@@ -25,11 +12,6 @@
 ]
 \setmonofont{DejaVu Sans Mono}
 
-% ── لوحة الألوان الموحّدة (أزرق / أسود / أبيض حصراً) ─────────────────────────
-\definecolor{primary}{HTML}{0D47A1}      % أزرق داكن — العناوين ورؤوس الجداول
-\definecolor{secondary}{HTML}{1976D2}    % أزرق متوسط — عناوين فرعية
-\definecolor{blue}{HTML}{42A5F5}         % أزرق فاتح — شارات ولمسات
-\definecolor{darktext}{HTML}{111111}     % أسود للنص
-\definecolor{lightbg}{HTML}{E8F0FE}      % خلفية فاتحة جداً
-\definecolor{zebra}{HTML}{F2F6FC}        % تظليل الصفوف المتناوب
-\definecolor{rulegray}{HTML}{9E9E9E}     % رمادي خطوط الجداول
+\definecolor{primary}{HTML}{0D47A1}      
+\definecolor{secondary}{HTML}{1976D2}    
+     
